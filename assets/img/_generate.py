@@ -204,5 +204,6 @@ if __name__ == "__main__":
         write(f"{slug}.svg", cover(slug, name, kicker, flavour))
     write("mark.svg", mark())
     write("og.svg", og())
-    write("favicon.svg", mark(64))
+    # favicon.svg is owned by _favicons.py, which also renders the .ico and
+    # PNG sizes from the same mark — don't write it from here too.
     print("done")

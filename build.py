@@ -7,10 +7,17 @@
 Edit the DATA blocks below and re-run — the header, menu, footer, cursor and
 meta tags stay identical across all pages.
 """
+import datetime
+import json
 import os
 import pathlib
 
 ROOT = pathlib.Path(__file__).parent
+
+# Absolute base URL used by sitemap.xml and robots.txt. Sitemaps require
+# absolute URLs, so point this at your real domain before deploying.
+# No trailing slash.
+SITE_URL = "https://pradeepmaurya.com"
 
 # ============================================================
 #  PERSONAL DATA  (sourced from Pradeep_Maurya_Resume.docx)
@@ -354,7 +361,10 @@ def head(title, description, root, extra_css=""):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{description}">
+<link rel="icon" href="{root}favicon.ico" sizes="32x32">
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
+<link rel="manifest" href="{root}site.webmanifest">
 <link rel="stylesheet" href="{root}assets/css/main.css">
 <link rel="stylesheet" href="{root}assets/css/pages.css">{extra_css}
 </head>'''
@@ -1237,6 +1247,81 @@ TERMS = [
 ]
 
 
+# ============================================================
+#  SITEMAP / ROBOTS
+# ============================================================
+# Google ignores <changefreq> and treats <priority> as little more than a hint,
+# but both are part of the protocol and harmless. Priority is kept to express
+# the page hierarchy; changefreq is skipped since it would be pure noise.
+PRIORITY = {
+    "index.html": "1.0",
+    "work.html": "0.9",
+    "about.html": "0.9",
+    "resume.html": "0.8",
+    "skills.html": "0.8",
+    "contact.html": "0.8",
+    "privacy.html": "0.3",
+    "terms.html": "0.3",
+}
+# 404 is not a destination — listing it invites crawlers to index an error page.
+SITEMAP_EXCLUDE = {"404.html"}
+
+
+def site_url(path):
+    """Absolute URL for a built page. index.html maps to the bare root, so `/`
+    and `/index.html` don't compete with each other as duplicates."""
+    base = SITE_URL.rstrip("/")
+    return base + "/" if path == "index.html" else f"{base}/{path}"
+
+
+def sitemap(paths, today):
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for path in paths:
+        if path in SITEMAP_EXCLUDE:
+            continue
+        lines += [
+            "  <url>",
+            f"    <loc>{site_url(path)}</loc>",
+            f"    <lastmod>{today}</lastmod>",
+            f"    <priority>{PRIORITY.get(path, '0.7')}</priority>",   # 0.7 = project pages
+            "  </url>",
+        ]
+    lines.append("</urlset>")
+    return "\n".join(lines) + "\n"
+
+
+def robots():
+    return "\n".join([
+        "User-agent: *",
+        "Allow: /",
+        "",
+        f"Sitemap: {SITE_URL.rstrip('/')}/sitemap.xml",
+    ]) + "\n"
+
+
+def webmanifest():
+    """Install metadata for Android/Chrome. Icon paths are resolved relative to
+    the manifest, which sits at the site root."""
+    return json.dumps({
+        "name": f"{ME['name']} — {ME['role']}",
+        "short_name": ME["first"],
+        "description": ME["tagline"],
+        # Relative to the manifest, so it still works if the site is ever
+        # served from a subfolder rather than the domain root.
+        "start_url": "./",
+        "display": "standalone",
+        "background_color": "#141414",
+        "theme_color": "#141414",
+        "icons": [
+            {"src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png"},
+        ],
+    }, indent=2, ensure_ascii=False) + "\n"
+
+
 def main():
     pages = {
         "index.html": page_index(),
@@ -1257,7 +1342,19 @@ def main():
         target = ROOT / path
         target.write_text(html, encoding="utf-8")
         print(f"  {path:<34} {len(html):>7,} bytes")
+    today = datetime.date.today().isoformat()
+    extras = {
+        "sitemap.xml": sitemap(pages.keys(), today),
+        "robots.txt": robots(),
+        "site.webmanifest": webmanifest(),
+    }
+    for path, text in extras.items():
+        (ROOT / path).write_text(text, encoding="utf-8")
+        print(f"  {path:<34} {len(text):>7,} bytes")
+
+    listed = len(pages) - len(SITEMAP_EXCLUDE & set(pages))
     print(f"\n{len(pages)} pages written to {ROOT}")
+    print(f"{listed} URLs in sitemap.xml  ·  base {SITE_URL}")
 
 
 if __name__ == "__main__":

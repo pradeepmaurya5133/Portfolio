@@ -1,8 +1,5 @@
 # Pradeep Maurya — Portfolio
 
-A portfolio site built to the visual language of [stefanobg.com](https://www.stefanobg.com/),
-with content taken from `Pradeep_Maurya_Resume.docx`.
-
 Static HTML/CSS/JS — no build step needed to *view* it, no framework, no CDN calls.
 Everything (fonts, GSAP, Lenis) is served from `assets/`, so it works offline and
 can be dropped on any static host.
@@ -40,7 +37,18 @@ at the top of `build.py` (`ME`, `NAV`, `PROJECTS`, `SKILL_GROUPS`, `EXPERIENCE`,
 python build.py
 ```
 
-That regenerates all 14 pages with a consistent header, menu, footer and meta tags.
+That regenerates all 14 pages with a consistent header, menu, footer and meta tags,
+plus `sitemap.xml` and `robots.txt`.
+
+## Before you deploy
+
+Set `SITE_URL` at the top of `build.py` to your real domain (no trailing slash)
+and re-run the build. Sitemaps require absolute URLs, so until that's changed
+both `sitemap.xml` and `robots.txt` point at a placeholder domain.
+
+The sitemap is derived from the page list, so new pages appear automatically —
+`404.html` is excluded, and `index.html` is listed as the bare root (`/`) so it
+doesn't compete with `/index.html` as a duplicate.
 
 ## Artwork
 
@@ -57,6 +65,23 @@ Both boxes use `object-fit: cover`, so the script crops to the exact display rat
 and the browser never crops again. If the new photo frames the subject differently,
 adjust `FACE_X` / `SQUARE_Y` / `PILL_Y` at the top of that script — they're
 fractions of the image, not pixels.
+
+### Favicons
+
+The PM monogram set — `favicon.ico` (16/32/48), `favicon.svg`,
+`apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png`:
+
+```sh
+python assets/img/_favicons.py
+```
+
+It draws the tile in a headless Chrome so the monogram uses the site's own
+Archivo webfont — a favicon renders outside the page, so an SVG's
+`font-family` never resolves and would fall back to Arial. Chrome is located
+automatically; override with the `CHROME` environment variable.
+
+The tile is accent-filled rather than the site's dark-with-hairline logo: at
+16px a hairline disappears and a dark tile vanishes into dark browser chrome.
 
 ### Project covers
 
