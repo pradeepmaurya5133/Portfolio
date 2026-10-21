@@ -1,4 +1,15 @@
+# Content Signals express how this site's operator prefers its
+# content to be used. They are preferences, not access controls.
+# See https://contentsignals.org/
+#
+# search=yes    indexing and search results are welcome
+# ai-input=yes  grounding AI answers in this content is welcome
+# ai-train=no   training models on this content is not permitted
+#
+# Questions or licensing requests: pradeepmaurya2002@gmail.com
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 Sitemap: https://pradeepmaurya.com/sitemap.xml

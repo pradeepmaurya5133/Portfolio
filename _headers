@@ -1,0 +1,43 @@
+# RFC 8288 Link relations for agent discovery.
+# Netlify and Cloudflare Pages read this file; see README for Apache,
+# nginx and Vercel equivalents.
+/*
+  Link: </about.html>; rel="author", <https://github.com/pradeepmaurya5133/>; rel="me", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel="me", <mailto:pradeepmaurya2002@gmail.com>; rel="me", </privacy.html>; rel="privacy-policy", </terms.html>; rel="terms-of-service"
+
+# Markdown twins, so an agent can find the text-only form of a page.
+/about.html
+  Link: </about.md>; rel="alternate"; type="text/markdown"
+/contact.html
+  Link: </contact.md>; rel="alternate"; type="text/markdown"
+/index.html
+  Link: </index.md>; rel="alternate"; type="text/markdown"
+/privacy.html
+  Link: </privacy.md>; rel="alternate"; type="text/markdown"
+/resume.html
+  Link: </resume.md>; rel="alternate"; type="text/markdown"
+/skills.html
+  Link: </skills.md>; rel="alternate"; type="text/markdown"
+/terms.html
+  Link: </terms.md>; rel="alternate"; type="text/markdown"
+/work.html
+  Link: </work.md>; rel="alternate"; type="text/markdown"
+/work/bakery.html
+  Link: </work/bakery.md>; rel="alternate"; type="text/markdown"
+/work/consentx.html
+  Link: </work/consentx.md>; rel="alternate"; type="text/markdown"
+/work/movie-scraper.html
+  Link: </work/movie-scraper.md>; rel="alternate"; type="text/markdown"
+/work/regulatorybridge.html
+  Link: </work/regulatorybridge.md>; rel="alternate"; type="text/markdown"
+/work/xamlysis.html
+  Link: </work/xamlysis.md>; rel="alternate"; type="text/markdown"
+
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+
+# llmstxt.org files are markdown-formatted but .txt by convention.
+# charset is explicit — the content has em dashes and accents.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8

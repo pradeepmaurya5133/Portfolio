@@ -11,6 +11,7 @@ import datetime
 import json
 import os
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -342,7 +343,7 @@ def external(url):
     return ' target="_blank" rel="noopener"'
 
 
-def head(title, description, root, extra_css=""):
+def head(title, description, root, path="index.html", extra_css=""):
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -365,7 +366,8 @@ def head(title, description, root, extra_css=""):
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 <link rel="manifest" href="{root}site.webmanifest">
-<link rel="stylesheet" href="{root}assets/css/main.css">
+<link rel="canonical" href="{site_url(path)}">
+{md_alternate(path)}{head_links(root)}<link rel="stylesheet" href="{root}assets/css/main.css">
 <link rel="stylesheet" href="{root}assets/css/pages.css">{extra_css}
 </head>'''
 
@@ -569,7 +571,7 @@ def page_index():
 
     return head(
         f"{ME['name']} — {ME['role']}",
-        ME["tagline"], root
+        ME["tagline"], root, "index.html"
     ) + f'''
 <body data-preloader>
 {preloader()}
@@ -713,7 +715,7 @@ def page_work():
 
     return head(f"Work — {ME['name']}",
                 f"Selected web development projects by {ME['name']}: consent and compliance platforms, "
-                f"e-commerce, an exam portal and a Django data pipeline.", root) + f'''
+                f"e-commerce, an exam portal and a Django data pipeline.", root, "work.html") + f'''
 <body>
 {header("Work", root)}
 <main id="main">
@@ -764,7 +766,7 @@ def page_about():
 
     return head(f"About — {ME['name']}",
                 f"{ME['name']} is {article(ME['role'])} {ME['role']} based in {ME['city']}, India, working across "
-                f"frontend, backend, testing and data.", root) + f'''
+                f"frontend, backend, testing and data.", root, "about.html") + f'''
 <body>
 {header("About", root)}
 <main id="main">
@@ -859,7 +861,7 @@ def page_skills():
 
     return head(f"Skills — {ME['name']}",
                 "Technical skills: frontend, backend and APIs, databases and state, testing and tools, "
-                "data and collaboration.", root) + f'''
+                "data and collaboration.", root, "skills.html") + f'''
 <body>
 {header("Skills", root)}
 <main id="main">
@@ -915,7 +917,7 @@ def page_resume():
 
     return head(f"Résumé — {ME['name']}",
                 f"Résumé of {ME['name']}, {ME['role']} — experience, projects, skills and certifications.",
-                root) + f'''
+                root, "resume.html") + f'''
 <body>
 {header("Résumé", root)}
 <main id="main">
@@ -989,7 +991,7 @@ def page_contact():
         for name, url in SOCIALS
     )
     return head(f"Contact — {ME['name']}",
-                f"Get in touch with {ME['name']} — {ME['email']}", root) + f'''
+                f"Get in touch with {ME['name']} — {ME['email']}", root, "contact.html") + f'''
 <body>
 {header("Contact", root)}
 <main id="main">
@@ -1080,7 +1082,7 @@ def page_project(p, index):
         for h, t in p["notes"]
     )
 
-    return head(f"{p['name']} — {ME['name']}", p["summary"], root) + f'''
+    return head(f"{p['name']} — {ME['name']}", p["summary"], root, f"work/{p['slug']}.html") + f'''
 <body>
 {header("Work", root)}
 <main id="main">
@@ -1181,7 +1183,7 @@ def page_doc(title, slug, blocks):
             body += '<ul>' + "".join(f'<li>{i}</li>' for i in text) + '</ul>'
         else:
             body += f'<p>{text}</p>'
-    return head(f"{title} — {ME['name']}", f"{title} for {ME['name']}'s portfolio.", root) + f'''
+    return head(f"{title} — {ME['name']}", f"{title} for {ME['name']}'s portfolio.", root, f"{slug}.html") + f'''
 <body>
 {header("", root)}
 <main id="main">
@@ -1196,7 +1198,7 @@ def page_doc(title, slug, blocks):
 
 def page_404():
     root = ""
-    return head(f"Not found — {ME['name']}", "That page doesn't exist.", root) + f'''
+    return head(f"Not found — {ME['name']}", "That page doesn't exist.", root, "404.html") + f'''
 <body>
 {header("", root)}
 <main id="main">
@@ -1248,6 +1250,143 @@ TERMS = [
 
 
 # ============================================================
+#  LINK RELATIONS  (RFC 8288)
+# ============================================================
+# Emitted twice from one definition: as <link> elements in every page head,
+# and as a single RFC 8288 Link: response header via the server configs below.
+#
+# Every relation here is in the IANA Link Relations registry and is true of
+# this site. Deliberately NOT included: api-catalog and service-doc — there is
+# no API behind a static portfolio, and advertising /.well-known/api-catalog
+# would just hand agents a 404.
+SITE_RELS = [
+    # (rel, href, extra <link> attributes)
+    ("author", "/about.html", ""),
+    ("me", ME["github"], ""),
+    ("me", ME["linkedin"], ""),
+    ("me", "mailto:" + ME["email"], ""),
+    ("privacy-policy", "/privacy.html", ""),
+    ("terms-of-service", "/terms.html", ""),
+]
+
+
+def link_header():
+    """One Link header carrying every link-value, comma-separated.
+
+    RFC 8288 §3 allows multiple link-values in a single field, which is safer
+    across servers than repeating the header name.
+    """
+    return ", ".join(f'<{href}>; rel="{rel}"' for rel, href, _ in SITE_RELS)
+
+
+def md_alternate(path):
+    """<link rel=alternate> for the markdown twin, or nothing if there isn't one."""
+    href = md_href(path)
+    if not href:
+        return ""
+    return (f'<link rel="alternate" type="text/markdown" href="{href}" '
+            f'title="Markdown for agents">\n')
+
+
+def head_links(root):
+    """The same relations as <link> elements, for hosts that can't set headers
+    (GitHub Pages) and for agents that only parse HTML."""
+    out = ""
+    for rel, href, extra in SITE_RELS:
+        # Site-local targets go through {root} so project pages resolve too.
+        target = root + href.lstrip("/") if href.startswith("/") else href
+        out += f'<link rel="{rel}" href="{target}"{extra}>\n'
+    return out
+
+
+# An error page has no agent-readable form, so it gets no markdown twin —
+# and must not advertise one either.
+NO_MARKDOWN = {"404.html"}
+
+
+def md_href(path):
+    """Root-relative URL of a page's markdown twin, or None if it has none."""
+    if path in NO_MARKDOWN:
+        return None
+    return "/" + path[:-len(".html")] + ".md"
+
+
+def headers_file(md_paths):
+    """Netlify / Cloudflare Pages `_headers`."""
+    out = [
+        "# RFC 8288 Link relations for agent discovery.",
+        "# Netlify and Cloudflare Pages read this file; see README for Apache,",
+        "# nginx and Vercel equivalents.",
+        "/*",
+        f"  Link: {link_header()}",
+        "",
+        "# Markdown twins, so an agent can find the text-only form of a page.",
+    ]
+    for path in md_paths:
+        out += [
+            "/" + path,
+            f'  Link: <{md_href(path)}>; rel="alternate"; type="text/markdown"',
+        ]
+    out += [
+        "",
+        "/*.md",
+        "  Content-Type: text/markdown; charset=utf-8",
+        "",
+        "# llmstxt.org files are markdown-formatted but .txt by convention.",
+        "# charset is explicit — the content has em dashes and accents.",
+        "/llms.txt",
+        "  Content-Type: text/plain; charset=utf-8",
+        "/llms-full.txt",
+        "  Content-Type: text/plain; charset=utf-8",
+    ]
+    return "\n".join(out) + "\n"
+
+
+def htaccess_file():
+    """Apache: the Link header, plus Accept-based content negotiation so
+    `Accept: text/markdown` gets the .md twin while browsers still get HTML."""
+    value = link_header().replace('"', '\\"')
+    return "\n".join([
+        "# RFC 8288 Link relations for agent discovery.",
+        "<IfModule mod_headers.c>",
+        f'  Header always set Link "{value}"',
+        "</IfModule>",
+        "",
+        "# Markdown for agents: serve page.md when the client asks for",
+        "# markdown and that twin exists. HTML stays the default.",
+        "AddType text/markdown .md",
+        "",
+        "# llms.txt / llms-full.txt carry em dashes and accents — be explicit",
+        "# about UTF-8 so they aren't decoded as latin-1.",
+        "AddDefaultCharset UTF-8",
+        '<FilesMatch "^llms(-full)?\\.txt$">',
+        "  ForceType 'text/plain; charset=utf-8'",
+        "</FilesMatch>",
+        "<IfModule mod_rewrite.c>",
+        "  RewriteEngine On",
+        "",
+        "  # /path.html -> /path.md",
+        "  RewriteCond %{HTTP:Accept} text/markdown [NC]",
+        "  RewriteCond %{DOCUMENT_ROOT}/$1.md -f",
+        "  RewriteRule ^(.+)\\.html$ /$1.md [L]",
+        "",
+        "  # bare directory root -> /index.md",
+        "  RewriteCond %{HTTP:Accept} text/markdown [NC]",
+        "  RewriteCond %{DOCUMENT_ROOT}/index.md -f",
+        "  RewriteRule ^$ /index.md [L]",
+        "</IfModule>",
+        "",
+        "<IfModule mod_headers.c>",
+        "  # Caches must key on Accept, or a markdown response could be",
+        "  # replayed to a browser.",
+        '  <FilesMatch "\\.(html|md)$">',
+        "    Header append Vary Accept",
+        "  </FilesMatch>",
+        "</IfModule>",
+    ]) + "\n"
+
+
+# ============================================================
 #  SITEMAP / ROBOTS
 # ============================================================
 # Google ignores <changefreq> and treats <priority> as little more than a hint,
@@ -1293,9 +1432,44 @@ def sitemap(paths, today):
     return "\n".join(lines) + "\n"
 
 
+# Content Signals (contentsignals.org, draft-romm-aipref-contentsignals).
+# A preference expressed in robots.txt, not an enforcement mechanism — it
+# tells well-behaved crawlers what you want, and nothing more.
+#
+#   search    appearing in search results and the links/snippets around them
+#   ai-input  using the page to ground an AI answer (RAG, assistants)
+#   ai-train  using the page as training data for a model
+#
+# Chosen for a portfolio whose whole job is being found:
+#   search=yes    — the obvious one
+#   ai-input=yes  — this site ships llms.txt and serves markdown on
+#                   `Accept: text/markdown` precisely so assistants can read
+#                   it. Saying no here would contradict all of that, and an
+#                   assistant answering "full stack developers in Dehradun"
+#                   is exactly the discovery this site exists for.
+#   ai-train=no   — no reciprocal benefit, so withheld.
+CONTENT_SIGNALS = {
+    "search": "yes",
+    "ai-input": "yes",
+    "ai-train": "no",
+}
+
+
 def robots():
+    signals = ", ".join(f"{k}={v}" for k, v in CONTENT_SIGNALS.items())
     return "\n".join([
+        "# Content Signals express how this site's operator prefers its",
+        "# content to be used. They are preferences, not access controls.",
+        "# See https://contentsignals.org/",
+        "#",
+        "# search=yes    indexing and search results are welcome",
+        "# ai-input=yes  grounding AI answers in this content is welcome",
+        "# ai-train=no   training models on this content is not permitted",
+        "#",
+        f"# Questions or licensing requests: {ME['email']}",
+        "",
         "User-agent: *",
+        f"Content-Signal: {signals}",
         "Allow: /",
         "",
         f"Sitemap: {SITE_URL.rstrip('/')}/sitemap.xml",
@@ -1322,6 +1496,228 @@ def webmanifest():
     }, indent=2, ensure_ascii=False) + "\n"
 
 
+# ============================================================
+#  MARKDOWN FOR AGENTS
+# ============================================================
+# Built from the same data as the HTML rather than converted from it — the
+# conversion route drags in nav, footer and decorative markup, which is
+# exactly the noise an agent is trying to avoid.
+
+
+def _md_head(title, path, description):
+    return [f"# {title}", "", description, "",
+            f"Canonical: {site_url(path)}", "", "---", ""]
+
+
+def _md_projects():
+    out = ["## Selected work", ""]
+    for i, p in enumerate(PROJECTS, 1):
+        out.append(f"{i}. **{p['name']}** — {p['meta']} ({p['year']})")
+        out.append(f"   {p['summary']}")
+        out.append(f"   Stack: {p['stack']}")
+        if p["link"]:
+            out.append(f"   Live: {p['link']}")
+        out.append(f"   Detail: {site_url('work/' + p['slug'] + '.html')}")
+        out.append("")
+    return out
+
+
+def _md_experience():
+    out = ["## Experience", ""]
+    for e in EXPERIENCE:
+        out += [f"### {strip_tags(e['role'])} — {e['org']}", f"*{e['when']}*", ""]
+        out += [f"- {strip_tags(pt)}" for pt in e["points"]] + [""]
+    return out
+
+
+def _md_skills():
+    out = ["## Technical skills", ""]
+    for _, name, items in SKILL_GROUPS:
+        out.append(f"- **{strip_tags(name)}**: {', '.join(items)}")
+    return out + [""]
+
+
+def _md_credentials():
+    out = ["## Certifications & education", ""]
+    for title, focus, issuer, year in CREDENTIALS:
+        out.append(f"- **{strip_tags(title)}** — {strip_tags(focus)} ({issuer}"
+                   + (f", {year}" if year else "") + ")")
+    return out + [""]
+
+
+def _md_contact():
+    out = ["## Contact", "",
+           f"- Email: {ME['email']}",
+           f"- Phone: {ME['phone']}",
+           f"- Location: {ME['region']}"]
+    for name, url in SOCIALS:
+        if not url.startswith("mailto"):
+            out.append(f"- {name}: {url}")
+    return out + [""]
+
+
+def _md_doc(blocks):
+    out = []
+    for kind, text in blocks:
+        if kind == "h2":
+            out += [f"## {strip_tags(text)}", ""]
+        elif kind == "ul":
+            out += [f"- {strip_tags(i)}" for i in text] + [""]
+        else:
+            out += [strip_tags(text), ""]
+    return out
+
+
+def markdown_page(path):
+    """Markdown twin of a built page, or None if that page has no useful
+    text-only form (404)."""
+    name = f"{ME['name']}"
+    if path == "index.html":
+        body = _md_head(f"{name} — {ME['role']}", path, ME["tagline"])
+        body += ["## About", "", ME["summary"], ""]
+        body += ["## At a glance", ""]
+        body += [f"- {label}: {value}" for label, value in STATS] + [""]
+        body += _md_projects()
+        body += ["## How I can help", ""]
+        body += [f"- **{strip_tags(t)}**: {strip_tags(d)}" for _, t, d in CAPABILITIES] + [""]
+        body += _md_credentials() + _md_contact()
+        return "\n".join(body)
+
+    if path == "work.html":
+        return "\n".join(_md_head(f"Work — {name}", path,
+                                  f"Projects by {name}.") + _md_projects())
+
+    if path == "about.html":
+        body = _md_head(f"About — {name}", path, ME["tagline"])
+        body += [ME["summary"], "", f"Based in {ME['region']}.", ""]
+        body += _md_experience() + _md_credentials() + _md_contact()
+        return "\n".join(body)
+
+    if path == "skills.html":
+        return "\n".join(_md_head(f"Skills — {name}", path,
+                                  "What I work with, grouped by stack layer.")
+                         + _md_skills())
+
+    if path == "resume.html":
+        body = _md_head(f"Résumé — {name}", path, ME["role_long"])
+        body += ["## Professional summary", "", ME["summary"], ""]
+        body += _md_experience() + _md_projects() + _md_skills()
+        body += _md_credentials() + _md_contact()
+        return "\n".join(body)
+
+    if path == "contact.html":
+        return "\n".join(_md_head(f"Contact — {name}", path,
+                                  "Open to new opportunities.") + _md_contact())
+
+    if path in ("privacy.html", "terms.html"):
+        label = "Privacy" if path == "privacy.html" else "Terms"
+        blocks = PRIVACY if path == "privacy.html" else TERMS
+        return "\n".join(_md_head(f"{label} — {name}", path,
+                                  f"{label} for {name}'s portfolio.") + _md_doc(blocks))
+
+    if path.startswith("work/"):
+        slug = path[len("work/"):-len(".html")]
+        p = next(x for x in PROJECTS if x["slug"] == slug)
+        body = _md_head(f"{p['name']} — {name}", path, p["summary"])
+        body += [p["lead"], ""] + [par + "\n" for par in p["body"]]
+        body += ["## Details", "",
+                 f"- Role: {p['role']}",
+                 f"- Context: {p['org']}",
+                 f"- Year: {p['year']}",
+                 f"- Stack: {p['stack']}",
+                 f"- Scope: {p['scope']}"]
+        if p["link"]:
+            body.append(f"- Live: {p['link']}")
+        body.append("")
+        for h, t in p["notes"]:
+            body += [f"### {strip_tags(h)}", "", strip_tags(t), ""]
+        return "\n".join(body)
+
+    return None   # 404 has no agent-readable form
+
+
+# ============================================================
+#  llms.txt  (llmstxt.org)
+# ============================================================
+# A curated index for language models: H1, a blockquote summary, then H2
+# sections of links. Everything it points at is the markdown twin, not the
+# HTML, so a model following a link gets clean text with no second hop.
+# Anything under "## Optional" may be skipped when context is tight.
+
+
+def _md_link(label, path, note):
+    # Build from md_href, not site_url — site_url("index.html") is the bare
+    # root, and trimming ".html" off that mangles the domain.
+    return f"- [{label}]({SITE_URL.rstrip('/')}{md_href(path)}): {note}"
+
+
+def llms_txt():
+    out = [
+        f"# {ME['name']}",
+        "",
+        # The tagline already opens with the role, so don't restate it.
+        f"> {ME['tagline']} Based in {ME['city']}, India.",
+        "",
+        "Portfolio site. Every page has a markdown twin at the same path with a",
+        "`.md` extension — the links below point straight at those. The site also",
+        "returns markdown to any request sending `Accept: text/markdown`.",
+        "",
+        "## Core",
+        "",
+        _md_link("Home", "index.html",
+                 "overview — stats, selected work, capabilities, credentials"),
+        _md_link("About", "about.html",
+                 "background, full work history, certifications and education"),
+        _md_link("Résumé", "resume.html",
+                 "complete CV — summary, experience, projects, skills, credentials"),
+        _md_link("Skills", "skills.html",
+                 "technical skills grouped by where they sit in the stack"),
+        _md_link("Contact", "contact.html", "email, phone, location, profiles"),
+        "",
+        "## Projects",
+        "",
+    ]
+    for p in PROJECTS:
+        note = f"{p['summary']} Stack: {p['stack']}. ({p['year']})"
+        out.append(_md_link(p["name"], f"work/{p['slug']}.html", note))
+    out += [
+        "",
+        "## Optional",
+        "",
+        _md_link("Work index", "work.html", "the project list on its own"),
+        _md_link("Privacy", "privacy.html", "what the site does and doesn't collect"),
+        _md_link("Terms", "terms.html", "terms of use"),
+        "",
+    ]
+    return "\n".join(out)
+
+
+def llms_full_txt(md_pages):
+    """Every markdown twin inlined, so a model can take the whole site in one
+    fetch instead of crawling the index."""
+    order = ["index.md", "about.md", "resume.md", "skills.md", "work.md"]
+    order += [f"work/{p['slug']}.md" for p in PROJECTS]
+    order += ["contact.md", "privacy.md", "terms.md"]
+
+    out = [f"# {ME['name']} — complete site content", "",
+           f"> {ME['tagline']}", "",
+           f"Generated {datetime.date.today().isoformat()} from {SITE_URL}.",
+           "Each section below is one page of the site.", ""]
+    for path in order:
+        if path in md_pages:
+            out += ["---", "", md_pages[path].rstrip(), ""]
+    return "\n".join(out) + "\n"
+
+
+def strip_tags(text):
+    """Data blocks carry a few HTML entities and inline tags for the web
+    output; markdown wants them plain."""
+    text = re.sub(r"<[^>]+>", "", text)
+    return (text.replace("&amp;", "&").replace("&mdash;", "—")
+                .replace("&ldquo;", "“").replace("&rdquo;", "”")
+                .replace("&nbsp;", " "))
+
+
 def main():
     pages = {
         "index.html": page_index(),
@@ -1338,15 +1734,30 @@ def main():
         pages[f"work/{p['slug']}.html"] = page_project(p, i)
 
     (ROOT / "work").mkdir(exist_ok=True)
+    md_pages = {}
+    for path in pages:
+        md = markdown_page(path)
+        if md:
+            md_pages[path[:-len(".html")] + ".md"] = md.rstrip() + "\n"
+
     for path, html in pages.items():
         target = ROOT / path
         target.write_text(html, encoding="utf-8")
         print(f"  {path:<34} {len(html):>7,} bytes")
+    for path, text in md_pages.items():
+        (ROOT / path).write_text(text, encoding="utf-8")
+    md_html = [k[:-len(".md")] + ".html" for k in md_pages]
+    print(f"  {len(md_pages)} markdown twins (*.md) for agent requests")
+
     today = datetime.date.today().isoformat()
     extras = {
         "sitemap.xml": sitemap(pages.keys(), today),
         "robots.txt": robots(),
         "site.webmanifest": webmanifest(),
+        "llms.txt": llms_txt(),
+        "llms-full.txt": llms_full_txt(md_pages),
+        "_headers": headers_file(sorted(md_html)),
+        ".htaccess": htaccess_file(),
     }
     for path, text in extras.items():
         (ROOT / path).write_text(text, encoding="utf-8")

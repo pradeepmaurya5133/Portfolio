@@ -1,0 +1,36 @@
+# RFC 8288 Link relations for agent discovery.
+<IfModule mod_headers.c>
+  Header always set Link "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\""
+</IfModule>
+
+# Markdown for agents: serve page.md when the client asks for
+# markdown and that twin exists. HTML stays the default.
+AddType text/markdown .md
+
+# llms.txt / llms-full.txt carry em dashes and accents — be explicit
+# about UTF-8 so they aren't decoded as latin-1.
+AddDefaultCharset UTF-8
+<FilesMatch "^llms(-full)?\.txt$">
+  ForceType 'text/plain; charset=utf-8'
+</FilesMatch>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /path.html -> /path.md
+  RewriteCond %{HTTP:Accept} text/markdown [NC]
+  RewriteCond %{DOCUMENT_ROOT}/$1.md -f
+  RewriteRule ^(.+)\.html$ /$1.md [L]
+
+  # bare directory root -> /index.md
+  RewriteCond %{HTTP:Accept} text/markdown [NC]
+  RewriteCond %{DOCUMENT_ROOT}/index.md -f
+  RewriteRule ^$ /index.md [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Caches must key on Accept, or a markdown response could be
+  # replayed to a browser.
+  <FilesMatch "\.(html|md)$">
+    Header append Vary Accept
+  </FilesMatch>
+</IfModule>

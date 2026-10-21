@@ -1,0 +1,29 @@
+# Pradeep Maurya
+
+> Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest. Based in Dehradun, India.
+
+Portfolio site. Every page has a markdown twin at the same path with a
+`.md` extension — the links below point straight at those. The site also
+returns markdown to any request sending `Accept: text/markdown`.
+
+## Core
+
+- [Home](https://pradeepmaurya.com/index.md): overview — stats, selected work, capabilities, credentials
+- [About](https://pradeepmaurya.com/about.md): background, full work history, certifications and education
+- [Résumé](https://pradeepmaurya.com/resume.md): complete CV — summary, experience, projects, skills, credentials
+- [Skills](https://pradeepmaurya.com/skills.md): technical skills grouped by where they sit in the stack
+- [Contact](https://pradeepmaurya.com/contact.md): email, phone, location, profiles
+
+## Projects
+
+- [ConsentX](https://pradeepmaurya.com/work/consentx.md): A consent management platform where privacy choices have to be captured, stored and proven. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
+- [RegulatoryBridge](https://pradeepmaurya.com/work/regulatorybridge.md): A regulatory compliance platform — dense information that still has to be quick to read. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
+- [Bakery](https://pradeepmaurya.com/work/bakery.md): A complete bakery shop — storefront, cart and secure accounts, built end to end. Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT. (2025)
+- [Xamlysis](https://pradeepmaurya.com/work/xamlysis.md): An online examination portal — the kind of app where a bug has a deadline attached. Stack: JavaScript, Node.js, REST APIs, manual & API testing. (2025)
+- [Movie Scraper](https://pradeepmaurya.com/work/movie-scraper.md): A Django app that pulls movie data from several sources and refuses to trust any of them. Stack: Python, Django, data validation. (2025)
+
+## Optional
+
+- [Work index](https://pradeepmaurya.com/work.md): the project list on its own
+- [Privacy](https://pradeepmaurya.com/privacy.md): what the site does and doesn't collect
+- [Terms](https://pradeepmaurya.com/terms.md): terms of use

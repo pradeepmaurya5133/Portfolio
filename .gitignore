@@ -1,0 +1,50 @@
+# ------------------------------------------------------------
+# Build output is intentionally NOT ignored.
+#
+# There's no CI here — `python build.py` runs locally and the generated
+# .html / .md / sitemap.xml / robots.txt / llms.txt / _headers / .htaccess
+# are what actually get deployed. Ignoring them would push an empty site.
+# ------------------------------------------------------------
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Scratch pages used to test rendering (headless-browser harnesses).
+# build.py never writes these — they're always throwaway.
+_*.html
+work/_*.html
+
+# Intermediate left behind if _favicons.py dies before its cleanup step
+assets/img/_icon-master.png
+
+# Secrets. Nothing here needs a key today, but if a signing key, API token
+# or form endpoint ever lands in this folder it must not be committed.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.jwk
+*.jwks
+secrets.json
+
+# Node, if build tooling is ever added
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
