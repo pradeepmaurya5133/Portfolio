@@ -1,0 +1,180 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Pradeep Maurya — Portfolio API",
+    "summary": "Contact delivery and health for pradeepmaury.in.",
+    "description": "A small API behind the portfolio. `/api/contact` delivers the contact form; `/api/health` reports whether it can send mail.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Pradeep Maurya",
+      "email": "pradeepmaurya2002@gmail.com",
+      "url": "https://www.pradeepmaury.in"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.pradeepmaury.in",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/contact": {
+      "post": {
+        "operationId": "sendContactMessage",
+        "summary": "Send a message via the contact form",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted for delivery",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ok"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          },
+          "502": {
+            "description": "Upstream mail provider failed"
+          },
+          "503": {
+            "description": "Mail sending is not configured"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Liveness and configuration status",
+        "responses": {
+          "200": {
+            "description": "Service is up",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContactRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "message"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 254
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "website": {
+            "type": "string",
+            "description": "Honeypot. Leave empty — a non-empty value is treated as a bot and silently discarded."
+          }
+        }
+      },
+      "Ok": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": false
+          },
+          "error": {
+            "type": "string",
+            "enum": [
+              "company_too_long",
+              "email_invalid",
+              "email_required",
+              "email_too_long",
+              "message_required",
+              "message_too_long",
+              "name_required",
+              "name_too_long"
+            ]
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok"
+            ]
+          },
+          "contact": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "unconfigured"
+            ]
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

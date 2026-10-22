@@ -1,0 +1,30 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://www.pradeepmaury.in/api",
+      "service-desc": [
+        {
+          "href": "https://www.pradeepmaury.in/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://www.pradeepmaury.in/docs/api.html",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://www.pradeepmaury.in/api/health",
+          "type": "application/json"
+        }
+      ],
+      "author": [
+        {
+          "href": "https://www.pradeepmaury.in/about.html"
+        }
+      ]
+    }
+  ]
+}

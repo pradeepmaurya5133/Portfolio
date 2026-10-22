@@ -6,7 +6,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\""
         },
         {
           "key": "Vary",
@@ -19,7 +19,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </about.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </about.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -32,7 +32,20 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </contact.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </contact.md>; rel=\"alternate\"; type=\"text/markdown\""
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
+    },
+    {
+      "source": "/docs/api.html",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </docs/api.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -45,7 +58,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </index.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </index.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -58,7 +71,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </index.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </index.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -71,7 +84,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </privacy.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </privacy.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -84,7 +97,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </resume.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </resume.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -97,7 +110,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </skills.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </skills.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -110,7 +123,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </terms.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </terms.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -123,7 +136,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -136,7 +149,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work/bakery.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/bakery.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -149,7 +162,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work/consentx.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/consentx.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -162,7 +175,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work/movie-scraper.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/movie-scraper.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -175,7 +188,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work/regulatorybridge.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/regulatorybridge.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -188,7 +201,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </work/xamlysis.md>; rel=\"alternate\"; type=\"text/markdown\""
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/xamlysis.md>; rel=\"alternate\"; type=\"text/markdown\""
         },
         {
           "key": "Vary",
@@ -220,6 +233,59 @@
         {
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/api-catalog",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/linkset+json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/poppy.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/ai-catalog.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/agent-data.json",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/openapi.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/openapi+json"
         }
       ]
     }
@@ -257,6 +323,17 @@
         }
       ],
       "destination": "/contact.md"
+    },
+    {
+      "source": "/docs/api.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(.*)text/markdown(.*)"
+        }
+      ],
+      "destination": "/docs/api.md"
     },
     {
       "source": "/index.html",

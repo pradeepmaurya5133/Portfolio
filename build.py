@@ -470,6 +470,7 @@ def chrome_end(root):
 <script src="{root}assets/vendor/SplitText.min.js"></script>
 <script src="{root}assets/vendor/lenis.min.js"></script>
 <script src="{root}assets/js/app.js"></script>
+<script src="{root}assets/js/webmcp.js" defer></script>
 </body>
 </html>'''
 
@@ -1011,22 +1012,28 @@ def page_contact():
 <section class="cb wrap">
 <div class="cb__main">
 <p class="cb__lead" data-reveal>Have a project in mind? Drop me a message and I'll get back to you within 24 hours.</p>
-<form class="form" data-contact-form action="#" method="post" novalidate>
+<form class="form" data-contact-form action="/api/contact" method="post" novalidate
+      toolname="send_message"
+      tooldescription="Send a message to Pradeep Maurya. Delivers a real email, so confirm the wording with the user first.">
 <div class="field">
 <label class="label muted" for="f-name">Your name</label>
-<input id="f-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
+<input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
 </div>
 <div class="field">
 <label class="label muted" for="f-email">Email</label>
-<input id="f-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email">
+<input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email">
 </div>
 <div class="field">
 <label class="label muted" for="f-company">Company <span class="muted">(optional)</span></label>
-<input id="f-company" name="company" type="text" placeholder="Company name" autocomplete="organization">
+<input toolparamdescription="Optional company or organisation name." id="f-company" name="company" type="text" placeholder="Company name" autocomplete="organization">
 </div>
 <div class="field">
 <label class="label muted" for="f-message">Message</label>
-<textarea id="f-message" name="message" rows="4" placeholder="What are you building?" required></textarea>
+<textarea toolparamdescription="The message body." id="f-message" name="message" rows="4" placeholder="What are you building?" required></textarea>
+</div>
+<div class="form__trap" aria-hidden="true">
+<label for="f-website">Website</label>
+<input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
 </div>
 <p class="mono" data-form-status></p>
 <div class="form__foot">
@@ -1201,6 +1208,78 @@ def page_doc(title, slug, blocks):
 {chrome_end(root)}'''
 
 
+def page_api_docs():
+    """Human-readable docs — the `service-doc` the API catalog points at."""
+    root = "../"
+    base = SITE_URL.rstrip("/")
+    errors = "".join(
+        f'<li data-reveal><span class="label muted">{code}</span>'
+        f'<span>{text}</span></li>'
+        for code, text in sorted(API_ERRORS.items())
+    )
+    return head("API — " + ME["name"],
+                f"HTTP API behind {ME['name']}'s portfolio: contact delivery "
+                f"and a health endpoint.", root, "docs/api.html") + f'''
+<body>
+{header("", root)}
+<main id="main">
+<section class="wh wrap">
+<p class="label muted wh__kicker"><span class="dot"></span> Developer reference</p>
+<h1 class="wh__title display" data-split>
+<span class="line-mask"><span>API<span class="accent">.</span></span></span>
+</h1>
+<p class="cb__lead" data-reveal style="margin-top:28px">A small HTTP API behind this
+portfolio. Machine-readable description:
+<a class="u-link" href="{root}openapi.json">openapi.json</a> ·
+catalog: <a class="u-link" href="{root}.well-known/api-catalog">/.well-known/api-catalog</a></p>
+</section>
+
+<section class="res wrap" style="padding-top:0">
+<div class="res__block">
+<h2 class="res__h">POST /api/contact</h2>
+<p class="muted" style="margin-bottom:24px">Delivers the contact form. Accepts
+JSON or form-encoded bodies.</p>
+<dl>
+<div class="res__line" data-reveal><dt class="label muted">name</dt>
+<dd>string, required, max 120</dd></div>
+<div class="res__line" data-reveal><dt class="label muted">email</dt>
+<dd>string, required, max 254 — used as the reply-to address</dd></div>
+<div class="res__line" data-reveal><dt class="label muted">company</dt>
+<dd>string, optional, max 160</dd></div>
+<div class="res__line" data-reveal><dt class="label muted">message</dt>
+<dd>string, required, max 5000</dd></div>
+<div class="res__line" data-reveal><dt class="label muted">website</dt>
+<dd>honeypot — leave empty. A non-empty value is treated as a bot and
+discarded, with a 200 so the bot learns nothing.</dd></div>
+</dl>
+<pre class="api__code" data-reveal><code>curl -X POST {base}/api/contact \\
+  -H 'Content-Type: application/json' \\
+  -d '{{"name":"Jane","email":"jane@example.com","message":"Hello"}}'</code></pre>
+<p class="muted">Returns <code>{{"ok":true}}</code> on success.
+<code>400</code> with an error code on validation failure, <code>502</code> if
+the mail provider rejects it, <code>503</code> if sending is not configured.</p>
+</div>
+
+<div class="res__block">
+<h2 class="res__h">GET /api/health</h2>
+<p class="muted" style="margin-bottom:24px">Liveness and configuration status —
+the <code>status</code> relation in the API catalog.</p>
+<pre class="api__code" data-reveal><code>{{"status":"ok","contact":"ready","time":"…"}}</code></pre>
+<p class="muted"><code>contact</code> reports <code>unconfigured</code> when the
+mail key is missing, so a monitor sees a misconfigured deploy rather than a
+false green.</p>
+</div>
+
+<div class="res__block">
+<h2 class="res__h">Error codes</h2>
+<ul class="credits__list">{errors}</ul>
+</div>
+</section>
+</main>
+{footer(root)}
+{chrome_end(root)}'''
+
+
 def page_404():
     root = ""
     return head(f"Not found — {ME['name']}", "That page doesn't exist.", root, "404.html") + f'''
@@ -1255,23 +1334,329 @@ TERMS = [
 
 
 # ============================================================
+#  API  (serverless functions in api/, described for discovery)
+# ============================================================
+API_ERRORS = {
+    "name_required": "Name was empty.",
+    "email_required": "Email was empty.",
+    "message_required": "Message was empty.",
+    "email_invalid": "Email is not a valid address.",
+    "name_too_long": "Name exceeds 120 characters.",
+    "email_too_long": "Email exceeds 254 characters.",
+    "company_too_long": "Company exceeds 160 characters.",
+    "message_too_long": "Message exceeds 5000 characters.",
+}
+
+
+def openapi_json():
+    base = SITE_URL.rstrip("/")
+    return json.dumps({
+        "openapi": "3.1.0",
+        "info": {
+            "title": f"{ME['name']} — Portfolio API",
+            "summary": "Contact delivery and health for pradeepmaury.in.",
+            "description": (
+                "A small API behind the portfolio. `/api/contact` delivers the "
+                "contact form; `/api/health` reports whether it can send mail."
+            ),
+            "version": "1.0.0",
+            "contact": {"name": ME["name"], "email": ME["email"], "url": base},
+        },
+        "servers": [{"url": base, "description": "Production"}],
+        "paths": {
+            "/api/contact": {
+                "post": {
+                    "operationId": "sendContactMessage",
+                    "summary": "Send a message via the contact form",
+                    "requestBody": {
+                        "required": True,
+                        "content": {
+                            "application/json": {
+                                "schema": {"$ref": "#/components/schemas/ContactRequest"}
+                            },
+                            "application/x-www-form-urlencoded": {
+                                "schema": {"$ref": "#/components/schemas/ContactRequest"}
+                            },
+                        },
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Accepted for delivery",
+                            "content": {"application/json": {
+                                "schema": {"$ref": "#/components/schemas/Ok"}}},
+                        },
+                        "400": {
+                            "description": "Validation failed",
+                            "content": {"application/json": {
+                                "schema": {"$ref": "#/components/schemas/Error"}}},
+                        },
+                        "405": {"description": "Method not allowed"},
+                        "502": {"description": "Upstream mail provider failed"},
+                        "503": {"description": "Mail sending is not configured"},
+                    },
+                }
+            },
+            "/api/health": {
+                "get": {
+                    "operationId": "getHealth",
+                    "summary": "Liveness and configuration status",
+                    "responses": {
+                        "200": {
+                            "description": "Service is up",
+                            "content": {"application/json": {
+                                "schema": {"$ref": "#/components/schemas/Health"}}},
+                        }
+                    },
+                }
+            },
+        },
+        "components": {
+            "schemas": {
+                "ContactRequest": {
+                    "type": "object",
+                    "required": ["name", "email", "message"],
+                    "properties": {
+                        "name": {"type": "string", "maxLength": 120},
+                        "email": {"type": "string", "format": "email", "maxLength": 254},
+                        "company": {"type": "string", "maxLength": 160},
+                        "message": {"type": "string", "maxLength": 5000},
+                        "website": {
+                            "type": "string",
+                            "description":
+                                "Honeypot. Leave empty — a non-empty value is "
+                                "treated as a bot and silently discarded.",
+                        },
+                    },
+                },
+                "Ok": {
+                    "type": "object",
+                    "properties": {"ok": {"type": "boolean", "const": True}},
+                },
+                "Error": {
+                    "type": "object",
+                    "properties": {
+                        "ok": {"type": "boolean", "const": False},
+                        "error": {"type": "string", "enum": sorted(API_ERRORS)},
+                    },
+                },
+                "Health": {
+                    "type": "object",
+                    "properties": {
+                        "status": {"type": "string", "enum": ["ok"]},
+                        "contact": {"type": "string", "enum": ["ready", "unconfigured"]},
+                        "time": {"type": "string", "format": "date-time"},
+                    },
+                },
+            }
+        },
+    }, indent=2, ensure_ascii=False) + "\n"
+
+
+def poppy_json():
+    """Personal Agent Protocol discovery — personalagentprotocol.org
+
+    A website-only declaration: `web: {}` with no `auth` block. The spec allows
+    this explicitly, and it's the only honest shape here — declaring `agent` or
+    `apis` obliges you to publish an `auth.issuer` with matching RFC 8414
+    metadata, and there is no authorization server behind this site. The API
+    that does exist (POST /api/contact, GET /api/health) is deliberately
+    public, so it has no issuer to name.
+
+    `domain` is the registrable domain: the spec matches it against the
+    requested hostname ignoring a leading "www", so this covers both
+    pradeepmaury.in and www.pradeepmaury.in.
+    """
+    host = SITE_URL.split("://", 1)[1].rstrip("/")
+    return json.dumps({
+        "protocol_version": "0.1",
+        "organization": {
+            "name": ME["name"],
+            "domain": host.removeprefix("www."),
+            "description": (
+                f"Portfolio of {ME['name']}, {ME['role']} in {ME['city']}, India."
+            ),
+            "contact": ME["email"],
+        },
+        "web": {},
+    }, indent=2, ensure_ascii=False) + "\n"
+
+
+def ai_catalog():
+    """ARD manifest — agenticresourcediscovery.org
+
+    Every entry points at something this site actually serves. Notably absent:
+    an MCP server entry. The WebMCP tools in assets/js/webmcp.js run in the
+    visitor's browser; there is no hosted MCP endpoint for a registry to call,
+    and claiming one would send agents to a URL that doesn't answer.
+    """
+    base = SITE_URL.rstrip("/")
+    # URNs identify the registrable domain, not the serving host, so no "www".
+    urn_domain = base.split("://", 1)[1].removeprefix("www.")
+
+    def entry(namespace, name, display, media_type, path, description, queries):
+        return {
+            "id": f"urn:air:{urn_domain}:{namespace}:{name}",
+            "displayName": display,
+            "description": description,
+            "type": media_type,
+            "url": f"{base}{path}",
+            "representativeQueries": queries,
+        }
+
+    return json.dumps({
+        # TODO: confirm against the published spec — see README.
+        "specVersion": "0.1",
+        "host": {
+            "name": ME["name"],
+            "url": base + "/",
+            "description": (
+                f"Portfolio of {ME['name']}, {ME['role']} in {ME['city']}, India. "
+                "Projects, résumé and a small contact API."
+            ),
+            "contact": ME["email"],
+        },
+        "entries": [
+            entry("api", "openapi", "Portfolio API (OpenAPI 3.1)",
+                  "application/openapi+json", "/openapi.json",
+                  "Machine-readable description of POST /api/contact and "
+                  "GET /api/health.",
+                  ["How do I send Pradeep Maurya a message programmatically?",
+                   "What API endpoints does this site expose?",
+                   "Is there an OpenAPI schema for pradeepmaury.in?"]),
+
+            entry("api", "catalog", "API Catalog (RFC 9727)",
+                  "application/linkset+json", "/.well-known/api-catalog",
+                  "Linkset naming the site's API, its description, docs and "
+                  "health endpoint.",
+                  ["Where is the API catalog for this domain?",
+                   "What services does pradeepmaury.in provide?",
+                   "How do I check if this site's API is up?"]),
+
+            entry("content", "llms", "LLM content index",
+                  "text/markdown", "/llms.txt",
+                  "Curated llmstxt.org index linking every page's markdown "
+                  "version.",
+                  ["What is on Pradeep Maurya's portfolio?",
+                   "Give me an index of this site for an LLM.",
+                   "Which pages does pradeepmaury.in have?"]),
+
+            entry("content", "llms-full", "Full site content",
+                  "text/markdown", "/llms-full.txt",
+                  "Every page of the site inlined as markdown in a single "
+                  "document (~5.5k tokens).",
+                  ["Summarise Pradeep Maurya's entire portfolio.",
+                   "Give me the full text of this website.",
+                   "What is Pradeep Maurya's experience and skill set?"]),
+
+            entry("data", "profile", "Structured profile and project data",
+                  "application/json", "/agent-data.json",
+                  "Projects, skills, work history and contact details as JSON.",
+                  ["What projects has Pradeep Maurya built?",
+                   "What technologies does Pradeep Maurya work with?",
+                   "Who is Pradeep Maurya and where is he based?",
+                   "What is Pradeep Maurya's work history?"]),
+
+            entry("content", "sitemap", "Sitemap",
+                  "application/xml", "/sitemap.xml",
+                  "Every indexable URL on the site.",
+                  ["List all pages on pradeepmaury.in.",
+                   "Where is the sitemap for this domain?"]),
+        ],
+    }, indent=2, ensure_ascii=False) + "\n"
+
+
+def agent_data():
+    """Structured site data for the WebMCP tools in assets/js/webmcp.js.
+
+    Fetched lazily the first time a tool runs, so it costs nothing on a normal
+    page view. Same source as the HTML, so it can't drift.
+    """
+    base = SITE_URL.rstrip("/")
+    return json.dumps({
+        "profile": {
+            "name": ME["name"],
+            "role": ME["role"],
+            "location": ME["region"],
+            "email": ME["email"],
+            "phone": ME["phone"],
+            "github": ME["github"],
+            "linkedin": ME["linkedin"],
+            "summary": ME["summary"],
+        },
+        "projects": [{
+            "name": p["name"],
+            "slug": p["slug"],
+            "year": p["year"],
+            "category": p["meta"],
+            "summary": p["summary"],
+            "stack": p["stack"],
+            "role": p["role"],
+            "url": f"{base}/work/{p['slug']}.html",
+            "live": p["link"] or None,
+        } for p in PROJECTS],
+        "skills": [
+            {"group": strip_tags(name), "items": items}
+            for _, name, items in SKILL_GROUPS
+        ],
+        "experience": [{
+            "role": strip_tags(e["role"]),
+            "org": e["org"],
+            "period": e["when"],
+            "highlights": [strip_tags(pt) for pt in e["points"]],
+        } for e in EXPERIENCE],
+        "pages": [
+            {"title": t, "url": f"{base}/{h}", "markdown": f"{base}{md_href(h)}"}
+            for t, h in [
+                ("Home", "index.html"), ("Work", "work.html"),
+                ("About", "about.html"), ("Skills", "skills.html"),
+                ("Resume", "resume.html"), ("Contact", "contact.html"),
+                ("API", "docs/api.html"),
+            ]
+        ],
+    }, indent=2, ensure_ascii=False) + "\n"
+
+
+def api_catalog():
+    """RFC 9727 catalog as an RFC 9264 linkset."""
+    base = SITE_URL.rstrip("/")
+    return json.dumps({
+        "linkset": [{
+            "anchor": f"{base}/api",
+            "service-desc": [
+                {"href": f"{base}/openapi.json", "type": "application/openapi+json"}
+            ],
+            "service-doc": [
+                {"href": f"{base}/docs/api.html", "type": "text/html"}
+            ],
+            "status": [
+                {"href": f"{base}/api/health", "type": "application/json"}
+            ],
+            "author": [{"href": f"{base}/about.html"}],
+        }]
+    }, indent=2) + "\n"
+
+
+# ============================================================
 #  LINK RELATIONS  (RFC 8288)
 # ============================================================
 # Emitted twice from one definition: as <link> elements in every page head,
 # and as a single RFC 8288 Link: response header via the server configs below.
 #
 # Every relation here is in the IANA Link Relations registry and is true of
-# this site. Deliberately NOT included: api-catalog and service-doc — there is
-# no API behind a static portfolio, and advertising /.well-known/api-catalog
-# would just hand agents a 404.
+# this site. api-catalog and service-desc are included now that api/ actually
+# exists — before it did, they would have pointed agents at a 404.
 SITE_RELS = [
-    # (rel, href, extra <link> attributes)
-    ("author", "/about.html", ""),
-    ("me", ME["github"], ""),
-    ("me", ME["linkedin"], ""),
-    ("me", "mailto:" + ME["email"], ""),
-    ("privacy-policy", "/privacy.html", ""),
-    ("terms-of-service", "/terms.html", ""),
+    # (rel, href, extra params) — params are kept as a dict so the HTML
+    # attribute form and the RFC 8288 header form can't drift apart.
+    ("author", "/about.html", {}),
+    ("me", ME["github"], {}),
+    ("me", ME["linkedin"], {}),
+    ("me", "mailto:" + ME["email"], {}),
+    ("privacy-policy", "/privacy.html", {}),
+    ("terms-of-service", "/terms.html", {}),
+    ("api-catalog", "/.well-known/api-catalog", {"type": "application/linkset+json"}),
+    ("service-desc", "/openapi.json", {"type": "application/openapi+json"}),
+    ("service-doc", "/docs/api.html", {"type": "text/html"}),
 ]
 
 
@@ -1281,7 +1666,13 @@ def link_header():
     RFC 8288 §3 allows multiple link-values in a single field, which is safer
     across servers than repeating the header name.
     """
-    return ", ".join(f'<{href}>; rel="{rel}"' for rel, href, _ in SITE_RELS)
+    values = []
+    for rel, href, params in SITE_RELS:
+        value = f'<{href}>; rel="{rel}"'
+        for key, val in params.items():
+            value += f'; {key}="{val}"'
+        values.append(value)
+    return ", ".join(values)
 
 
 def md_alternate(path):
@@ -1297,10 +1688,11 @@ def head_links(root):
     """The same relations as <link> elements, for hosts that can't set headers
     (GitHub Pages) and for agents that only parse HTML."""
     out = ""
-    for rel, href, extra in SITE_RELS:
+    for rel, href, params in SITE_RELS:
         # Site-local targets go through {root} so project pages resolve too.
         target = root + href.lstrip("/") if href.startswith("/") else href
-        out += f'<link rel="{rel}" href="{target}"{extra}>\n'
+        attrs = "".join(f' {k}="{v}"' for k, v in params.items())
+        out += f'<link rel="{rel}" href="{target}"{attrs}>\n'
     return out
 
 
@@ -1346,6 +1738,20 @@ def headers_file(md_paths):
         "  Content-Type: text/plain; charset=utf-8",
         "/llms-full.txt",
         "  Content-Type: text/plain; charset=utf-8",
+        "",
+        "# RFC 9727 / RFC 9264 discovery documents.",
+        "/.well-known/api-catalog",
+        "  Content-Type: application/linkset+json",
+        "/.well-known/ai-catalog.json",
+        "  Content-Type: application/json",
+        "  Access-Control-Allow-Origin: *",
+        "/.well-known/poppy.json",
+        "  Content-Type: application/json",
+        "  Access-Control-Allow-Origin: *",
+        "/agent-data.json",
+        "  Access-Control-Allow-Origin: *",
+        "/openapi.json",
+        "  Content-Type: application/openapi+json",
     ]
     return "\n".join(out) + "\n"
 
@@ -1384,6 +1790,22 @@ def vercel_json(md_paths):
          "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]},
         {"source": "/llms-full.txt",
          "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]},
+        {"source": "/.well-known/api-catalog",
+         "headers": [{"key": "Content-Type", "value": "application/linkset+json"}]},
+        {"source": "/.well-known/poppy.json",
+         "headers": [
+             {"key": "Content-Type", "value": "application/json"},
+             {"key": "Access-Control-Allow-Origin", "value": "*"},
+         ]},
+        {"source": "/.well-known/ai-catalog.json",
+         "headers": [
+             {"key": "Content-Type", "value": "application/json"},
+             {"key": "Access-Control-Allow-Origin", "value": "*"},
+         ]},
+        {"source": "/agent-data.json",
+         "headers": [{"key": "Access-Control-Allow-Origin", "value": "*"}]},
+        {"source": "/openapi.json",
+         "headers": [{"key": "Content-Type", "value": "application/openapi+json"}]},
     ]
 
     # Accept-based rewrites, one explicit entry per page.
@@ -1471,6 +1893,7 @@ PRIORITY = {
     "resume.html": "0.8",
     "skills.html": "0.8",
     "contact.html": "0.8",
+    "docs/api.html": "0.4",
     "privacy.html": "0.3",
     "terms.html": "0.3",
 }
@@ -1687,6 +2110,45 @@ def markdown_page(path):
         return "\n".join(_md_head(f"{label} — {name}", path,
                                   f"{label} for {name}'s portfolio.") + _md_doc(blocks))
 
+    if path == "docs/api.html":
+        base = SITE_URL.rstrip("/")
+        body = _md_head(f"API — {name}", path,
+                        "HTTP API behind the portfolio: contact delivery and health.")
+        body += [
+            f"Machine-readable: [openapi.json]({base}/openapi.json) · "
+            f"catalog: [/.well-known/api-catalog]({base}/.well-known/api-catalog)",
+            "",
+            "## POST /api/contact", "",
+            "Delivers the contact form. Accepts JSON or form-encoded bodies.", "",
+            "| Field | Type | Notes |",
+            "| --- | --- | --- |",
+            "| name | string | required, max 120 |",
+            "| email | string | required, max 254 — used as the reply-to address |",
+            "| company | string | optional, max 160 |",
+            "| message | string | required, max 5000 |",
+            "| website | string | honeypot — leave empty |",
+            "",
+            "```sh",
+            f"curl -X POST {base}/api/contact \\",
+            "  -H 'Content-Type: application/json' \\",
+            '  -d \'{"name":"Jane","email":"jane@example.com","message":"Hello"}\'',
+            "```",
+            "",
+            "Returns `{\"ok\":true}` on success. `400` with an error code on "
+            "validation failure, `502` if the mail provider rejects it, `503` "
+            "if sending is not configured.", "",
+            "## GET /api/health", "",
+            "Liveness and configuration status — the `status` relation in the "
+            "API catalog.", "",
+            "```json",
+            '{"status":"ok","contact":"ready","time":"…"}',
+            "```", "",
+            "## Error codes", "",
+        ]
+        body += [f"- `{code}` — {text}" for code, text in sorted(API_ERRORS.items())]
+        body.append("")
+        return "\n".join(body)
+
     if path.startswith("work/"):
         slug = path[len("work/"):-len(".html")]
         p = next(x for x in PROJECTS if x["slug"] == slug)
@@ -1800,12 +2262,15 @@ def main():
         "contact.html": page_contact(),
         "privacy.html": page_doc("Privacy", "privacy", PRIVACY),
         "terms.html": page_doc("Terms", "terms", TERMS),
+        "docs/api.html": page_api_docs(),
         "404.html": page_404(),
     }
     for i, p in enumerate(PROJECTS):
         pages[f"work/{p['slug']}.html"] = page_project(p, i)
 
     (ROOT / "work").mkdir(exist_ok=True)
+    (ROOT / "docs").mkdir(exist_ok=True)
+    (ROOT / ".well-known").mkdir(exist_ok=True)
     md_pages = {}
     for path in pages:
         md = markdown_page(path)
@@ -1826,6 +2291,11 @@ def main():
         "sitemap.xml": sitemap(pages.keys(), today),
         "robots.txt": robots(),
         "site.webmanifest": webmanifest(),
+        "openapi.json": openapi_json(),
+        "agent-data.json": agent_data(),
+        ".well-known/ai-catalog.json": ai_catalog(),
+        ".well-known/poppy.json": poppy_json(),
+        ".well-known/api-catalog": api_catalog(),
         "llms.txt": llms_txt(),
         "llms-full.txt": llms_full_txt(md_pages),
         "_headers": headers_file(sorted(md_html)),

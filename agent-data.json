@@ -1,0 +1,200 @@
+{
+  "profile": {
+    "name": "Pradeep Maurya",
+    "role": "Full Stack Developer",
+    "location": "Shree Enclave Panditwari, Dehradun, India",
+    "email": "pradeepmaurya2002@gmail.com",
+    "phone": "+91 95199 65133",
+    "github": "https://github.com/pradeepmaurya5133/",
+    "linkedin": "https://linkedin.com/in/pradeep-maurya-b82b5820b/",
+    "summary": "Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications."
+  },
+  "projects": [
+    {
+      "name": "ConsentX",
+      "slug": "consentx",
+      "year": "2026",
+      "category": "Full-Stack / UI Engineering",
+      "summary": "A consent management platform where privacy choices have to be captured, stored and proven.",
+      "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
+      "role": "Full Stack Developer",
+      "url": "https://www.pradeepmaury.in/work/consentx.html",
+      "live": "https://consentx.io"
+    },
+    {
+      "name": "RegulatoryBridge",
+      "slug": "regulatorybridge",
+      "year": "2026",
+      "category": "Web Development / QA",
+      "summary": "A regulatory compliance platform — dense information that still has to be quick to read.",
+      "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
+      "role": "Full Stack Developer",
+      "url": "https://www.pradeepmaury.in/work/regulatorybridge.html",
+      "live": "https://regulatorybridge.com"
+    },
+    {
+      "name": "Bakery",
+      "slug": "bakery",
+      "year": "2025",
+      "category": "Full-Stack / E-commerce",
+      "summary": "A complete bakery shop — storefront, cart and secure accounts, built end to end.",
+      "stack": "Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT",
+      "role": "Full-stack developer (personal project)",
+      "url": "https://www.pradeepmaury.in/work/bakery.html",
+      "live": null
+    },
+    {
+      "name": "Xamlysis",
+      "slug": "xamlysis",
+      "year": "2025",
+      "category": "Web App / QA",
+      "summary": "An online examination portal — the kind of app where a bug has a deadline attached.",
+      "stack": "JavaScript, Node.js, REST APIs, manual & API testing",
+      "role": "Developer / QA support",
+      "url": "https://www.pradeepmaury.in/work/xamlysis.html",
+      "live": null
+    },
+    {
+      "name": "Movie Scraper",
+      "slug": "movie-scraper",
+      "year": "2025",
+      "category": "Python / Data Pipeline",
+      "summary": "A Django app that pulls movie data from several sources and refuses to trust any of them.",
+      "stack": "Python, Django, data validation",
+      "role": "Developer",
+      "url": "https://www.pradeepmaury.in/work/movie-scraper.html",
+      "live": null
+    }
+  ],
+  "skills": [
+    {
+      "group": "Frontend",
+      "items": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Bootstrap"
+      ]
+    },
+    {
+      "group": "Backend & APIs",
+      "items": [
+        "Node.js",
+        "Express.js",
+        "Python",
+        "Django",
+        "REST APIs",
+        "AI API integration"
+      ]
+    },
+    {
+      "group": "Databases & State",
+      "items": [
+        "PostgreSQL",
+        "Prisma",
+        "Redux Toolkit"
+      ]
+    },
+    {
+      "group": "Testing & Tools",
+      "items": [
+        "Manual Testing",
+        "API Testing (Postman)",
+        "Web Testing",
+        "Visual Studio Code",
+        "PyCharm"
+      ]
+    },
+    {
+      "group": "Data & Collaboration",
+      "items": [
+        "MS Excel",
+        "Power BI",
+        "Git",
+        "GitHub"
+      ]
+    },
+    {
+      "group": "Professional",
+      "items": [
+        "Communication",
+        "Teamwork",
+        "Analytical thinking",
+        "Attention to detail",
+        "Adaptability"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Full Stack Developer",
+      "org": "iLeads Auxiliary Services Private Limited",
+      "period": "Aug 2026 — Present",
+      "highlights": [
+        "Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.",
+        "Support development, debugging, testing and refinement of web experiences using modern web technologies.",
+        "Work on product and project deliverables associated with SS IntelligenceX Private Limited.",
+        "Project work: ConsentX.io and RegulatoryBridge.com."
+      ]
+    },
+    {
+      "role": "Software / QA and Data Support",
+      "org": "Tecxpert Software Pvt. Ltd.",
+      "period": "Sep 2025 — July 2026",
+      "highlights": [
+        "Supported software testing, quality assurance, data management, reporting and process-improvement activities.",
+        "Helped coordinate tasks and resolve issues while maintaining focus on accuracy and delivery quality."
+      ]
+    },
+    {
+      "role": "Data Entry & Document Verification Operator — SBI Credit Card",
+      "org": "Alexis Global Pvt. Ltd.",
+      "period": "Jan 2025 — Jun 2025",
+      "highlights": [
+        "Entered and maintained customer application records with attention to accuracy and confidentiality.",
+        "Verified customer documents against process requirements and coordinated resolution of discrepancies."
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "title": "Home",
+      "url": "https://www.pradeepmaury.in/index.html",
+      "markdown": "https://www.pradeepmaury.in/index.md"
+    },
+    {
+      "title": "Work",
+      "url": "https://www.pradeepmaury.in/work.html",
+      "markdown": "https://www.pradeepmaury.in/work.md"
+    },
+    {
+      "title": "About",
+      "url": "https://www.pradeepmaury.in/about.html",
+      "markdown": "https://www.pradeepmaury.in/about.md"
+    },
+    {
+      "title": "Skills",
+      "url": "https://www.pradeepmaury.in/skills.html",
+      "markdown": "https://www.pradeepmaury.in/skills.md"
+    },
+    {
+      "title": "Resume",
+      "url": "https://www.pradeepmaury.in/resume.html",
+      "markdown": "https://www.pradeepmaury.in/resume.md"
+    },
+    {
+      "title": "Contact",
+      "url": "https://www.pradeepmaury.in/contact.html",
+      "markdown": "https://www.pradeepmaury.in/contact.md"
+    },
+    {
+      "title": "API",
+      "url": "https://www.pradeepmaury.in/docs/api.html",
+      "markdown": "https://www.pradeepmaury.in/docs/api.md"
+    }
+  ]
+}

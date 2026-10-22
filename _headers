@@ -2,13 +2,15 @@
 # Netlify and Cloudflare Pages read this file; see README for Apache,
 # nginx and Vercel equivalents.
 /*
-  Link: </about.html>; rel="author", <https://github.com/pradeepmaurya5133/>; rel="me", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel="me", <mailto:pradeepmaurya2002@gmail.com>; rel="me", </privacy.html>; rel="privacy-policy", </terms.html>; rel="terms-of-service"
+  Link: </about.html>; rel="author", <https://github.com/pradeepmaurya5133/>; rel="me", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel="me", <mailto:pradeepmaurya2002@gmail.com>; rel="me", </privacy.html>; rel="privacy-policy", </terms.html>; rel="terms-of-service", </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </openapi.json>; rel="service-desc"; type="application/openapi+json", </docs/api.html>; rel="service-doc"; type="text/html"
 
 # Markdown twins, so an agent can find the text-only form of a page.
 /about.html
   Link: </about.md>; rel="alternate"; type="text/markdown"
 /contact.html
   Link: </contact.md>; rel="alternate"; type="text/markdown"
+/docs/api.html
+  Link: </docs/api.md>; rel="alternate"; type="text/markdown"
 /
   Link: </index.md>; rel="alternate"; type="text/markdown"
 /index.html
@@ -43,3 +45,17 @@
   Content-Type: text/plain; charset=utf-8
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
+
+# RFC 9727 / RFC 9264 discovery documents.
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+/.well-known/ai-catalog.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+/.well-known/poppy.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+/agent-data.json
+  Access-Control-Allow-Origin: *
+/openapi.json
+  Content-Type: application/openapi+json

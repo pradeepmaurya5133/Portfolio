@@ -1,0 +1,83 @@
+{
+  "specVersion": "0.1",
+  "host": {
+    "name": "Pradeep Maurya",
+    "url": "https://www.pradeepmaury.in/",
+    "description": "Portfolio of Pradeep Maurya, Full Stack Developer in Dehradun, India. Projects, résumé and a small contact API.",
+    "contact": "pradeepmaurya2002@gmail.com"
+  },
+  "entries": [
+    {
+      "id": "urn:air:pradeepmaury.in:api:openapi",
+      "displayName": "Portfolio API (OpenAPI 3.1)",
+      "description": "Machine-readable description of POST /api/contact and GET /api/health.",
+      "type": "application/openapi+json",
+      "url": "https://www.pradeepmaury.in/openapi.json",
+      "representativeQueries": [
+        "How do I send Pradeep Maurya a message programmatically?",
+        "What API endpoints does this site expose?",
+        "Is there an OpenAPI schema for pradeepmaury.in?"
+      ]
+    },
+    {
+      "id": "urn:air:pradeepmaury.in:api:catalog",
+      "displayName": "API Catalog (RFC 9727)",
+      "description": "Linkset naming the site's API, its description, docs and health endpoint.",
+      "type": "application/linkset+json",
+      "url": "https://www.pradeepmaury.in/.well-known/api-catalog",
+      "representativeQueries": [
+        "Where is the API catalog for this domain?",
+        "What services does pradeepmaury.in provide?",
+        "How do I check if this site's API is up?"
+      ]
+    },
+    {
+      "id": "urn:air:pradeepmaury.in:content:llms",
+      "displayName": "LLM content index",
+      "description": "Curated llmstxt.org index linking every page's markdown version.",
+      "type": "text/markdown",
+      "url": "https://www.pradeepmaury.in/llms.txt",
+      "representativeQueries": [
+        "What is on Pradeep Maurya's portfolio?",
+        "Give me an index of this site for an LLM.",
+        "Which pages does pradeepmaury.in have?"
+      ]
+    },
+    {
+      "id": "urn:air:pradeepmaury.in:content:llms-full",
+      "displayName": "Full site content",
+      "description": "Every page of the site inlined as markdown in a single document (~5.5k tokens).",
+      "type": "text/markdown",
+      "url": "https://www.pradeepmaury.in/llms-full.txt",
+      "representativeQueries": [
+        "Summarise Pradeep Maurya's entire portfolio.",
+        "Give me the full text of this website.",
+        "What is Pradeep Maurya's experience and skill set?"
+      ]
+    },
+    {
+      "id": "urn:air:pradeepmaury.in:data:profile",
+      "displayName": "Structured profile and project data",
+      "description": "Projects, skills, work history and contact details as JSON.",
+      "type": "application/json",
+      "url": "https://www.pradeepmaury.in/agent-data.json",
+      "representativeQueries": [
+        "What projects has Pradeep Maurya built?",
+        "What technologies does Pradeep Maurya work with?",
+        "Who is Pradeep Maurya and where is he based?",
+        "What is Pradeep Maurya's work history?"
+      ]
+    },
+    {
+      "id": "urn:air:pradeepmaury.in:content:sitemap",
+      "displayName": "Sitemap",
+      "description": "Every indexable URL on the site.",
+      "type": "application/xml",
+      "url": "https://www.pradeepmaury.in/sitemap.xml",
+      "representativeQueries": [
+        "List all pages on pradeepmaury.in.",
+        "Where is the sitemap for this domain?"
+      ]
+    }
+  ]
+}

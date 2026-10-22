@@ -599,36 +599,65 @@
       }
     };
 
+    // Readable text for the error codes POST /api/contact can return.
+    var MESSAGES = {
+      name_required: 'Please add your name.',
+      email_required: 'Please add your email.',
+      message_required: 'Please add a message.',
+      email_invalid: "That email address doesn't look right.",
+      name_too_long: 'That name is too long.',
+      email_too_long: 'That email address is too long.',
+      company_too_long: 'That company name is too long.',
+      message_too_long: 'That message is too long — 5000 characters max.'
+    };
+
+    // Last resort: hand the message to the visitor's own mail client, so a
+    // missing API key or a dead provider never costs an enquiry.
+    var mailtoFallback = function (data) {
+      var body = 'Name: ' + (data.get('name') || '') +
+                 '\nEmail: ' + (data.get('email') || '') +
+                 '\nCompany: ' + (data.get('company') || '') +
+                 '\n\n' + (data.get('message') || '');
+      say('sent', 'Opening your mail app so you can send it directly — thank you!');
+      window.location.href = 'mailto:pradeepmaurya2002@gmail.com' +
+        '?subject=' + encodeURIComponent('Portfolio enquiry from ' + (data.get('name') || 'website')) +
+        '&body=' + encodeURIComponent(body);
+    };
+
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var submit = $('button[type=submit]', form);
       var endpoint = form.getAttribute('action');
+      var data = new FormData(form);
 
-      // Without a configured endpoint, hand the message to the user's mail client.
-      if (!endpoint || endpoint === '#') {
-        var data = new FormData(form);
-        var subject = 'Portfolio enquiry from ' + (data.get('name') || 'website');
-        var body = 'Name: ' + (data.get('name') || '') +
-                   '\nEmail: ' + (data.get('email') || '') +
-                   '\nCompany: ' + (data.get('company') || '') +
-                   '\n\n' + (data.get('message') || '');
-        say('sent', 'Opening your mail app so you can send it directly — thank you!');
-        window.location.href = 'mailto:pradeepmaurya2002@gmail.com?subject=' +
-          encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        return;
-      }
+      if (!endpoint || endpoint === '#') return mailtoFallback(data);
 
       submit.disabled = true;
       say('sending', 'Sending…');
       try {
-        var res = await fetch(endpoint, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        var res = await fetch(endpoint, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' }
+        });
         var json = await res.json().catch(function () { return {}; });
-        if (!res.ok) throw new Error(json.error || 'Something went wrong.');
-        form.reset();
-        form.classList.add('is-sent');
-        say('sent', "Thanks for your message. I'll get back to you as soon as possible (:");
+
+        if (res.ok) {
+          form.reset();
+          form.classList.add('is-sent');
+          say('sent', "Thanks for your message. I'll get back to you within 24 hours.");
+          return;
+        }
+
+        // 400 is the visitor's input — tell them what to fix. Anything else
+        // is our problem, so don't make them retype it.
+        if (res.status === 400 && MESSAGES[json.error]) {
+          say('error', MESSAGES[json.error]);
+          return;
+        }
+        mailtoFallback(data);
       } catch (err) {
-        say('error', err.message);
+        mailtoFallback(data);   // offline, blocked, CORS — still recoverable
       } finally {
         submit.disabled = false;
       }

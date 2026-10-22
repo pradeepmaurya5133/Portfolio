@@ -28,6 +28,9 @@
 <link rel="me" href="mailto:pradeepmaurya2002@gmail.com">
 <link rel="privacy-policy" href="privacy.html">
 <link rel="terms-of-service" href="terms.html">
+<link rel="api-catalog" href=".well-known/api-catalog" type="application/linkset+json">
+<link rel="service-desc" href="openapi.json" type="application/openapi+json">
+<link rel="service-doc" href="docs/api.html" type="text/html">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 </head>
@@ -59,22 +62,28 @@
 <section class="cb wrap">
 <div class="cb__main">
 <p class="cb__lead" data-reveal>Have a project in mind? Drop me a message and I'll get back to you within 24 hours.</p>
-<form class="form" data-contact-form action="#" method="post" novalidate>
+<form class="form" data-contact-form action="/api/contact" method="post" novalidate
+      toolname="send_message"
+      tooldescription="Send a message to Pradeep Maurya. Delivers a real email, so confirm the wording with the user first.">
 <div class="field">
 <label class="label muted" for="f-name">Your name</label>
-<input id="f-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
+<input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
 </div>
 <div class="field">
 <label class="label muted" for="f-email">Email</label>
-<input id="f-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email">
+<input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email">
 </div>
 <div class="field">
 <label class="label muted" for="f-company">Company <span class="muted">(optional)</span></label>
-<input id="f-company" name="company" type="text" placeholder="Company name" autocomplete="organization">
+<input toolparamdescription="Optional company or organisation name." id="f-company" name="company" type="text" placeholder="Company name" autocomplete="organization">
 </div>
 <div class="field">
 <label class="label muted" for="f-message">Message</label>
-<textarea id="f-message" name="message" rows="4" placeholder="What are you building?" required></textarea>
+<textarea toolparamdescription="The message body." id="f-message" name="message" rows="4" placeholder="What are you building?" required></textarea>
+</div>
+<div class="form__trap" aria-hidden="true">
+<label for="f-website">Website</label>
+<input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
 </div>
 <p class="mono" data-form-status></p>
 <div class="form__foot">
@@ -145,5 +154,6 @@
 <script src="assets/vendor/SplitText.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/webmcp.js" defer></script>
 </body>
 </html>

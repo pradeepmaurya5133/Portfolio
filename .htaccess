@@ -1,6 +1,6 @@
 # RFC 8288 Link relations for agent discovery.
 <IfModule mod_headers.c>
-  Header always set Link "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\""
+  Header always set Link "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\""
 </IfModule>
 
 # Markdown for agents: serve page.md when the client asks for

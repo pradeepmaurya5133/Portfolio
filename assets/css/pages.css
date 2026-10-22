@@ -836,6 +836,15 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 .field input::placeholder, .field textarea::placeholder { color: #ffffff2e }
 .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none }
 .form__consent { flex: 180px; max-width: 420px; font-size: .85rem; line-height: 1.5 }
+/* Honeypot. Kept out of the layout and out of the a11y tree, but NOT
+   display:none — some bots skip hidden inputs, and that would defeat it. */
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .form__consent a { color: var(--paper) }
 .form [data-form-status]:empty { display: none }
 .form [data-form-status][data-state=sent] { color: var(--accent) }
@@ -847,6 +856,18 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
   .form__consent { flex: none }
 }
 @media (width <= 900px) { .cb { grid-template-columns: 1fr } }
+
+/* API docs code blocks */
+.api__code {
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  padding: 18px 20px;
+  margin: 0 0 20px;
+  overflow-x: auto;
+  font-size: .88rem;
+  line-height: 1.6;
+}
+.api__code code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace }
 
 /* ============================================================
    Résumé page
