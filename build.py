@@ -369,8 +369,10 @@ ABOUT_EXPERIENCE_BLURB = (
     "user interfaces, implementing features, integrating APIs, and improving application "
     "usability and maintainability.")
 
-# Three shown on About; the rest live on the Work page.
-ABOUT_PROJECT_SLUGS = ["consentx", "regulatorybridge", "portfolio"]
+# Shown on About, Skills and Experience; the rest live on the Work page.
+# Four, not three: the card grid is two columns, so an odd count leaves the
+# last card alone beside an empty half-row. All four have real screenshots.
+ABOUT_PROJECT_SLUGS = ["consentx", "regulatorybridge", "xamlysis", "portfolio"]
 
 EXPERIENCE = [
     {
@@ -857,7 +859,14 @@ def header(active, root):
 
 
 def footer(root):
-    return f'''<footer class="footer">
+    return f'''<footer class="footer footer--video">
+<div class="footer__bg" aria-hidden="true">
+<video class="footer__video" data-autoplay muted loop playsinline preload="none"
+       poster="{root}assets/video/footer-bg.jpg" width="1280" height="720" tabindex="-1">
+<source src="{root}assets/video/footer-bg.mp4" type="video/mp4">
+</video>
+<div class="footer__shade"></div>
+</div>
 <section class="cta wrap" aria-labelledby="cta-title">
 <p class="label muted cta__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h2 id="cta-title" class="cta__title display" data-split>
@@ -1016,6 +1025,10 @@ def page_index():
 
 <section class="hero" data-hero aria-label="Introduction">
 <div class="hero__bg" aria-hidden="true">
+<img class="hero__photo" data-hero-bg src="assets/img/hero-bg.webp"
+     srcset="assets/img/hero-bg-1280.webp 1280w, assets/img/hero-bg.webp 1920w"
+     sizes="100vw" alt="" width="1920" height="1080"
+     loading="eager" fetchpriority="high" decoding="async">
 <canvas data-hero-bg data-flow="1"></canvas>
 <div class="hero__shade"></div>
 <div class="hero__scan"></div>
@@ -1339,7 +1352,14 @@ def page_about():
 {header("About", root)}
 <main id="main">
 
-<section class="ph" data-project-hero aria-labelledby="ph-title">
+<section class="ph ph--photo" data-project-hero aria-labelledby="ph-title">
+<div class="ph__bg" aria-hidden="true">
+<img class="ph__photo" src="assets/img/about-bg.webp"
+     srcset="assets/img/about-bg-960.webp 960w, assets/img/about-bg.webp 1440w"
+     sizes="100vw" alt="" width="1440" height="808"
+     loading="eager" fetchpriority="high" decoding="async">
+<div class="ph__shade"></div>
+</div>
 <div class="ph__top wrap label" data-ph-fade>
 <a href="index.html" class="u-link" data-cursor="hover">{ARROW_BACK} Home</a>
 <span class="muted">A little about me</span>
@@ -1528,7 +1548,14 @@ def page_skills():
 {header("Skills", root)}
 <main id="main">
 
-<section class="wh wrap">
+<section class="wh wrap wh--photo">
+<div class="wh__bg" aria-hidden="true">
+<img class="wh__photo" src="assets/img/skills-bg.webp"
+     srcset="assets/img/skills-bg-720.webp 720w, assets/img/skills-bg.webp 1200w"
+     sizes="100vw" alt="" width="1200" height="1595"
+     loading="eager" fetchpriority="high" decoding="async">
+<div class="wh__shade wh__shade--photo"></div>
+</div>
 <p class="label muted wh__kicker"><span class="dot"></span> Technical expertise</p>
 <h1 class="wh__title wh__title--long display" data-split>
 <span class="line-mask"><span>The Skills Behind</span></span>
@@ -1867,7 +1894,7 @@ def page_contact():
 <div class="field">
 <label class="label muted" for="f-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
 <input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text"
-       placeholder="Jane Doe" required maxlength="120" autocomplete="name"
+       placeholder="Enter your name" required maxlength="120" autocomplete="name"
        aria-describedby="e-name">
 <p class="field__error" id="e-name" data-error-for="name" aria-live="polite"></p>
 </div>
@@ -1875,7 +1902,7 @@ def page_contact():
 <div class="field">
 <label class="label muted" for="f-email">Email <span class="field__req" aria-hidden="true">*</span></label>
 <input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email"
-       name="email" type="email" placeholder="jane@company.com" required maxlength="254"
+       name="email" type="email" placeholder="Enter your email" required maxlength="254"
        autocomplete="email" inputmode="email" aria-describedby="e-email">
 <p class="field__error" id="e-email" data-error-for="email" aria-live="polite"></p>
 </div>
@@ -2230,7 +2257,14 @@ def page_experience():
 {header("Experience", root)}
 <main id="main">
 
-<section class="wh wrap">
+<section class="wh wrap wh--photo">
+<div class="wh__bg" aria-hidden="true">
+<img class="wh__photo" src="assets/img/experience-bg.webp"
+     srcset="assets/img/experience-bg-720.webp 720w, assets/img/experience-bg.webp 1200w"
+     sizes="100vw" alt="" width="1200" height="1595"
+     loading="eager" fetchpriority="high" decoding="async">
+<div class="wh__shade wh__shade--photo"></div>
+</div>
 <p class="label muted wh__kicker"><span class="dot"></span> Career</p>
 <h1 class="wh__title wh__title--long display" data-split>
 <span class="line-mask"><span>Professional</span></span>

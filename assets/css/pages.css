@@ -14,6 +14,16 @@
   overflow: hidden;
 }
 .hero__bg { z-index: -1; position: absolute; inset: 0 }
+/* Photographic backdrop, covering the whole hero. It sits under the canvas
+   and under .hero__shade, which is what keeps the headline legible. */
+.hero__photo {
+  object-fit: cover;
+  filter: grayscale(.25) contrast(1.05);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
 .hero__bg canvas, .hero__bg video {
   object-fit: cover;
   filter: grayscale(.2) contrast(1.1);
@@ -21,10 +31,19 @@
   width: 100%;
   height: 100%;
 }
+/* The canvas clears to an opaque near-black radial fill, which would hide
+   the photo completely. Screen blending drops that near-black to nothing
+   and keeps only the glow and the node mesh on top of the image. */
+.hero__bg canvas { mix-blend-mode: screen; opacity: .9 }
 .hero__shade {
+  /* Three layers, in order: darken the left where the headline and copy
+     sit, keep a lit pocket upper-right so the photo still reads, then the
+     usual top-and-bottom fade into the page. Tuned against the photo —
+     without the first layer the body copy fights the bright monitors. */
   background:
-    radial-gradient(120% 80% at 70% 20%, transparent 0%, #14141459 60%, #141414d9 100%),
-    linear-gradient(180deg, #14141499 0%, #1414140d 30%, #141414b3 75%, var(--ink) 100%);
+    linear-gradient(100deg, #141414d6 0%, #1414149c 34%, #14141440 68%, #14141466 100%),
+    radial-gradient(120% 80% at 72% 18%, transparent 0%, #14141466 58%, #141414e0 100%),
+    linear-gradient(180deg, #141414b3 0%, #14141433 26%, #141414c4 70%, var(--ink) 100%);
   position: absolute;
   inset: 0;
 }
@@ -98,7 +117,12 @@ html.js .pill img:not(.is-loaded) { opacity: 0 }
 .reel-btn:hover .reel-btn__icon { transform: translate(4px) }
 @media (width <= 900px) {
   .hero { padding-top: 96px }
-  .hero__title { font-size: clamp(2rem, 9.4vw, 5rem); line-height: 1.02 }
+  /* .hero__line is nowrap + overflow:hidden, so an oversized headline is
+     silently clipped rather than wrapped. Measured across 320-899px, the
+     longest line ("& scalable software." plus the portrait pill) needs at
+     most 8.89vw; 8.4vw leaves ~2px of slack at every width tested.
+     The floor was 2rem, which still clipped by 25px at 320px. */
+  .hero__title { font-size: clamp(1.7rem, 8.4vw, 5rem); line-height: 1.02 }
   .hero__line > .hero__rotate { margin-bottom: -.08em; padding-bottom: .08em; display: block; overflow: hidden }
   .hero__line--pill { gap: .18em }
   .pill { width: 1.3em; height: .62em }
@@ -440,7 +464,10 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
    Work page
    ============================================================ */
 .wh {
-  padding-top: clamp(140px, 18vw, 240px);
+  /* Clears the 80px fixed header and leaves a comfortable band below it.
+     The old 240px cap left roughly 160px of empty page before the first
+     word on every desktop screen. */
+  padding-top: clamp(124px, 11vw, 164px);
   padding-bottom: clamp(48px, 6vw, 96px);
   isolation: isolate;
   position: relative;
@@ -449,6 +476,23 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 /* Plexus network canvas, painted behind the Work heading */
 .wh__bg { z-index: -1; position: absolute; inset: 0 }
 .wh__bg canvas { width: 100%; height: 100%; display: block }
+
+/* Photographic backdrop (skills.html). The source is portrait, so the crop
+   is pushed up a little to keep the monitors and the neon ceiling in frame
+   rather than centring on the empty floor. */
+.wh--photo { isolation: isolate }
+.wh__photo {
+  object-fit: cover;
+  object-position: 50% 34%;
+  /* The photo's neon is almost exactly the brand accent, so the red half of
+     the heading was disappearing into the server racks. Desaturating pulls
+     the two apart without losing the lighting. */
+  filter: grayscale(.38) contrast(1.06) brightness(.94);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
 /* Darkens behind the heading on the left rather than wiping the whole lower
    half, so the network stays readable across the right of the hero. */
 .wh__shade {
@@ -485,6 +529,22 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
       radial-gradient(84% 110% at 50% 46%, #1414147a 0%, #141414b3 52%, #141414d9 100%),
       linear-gradient(180deg, #14141473 0%, #14141440 30%, #141414a6 86%, var(--ink) 100%);
   }
+}
+/* Heading, lead and buttons all sit left, so weight the darkening there and
+   leave the right side lit enough to read as a photograph. */
+.wh__shade--photo {
+  background:
+    linear-gradient(97deg, #141414ed 0%, #141414c4 32%, #1414145e 62%, #14141478 100%),
+    linear-gradient(180deg, #141414c4 0%, #14141433 26%, #141414bd 74%, var(--ink) 100%);
+}
+@media (width <= 900px) {
+  /* One column, so there is no right-hand space for the photo to show in
+     and the left-weighted layer just blacks the whole thing out. Fade
+     top-to-bottom only. */
+  .wh__shade--photo {
+    background: linear-gradient(180deg, #141414cc 0%, #1414149e 30%, #141414c4 70%, var(--ink) 100%);
+  }
+  .wh__photo { object-position: 50% 28% }
 }
 .wh__kicker { align-items: center; gap: 12px; margin-bottom: 28px; display: flex }
 .nowrap { white-space: nowrap }
@@ -544,6 +604,30 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
   display: grid;
   position: relative;
   overflow: hidden;
+}
+/* Photographic backdrop (about.html only — .ph is shared with every project
+   page). The portrait in .ph__media still animates on top of it. */
+.ph--photo { isolation: isolate }
+.ph__bg { z-index: -1; pointer-events: none; position: absolute; inset: 0 }
+.ph__photo {
+  object-fit: cover;
+  /* Like the footer loop, the red here IS the brand accent — muting it just
+     greys the picture out. Barely desaturated, lifted slightly instead. */
+  filter: grayscale(.1) contrast(1.06);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+/* The giant PRADEEP wordmark runs edge to edge and the portrait sits dead
+   centre, so this darkens from the centre outward rather than from one
+   side, and closes to solid at the bottom where the copy and buttons are. */
+.ph__shade {
+  background:
+    radial-gradient(78% 94% at 50% 44%, #1414141a 0%, #14141466 58%, #141414b8 100%),
+    linear-gradient(180deg, #141414a3 0%, #14141414 28%, #14141487 78%, var(--ink) 100%);
+  position: absolute;
+  inset: 0;
 }
 .ph__top { justify-content: space-between; display: flex }
 /* padding-inline gives [data-fit] a gutter to measure against, so long project
@@ -801,7 +885,7 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 /* ============================================================
    Contact page
    ============================================================ */
-.ch { padding-top: clamp(130px, 16vw, 220px); position: relative; isolation: isolate }
+.ch { padding-top: clamp(124px, 11vw, 164px); position: relative; isolation: isolate }
 /* Same node-flow canvas the home and spotlight sections use, dialled down —
    a background detail, not a feature. initHeroCanvas() leaves it blank when
    the visitor prefers reduced motion. */
@@ -957,6 +1041,10 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
    Skills page
    ============================================================ */
 .sk { padding-bottom: clamp(96px, 12vw, 180px) }
+/* A .sk block that only introduces the grid below it was pushing up to
+   180px of empty page between a heading and the cards it belongs to.
+   Keep them together; the grid brings its own bottom padding. */
+.sk:has(+ .grid) { padding-bottom: clamp(24px, 3vw, 40px) }
 .sk__group { border-top: 1px solid var(--line); grid-template-columns: 1fr 2fr; gap: clamp(24px, 4vw, 64px); padding-block: clamp(36px, 4vw, 56px); display: grid; position: relative }
 .sk__group:last-child { border-bottom: 1px solid var(--line) }
 .sk__group:after {
@@ -1042,7 +1130,7 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 /* ============================================================
    Misc pages (privacy / terms / 404)
    ============================================================ */
-.doc { max-width: 760px; padding-block: clamp(140px, 18vw, 240px) clamp(96px, 12vw, 180px) }
+.doc { max-width: 760px; padding-block: clamp(130px, 12vw, 172px) clamp(96px, 12vw, 180px) }
 .doc h1 { font-size: var(--fs-h2); letter-spacing: -.04em; font-weight: 700; line-height: .95; margin-bottom: 40px }
 .doc h2 { font-size: var(--fs-h3); letter-spacing: -.03em; margin: 48px 0 16px }
 .doc p, .doc li { color: var(--muted); line-height: 1.6; margin-bottom: 14px }

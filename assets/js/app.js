@@ -235,8 +235,10 @@
     var hero = $('[data-hero]');
     if (!hero) return;
 
-    var bg = $('[data-hero-bg]', hero);
-    if (bg) {
+    // both backdrop layers — the photo and the canvas over it — so they
+    // drift as one rather than sliding apart
+    var bg = $$('[data-hero-bg]', hero);
+    if (bg.length) {
       gsap.to(bg, {
         yPercent: 18, scale: 1.08, ease: 'none',
         scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
@@ -318,6 +320,10 @@
   function initAutoplay() {
     var videos = $$('video[data-autoplay]');
     if (!videos.length) return;
+    // Reduced motion: never fetch or play. preload="none" means the file is
+    // not downloaded either, so these visitors keep the poster frame and
+    // pay nothing for a loop they did not want.
+    if (REDUCED) return;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         var v = entry.target;

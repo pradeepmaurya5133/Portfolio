@@ -63,6 +63,10 @@
 
 <section class="hero" data-hero aria-label="Introduction">
 <div class="hero__bg" aria-hidden="true">
+<img class="hero__photo" data-hero-bg src="assets/img/hero-bg.webp"
+     srcset="assets/img/hero-bg-1280.webp 1280w, assets/img/hero-bg.webp 1920w"
+     sizes="100vw" alt="" width="1920" height="1080"
+     loading="eager" fetchpriority="high" decoding="async">
 <canvas data-hero-bg data-flow="1"></canvas>
 <div class="hero__shade"></div>
 <div class="hero__scan"></div>
@@ -200,7 +204,14 @@ As a Web Developer at SS IntelligenceX Private Limited, managed by iLeads Auxili
 </div>
 
 </main>
-<footer class="footer">
+<footer class="footer footer--video">
+<div class="footer__bg" aria-hidden="true">
+<video class="footer__video" data-autoplay muted loop playsinline preload="none"
+       poster="assets/video/footer-bg.jpg" width="1280" height="720" tabindex="-1">
+<source src="assets/video/footer-bg.mp4" type="video/mp4">
+</video>
+<div class="footer__shade"></div>
+</div>
 <section class="cta wrap" aria-labelledby="cta-title">
 <p class="label muted cta__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h2 id="cta-title" class="cta__title display" data-split>

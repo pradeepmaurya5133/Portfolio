@@ -159,7 +159,9 @@ ul, ol { padding: 0; list-style: none }
 
 /* ---------- Layout ---------- */
 .wrap { padding-inline: var(--gutter) }
-.section { padding-block: clamp(96px, 16vw, 220px) }
+/* 220px top AND bottom put ~440px of empty page between every pair of
+   sections on a desktop screen. Still generous, noticeably tighter. */
+.section { padding-block: clamp(88px, 12vw, 168px) }
 .section-head {
   justify-content: space-between;
   align-items: flex-end;
@@ -408,6 +410,42 @@ html.js [data-reveal].is-in {
    Footer
    ============================================================ */
 .footer { border-top: 1px solid var(--line); position: relative; overflow: hidden }
+
+/* ---------- Footer background loop ----------
+   The <video> is preload="none" and only starts downloading when
+   initAutoplay() sees the footer scroll into view, so most of a visit
+   never fetches it. Until then — and permanently, for anyone who asked
+   for reduced motion — the poster frame stands in. */
+.footer--video { isolation: isolate }
+.footer__bg {
+  z-index: -1;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+.footer__video {
+  object-fit: cover;
+  /* The clip is red line-work on black — already the brand accent and
+     already dark, so it needs lifting, not muting. */
+  filter: contrast(1.08) saturate(1.05);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+/* The clip is mostly black, so this only has to protect the type: a band
+   behind the CTA heading at the top, a band behind the legal bar at the
+   bottom, and an open middle where the geometry can show. */
+.footer__shade {
+  background:
+    linear-gradient(180deg, var(--ink) 0%, #141414c7 11%, #1414141f 44%, #14141466 84%, #141414d1 100%),
+    linear-gradient(90deg, #1414149e 0%, #14141400 48%, #14141429 100%);
+  position: absolute;
+  inset: 0;
+}
+/* The base bar paints var(--ink); left opaque it would slice the video off
+   above the legal line instead of running the full height of the footer. */
+.footer--video .footer__base { background: #0000 }
 .cta { padding-block: clamp(96px, 14vw, 200px) clamp(64px, 8vw, 120px) }
 .cta__kicker { align-items: center; gap: 12px; margin-bottom: 32px; display: flex }
 .cta__title {

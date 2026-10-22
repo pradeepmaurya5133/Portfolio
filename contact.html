@@ -75,7 +75,7 @@
 <div class="field">
 <label class="label muted" for="f-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
 <input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text"
-       placeholder="Jane Doe" required maxlength="120" autocomplete="name"
+       placeholder="Enter your name" required maxlength="120" autocomplete="name"
        aria-describedby="e-name">
 <p class="field__error" id="e-name" data-error-for="name" aria-live="polite"></p>
 </div>
@@ -83,7 +83,7 @@
 <div class="field">
 <label class="label muted" for="f-email">Email <span class="field__req" aria-hidden="true">*</span></label>
 <input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email"
-       name="email" type="email" placeholder="jane@company.com" required maxlength="254"
+       name="email" type="email" placeholder="Enter your email" required maxlength="254"
        autocomplete="email" inputmode="email" aria-describedby="e-email">
 <p class="field__error" id="e-email" data-error-for="email" aria-live="polite"></p>
 </div>
@@ -162,7 +162,14 @@ takes the same list.</p>
 </div>
 
 </main>
-<footer class="footer">
+<footer class="footer footer--video">
+<div class="footer__bg" aria-hidden="true">
+<video class="footer__video" data-autoplay muted loop playsinline preload="none"
+       poster="assets/video/footer-bg.jpg" width="1280" height="720" tabindex="-1">
+<source src="assets/video/footer-bg.mp4" type="video/mp4">
+</video>
+<div class="footer__shade"></div>
+</div>
 <section class="cta wrap" aria-labelledby="cta-title">
 <p class="label muted cta__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h2 id="cta-title" class="cta__title display" data-split>
