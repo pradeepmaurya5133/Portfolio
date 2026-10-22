@@ -154,6 +154,7 @@
         properties: {
           name: { type: "string", description: "Sender's name." },
           email: { type: "string", description: "Sender's email — used as reply-to." },
+          subject: { type: "string", description: "Optional subject or enquiry type." },
           company: { type: "string", description: "Optional company name." },
           message: { type: "string", description: "The message body." },
         },
@@ -165,12 +166,13 @@
           body: JSON.stringify({
             name: args.name,
             email: args.email,
+            subject: args.subject || "",
             company: args.company || "",
             message: args.message,
           }),
         });
         var body = await res.json().catch(function () { return {}; });
-        if (res.ok) return text("Message sent. Pradeep replies within 24 hours.");
+        if (res.ok) return text("Message delivered to Pradeep's inbox.");
         if (res.status === 400) return fail("Rejected: " + (body.error || "invalid input"));
         return fail(
           "Could not send right now. Email " +

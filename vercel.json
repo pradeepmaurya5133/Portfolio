@@ -54,6 +54,19 @@
       ]
     },
     {
+      "source": "/experience.html",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </experience.md>; rel=\"alternate\"; type=\"text/markdown\""
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
+    },
+    {
       "source": "/",
       "headers": [
         {
@@ -347,6 +360,17 @@
         }
       ],
       "destination": "/docs/api.md"
+    },
+    {
+      "source": "/experience.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(.*)text/markdown(.*)"
+        }
+      ],
+      "destination": "/experience.md"
     },
     {
       "source": "/index.html",

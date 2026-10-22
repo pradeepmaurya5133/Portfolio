@@ -1,0 +1,322 @@
+/* ============================================================
+   Printable résumé
+   ============================================================
+   Loaded only by resume.html, with media="print", so it costs the
+   screen experience nothing and cannot affect any other page.
+
+   Four jobs, in this order — the order matters, because several of
+   these rules have equal specificity and the later one wins:
+
+     1. repaint: the site's palette is white-on-near-black, so every
+        colour is flipped by redefining the custom properties rather
+        than by chasing individual selectors.
+     2. relayout: collapse the two-column grid to one column.
+     3. strip the chrome. This has to come AFTER the relayout, because
+        .header and the hero both carry .wrap, and a `.wrap { display:
+        block }` further down would otherwise un-hide them.
+     4. undo the entrance animations — GSAP writes `transform` and
+        `opacity` as INLINE styles, so every reset needs !important to
+        win against them. Without this, anything that had not scrolled
+        into view yet prints blank.
+
+   Regenerate the committed PDF after changing this file:
+       python assets/_resume_pdf.py
+   ============================================================ */
+
+@page {
+  size: A4;
+  margin: 13mm 14mm;
+}
+
+/* ---------- 1. repaint ---------- */
+/* Every colour on the site resolves through these. Flipping them here
+   turns the whole document black-on-white in one place, and keeps any
+   selector this file forgot from printing white text on white paper. */
+:root,
+.theme-light {
+  --ink: #fff;
+  --ink-2: #fff;
+  --ink-3: #fff;
+  --paper: #000;
+  --accent: #000;
+  --muted: #333;
+  --faint: #444;
+  --line: #00000026;
+  color-scheme: light;
+}
+
+html,
+body {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 10pt;
+  line-height: 1.38;
+  /* Lenis sets both for smooth scrolling; both break pagination. */
+  height: auto !important;
+  overflow: visible !important;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+a {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* ---------- 2. relayout ---------- */
+main,
+.res,
+.res__grid,
+.res__doc {
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  grid-template-columns: none !important;
+}
+
+/* ---------- 3. chrome off ---------- */
+.preloader,
+.header,
+.menu,
+.footer,
+.cursor,
+.grain,
+.skip,
+.res__aside,
+.res__head,
+.res__more,
+.btn,
+.bth__ctas,
+canvas {
+  display: none !important;
+}
+
+/* ---------- 4. animations off ---------- */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+[data-reveal],
+[data-split],
+.line-mask,
+.line-mask > *,
+.word,
+.char,
+.res__block,
+.res__line {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  clip-path: none !important;
+  filter: none !important;
+}
+
+.line-mask {
+  overflow: visible !important;
+}
+
+/* ---------- 5. the document ---------- */
+
+/* -- header (print-only; display:none on screen) -- */
+.res__printhead {
+  display: block !important;
+  border-bottom: 1.5pt solid #000;
+  margin-bottom: 9pt;
+  padding-bottom: 7pt;
+}
+
+.res__printname {
+  font-size: 21pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.res__printrole {
+  font-size: 10.5pt;
+  font-weight: 600;
+  margin: 3pt 0 0;
+}
+
+.res__printtag {
+  font-size: 9pt;
+  font-style: italic;
+  color: #333 !important;
+  margin: 3pt 0 0;
+}
+
+.res__printmeta {
+  font-size: 8.5pt;
+  color: #222 !important;
+  line-height: 1.45;
+  margin: 4pt 0 0;
+  /* long URLs must not push the line off the page */
+  overflow-wrap: anywhere;
+}
+
+/* -- sections -- */
+.res__block {
+  border: 0 !important;
+  margin: 0 0 9pt !important;
+  padding: 0 !important;
+}
+
+.res__block:last-child {
+  margin-bottom: 0 !important;
+}
+
+.res__h {
+  font-size: 10.5pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 0.75pt solid #000;
+  margin: 0 0 5pt !important;
+  padding-bottom: 2pt;
+  /* never leave a heading stranded at the foot of a page */
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.res__line {
+  border: 0 !important;
+  display: block !important;
+  margin: 0 0 6pt !important;
+  padding: 0 !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.res__line:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* dt is a grid on screen so the date can sit under the role; in print
+   the date floats to the right of the same line, as a résumé expects */
+.res__dt {
+  display: block !important;
+  color: #000 !important;
+  font-size: 10pt !important;
+  margin-bottom: 1pt;
+}
+
+.res__role {
+  color: #000 !important;
+  font-size: 10.5pt;
+  font-weight: 700;
+}
+
+.res__when {
+  float: right;
+  font-size: 9pt;
+  font-weight: 400;
+  color: #333 !important;
+  letter-spacing: 0;
+}
+
+.res__org {
+  color: #000 !important;
+  font-size: 9.5pt;
+  font-style: italic;
+  margin: 0 0 2pt !important;
+}
+
+.res__p,
+.res__lead,
+dd p {
+  color: #000 !important;
+  font-size: 10pt !important;
+  line-height: 1.38 !important;
+  margin: 0 0 2pt !important;
+}
+
+.res__p + .res__p {
+  margin-top: 3pt !important;
+}
+
+/* these carry .mono on screen, which is uppercase and widely tracked —
+   fine as a UI label, wrong in a document */
+.res__tech,
+.res__note,
+.res__link {
+  font-size: 8.5pt !important;
+  color: #222 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  margin-top: 1pt !important;
+}
+
+/* a printed link cannot be followed, so the arrow is noise */
+.res__link .arrow-icon {
+  display: none !important;
+}
+
+.res__list {
+  color: #000 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+.res__list li {
+  font-size: 9.5pt;
+  line-height: 1.35;
+  padding-left: 10pt !important;
+  margin-bottom: 1pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.res__list li::before {
+  content: "\2022" !important;
+  background: none !important;
+  border-radius: 0 !important;
+  color: #000 !important;
+  font-size: 9pt;
+  width: auto !important;
+  height: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* capabilities read as one run-in row rather than seven short bullets */
+.res__list--inline {
+  margin-top: 2pt !important;
+}
+
+.res__list--inline li {
+  display: inline !important;
+  padding-left: 0 !important;
+}
+
+.res__list--inline li::before {
+  content: "" !important;
+}
+
+.res__list--inline li:not(:last-child)::after {
+  content: " · ";
+}
+
+dl,
+dd {
+  margin: 0 !important;
+}
+
+/* the opening two sections are what a reader scans first; a page break
+   between them looks like a mistake */
+#summary,
+#skills {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

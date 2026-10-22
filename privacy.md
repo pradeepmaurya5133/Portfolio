@@ -10,7 +10,7 @@ This site is a personal portfolio. It does not run analytics, advertising or thi
 
 ## What is collected
 
-Nothing automatically. If you use the contact form, the details you type — name, email, optional company and your message — are used solely to reply to you.
+Nothing automatically. If you use the contact form, the details you type — name, email, an optional subject and your message — are used solely to reply to you.
 
 ## How the contact form works
 

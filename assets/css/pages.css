@@ -708,6 +708,8 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 .exp__when { color: var(--faint); margin-top: 6px }
 .exp__points { color: var(--muted); gap: 12px; display: grid; font-size: 1.02rem; line-height: 1.5 }
 .exp__points li { padding-left: 20px; position: relative }
+/* Technology chips under a role's responsibilities */
+.exp__tech { margin-top: 20px }
 .exp__points li:before {
   content: "";
   background: var(--accent);
@@ -799,9 +801,21 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 /* ============================================================
    Contact page
    ============================================================ */
-.ch { padding-top: clamp(130px, 16vw, 220px) }
+.ch { padding-top: clamp(130px, 16vw, 220px); position: relative; isolation: isolate }
+/* Same node-flow canvas the home and spotlight sections use, dialled down —
+   a background detail, not a feature. initHeroCanvas() leaves it blank when
+   the visitor prefers reduced motion. */
+.ch__bg { z-index: -1; position: absolute; inset: -40px 0 auto; height: 460px; pointer-events: none }
+.ch__bg canvas { object-fit: cover; filter: grayscale(.5) blur(2px); width: 100%; height: 100%; opacity: .5 }
+.ch__bg:after {
+  content: "";
+  background: linear-gradient(180deg, #14141400 0%, var(--ink) 92%);
+  position: absolute;
+  inset: 0;
+}
 .ch__kicker { align-items: center; gap: 12px; margin-bottom: 32px; display: flex }
 .ch__title { font-size: var(--fs-display); text-transform: none; letter-spacing: -.05em; line-height: .92 }
+.ch__lead { margin-top: 32px }
 .cb {
   grid-template-columns: 1.3fr 1fr;
   gap: clamp(40px, 8vw, 140px);
@@ -822,6 +836,7 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 }
 .cb__socials a:hover { color: var(--accent); padding-inline: 10px }
 .cb__time { text-transform: uppercase }
+.cb__label { margin-bottom: 14px }
 .form { gap: 40px; display: grid }
 .field { gap: 14px; display: grid }
 .field input, .field textarea {
@@ -839,7 +854,22 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 }
 .field input::placeholder, .field textarea::placeholder { color: #ffffff2e }
 .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none }
+/* The rule above outranks the global :focus-visible ring in main.css and
+   was swallowing it, leaving keyboard users with only a 1px border change.
+   Put the ring back — pointer focus still gets the quiet treatment. */
+.field input:focus-visible, .field textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 .form__consent { flex: 180px; max-width: 420px; font-size: .85rem; line-height: 1.5 }
+.field__req { color: var(--accent); margin-left: 2px }
+.field__hint { font-size: .8rem; line-height: 1.5; margin-top: -4px }
+/* Empty by default; the message is written in by the form script. Collapsing
+   when empty keeps the field rhythm identical to before. */
+.field__error { color: var(--accent); font-size: .85rem; line-height: 1.5; margin-top: -4px }
+.field__error:empty { display: none }
+.field.is-invalid input, .field.is-invalid textarea { border-color: var(--accent) }
+.form__status { font-size: .8rem; line-height: 1.6; letter-spacing: .1em }
 /* Honeypot. Kept out of the layout and out of the a11y tree, but NOT
    display:none — some bots skip hidden inputs, and that would defeat it. */
 .form__trap {
@@ -853,6 +883,12 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 .form [data-form-status]:empty { display: none }
 .form [data-form-status][data-state=sent] { color: var(--accent) }
 .form [data-form-status][data-state=error] { color: var(--paper) }
+/* "notice" is the mailto fallback — the message is NOT delivered yet, so it
+   must not read like the success state. */
+.form [data-form-status][data-state=notice] { color: var(--muted) }
+.form [data-form-status][data-state=sending] { color: var(--muted) }
+.btn[aria-busy=true] { cursor: progress; opacity: .7 }
+.btn[disabled] { pointer-events: none }
 .form__foot { justify-content: space-between; align-items: center; gap: 24px; display: flex }
 .form__foot .btn { flex: none }
 @media (width <= 520px) {
@@ -896,6 +932,22 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
   top: .62em;
   left: 0;
 }
+.res__dt { color: var(--muted); font-size: .9rem; display: grid; gap: 4px; align-content: start }
+.res__role { color: var(--paper); font-size: 1rem; font-weight: 600; line-height: 1.3 }
+.res__when { font-size: .8rem }
+.res__org { color: var(--paper); margin-bottom: 10px }
+.res__p { color: var(--muted); font-size: 1.05rem; line-height: 1.65 }
+.res__p + .res__p { margin-top: 14px }
+.res__lead { color: var(--muted); line-height: 1.6 }
+.res__tech { font-size: .82rem; margin-top: 8px; line-height: 1.5 }
+.res__note { font-size: .9rem; margin-top: 16px }
+.res__link, .res__more { font-size: .85rem; margin-top: 10px }
+.res__more--all { margin-top: 20px }
+.res__list--inline { margin-top: 16px }
+/* The print header is a print-only artefact — hidden here, shown by print.css. */
+.res__printhead { display: none }
+/* Matches .u-link but is a <button>, so the UA defaults need clearing. */
+.res__printlink { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left }
 @media (width <= 900px) {
   .res__grid, .res__line { grid-template-columns: 1fr }
   .res__aside { position: static }

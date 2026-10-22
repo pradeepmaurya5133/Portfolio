@@ -65,7 +65,7 @@ NAV = [
     ("02", "Work", "{root}work.html"),
     ("03", "About", "{root}about.html"),
     ("04", "Skills", "{root}skills.html"),
-    ("05", "Experience", "{root}about.html#experience"),
+    ("05", "Experience", "{root}experience.html"),
     ("06", "Résumé", "{root}resume.html"),
     ("07", "Contact", "{root}contact.html"),
 ]
@@ -381,13 +381,15 @@ EXPERIENCE = [
         "product": "IntelligenceX.org",
         "when": "Aug 2026 — Present",
         "points": [
-            "Develop and maintain responsive web interfaces.",
-            "Build reusable UI components and implement frontend functionality.",
-            "Integrate APIs and contribute to full stack application development.",
-            "Troubleshoot technical issues and improve maintainability.",
-            "Collaborate on product features using appropriate modern web technologies.",
-            "Project work: ConsentX and RegulatoryBridge.",
+            "Develop and maintain responsive web interfaces using modern frontend technologies.",
+            "Implement reusable UI components and application functionality.",
+            "Contribute to development initiatives associated with ConsentX and RegulatoryBridge.",
+            "Integrate APIs and support communication between frontend and backend services.",
+            "Troubleshoot technical issues and improve code maintainability.",
+            "Contribute to ongoing product improvements and application development.",
         ],
+        "tech": ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js",
+                 "Next.js", "Node.js", "Python"],
     },
     {
         "num": "02",
@@ -398,6 +400,7 @@ EXPERIENCE = [
             "Supported software testing, quality assurance, data management, reporting and process-improvement activities.",
             "Helped coordinate tasks and resolve issues while maintaining focus on accuracy and delivery quality.",
         ],
+        "tech": ["Manual Testing", "API Testing", "MS Excel", "Power BI"],
     },
     {
         "num": "03",
@@ -625,12 +628,120 @@ DEV_APPROACH = [
      "Support deployment, documentation, and agreed post-launch improvements."),
 ]
 
-CREDENTIALS = [
-    ("Front-End Development", "HTML, CSS, Bootstrap, JavaScript, React", "Certification", ""),
-    ("Python Full-Stack Development", "Python, Django, full-stack web", "DUCAT IT Training Institute, Noida", ""),
-    ("Full-Stack Development", "Full-stack web development", "Coding Seekho, Pune (Online)", ""),
-    ("B.Tech — Computer Science", "Computer Science &amp; Engineering", "Institution to be added", ""),
+# Independent and freelance-oriented work. Deliberately separate from
+# EXPERIENCE, which is employment only — the brief was explicit that
+# independent projects must not read as paid client engagements. No client
+# names, counts, earnings or durations are claimed, because none are verified.
+FREELANCE = {
+    "title": "Freelance Web Development &amp; Independent Projects",
+    "kind": "Independent / self-directed",
+    "description": (
+        "I also focus on building practical digital solutions through independent development "
+        "and freelance-oriented work. This includes developing portfolio websites, exploring "
+        "full-stack application architecture, improving responsive interfaces, and working on "
+        "projects that combine frontend technologies with backend functionality."),
+    # Each of these is demonstrated by a project in PROJECTS.
+    "areas": [
+        "Responsive website development",
+        "Frontend implementation",
+        "Full-stack web applications",
+        "API integration",
+        "Website optimization and maintenance",
+        "Custom software development",
+        "Technical problem-solving",
+    ],
+    "note": ("The projects below are self-directed builds rather than paid client engagements. "
+             "I am open to freelance work."),
+}
+
+# Condensed technical summary for the Experience page.
+EXPERIENCE_SKILLS = [
+    ("01", "Frontend", ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js"]),
+    ("02", "Backend", ["Node.js", "Python", "REST APIs", "API integration"]),
+    ("03", "Engineering", ["Responsive development", "Reusable components", "Debugging",
+                           "Application maintenance", "Code organization"]),
+    ("04", "Tools", ["Git", "GitHub", "VS Code", "PyCharm", "Postman", "npm", "Vercel"]),
 ]
+
+# (title, focus, issuer, year, kind). `kind` is "education" or
+# "certification" so the resume can use the two conventional headings.
+# An empty issuer or year renders as nothing rather than as a placeholder —
+# TODO: add the B.Tech institution and the award years once confirmed.
+CREDENTIALS = [
+    ("Front-End Development", "HTML, CSS, Bootstrap, JavaScript, React", "", "", "certification"),
+    ("Python Full-Stack Development", "Python, Django, full-stack web", "DUCAT IT Training Institute, Noida", "", "certification"),
+    ("Full-Stack Development", "Full-stack web development", "Coding Seekho, Pune (Online)", "", "certification"),
+    ("B.Tech", "Computer Science &amp; Engineering", "", "", "education"),
+]
+
+# ============================================================
+#  RESUME PAGE
+# ============================================================
+# The resume reads as a document, so it gets its own summary and its own
+# skill headings — conventional resume labels an ATS parser recognises,
+# rather than the site's section names. Everything here is drawn from the
+# resume, from EXPERIENCE/PROJECTS above, or from code in this repository.
+RESUME_TAGLINE = ("Building responsive web applications, reliable backend services, "
+                  "and practical digital solutions.")
+
+RESUME_SUMMARY = [
+    ("I am a Full Stack Developer and Software Engineer focused on developing modern web "
+     "applications and practical digital solutions. My technical toolkit includes JavaScript, "
+     "TypeScript, React.js, Next.js, Node.js, and Python, with an interest in building "
+     "responsive user interfaces, integrating APIs, and developing maintainable application "
+     "functionality."),
+    ("I contribute to web development initiatives associated with IntelligenceX.org, including "
+     "ConsentX and RegulatoryBridge. I am interested in opportunities involving full-stack "
+     "development, software engineering, and freelance projects where I can contribute to "
+     "useful, reliable digital products."),
+]
+
+# Plain comma-separated rows — they stay readable in print and parse cleanly
+# in an ATS. Every entry also appears in SKILL_GROUPS or in the verified tier
+# of TECH_STACK; nothing is listed here that is not listed there.
+RESUME_SKILLS = [
+    ("Languages &amp; Web Technologies",
+     ["JavaScript", "TypeScript", "Python", "SQL", "HTML5", "CSS3"]),
+    ("Frontend Development",
+     ["React.js", "Next.js", "Tailwind CSS", "Bootstrap", "Redux Toolkit",
+      "Responsive web design", "Reusable UI components"]),
+    ("Backend Development",
+     ["Node.js", "Express.js", "Python", "Django", "REST API development",
+      "API integration"]),
+    ("Databases",
+     ["PostgreSQL", "Prisma"]),
+    ("Testing &amp; QA",
+     ["Manual testing", "API testing (Postman)", "Web testing"]),
+    ("Tools &amp; Workflow",
+     ["Git", "GitHub", "VS Code", "PyCharm", "Postman", "npm", "Vercel"]),
+    ("Data &amp; Reporting",
+     ["MS Excel", "Power BI"]),
+]
+
+# A resume lists a few representative projects, not the whole portfolio.
+RESUME_PROJECT_SLUGS = ["consentx", "regulatorybridge", "portfolio"]
+
+# Capabilities exercised in independent work. Kept apart from EXPERIENCE,
+# which is employment only.
+RESUME_FREELANCE = (
+    "Develop and explore web solutions through independent projects, portfolio development, "
+    "and freelance-oriented work, with a focus on responsive interfaces, practical application "
+    "functionality, and maintainable code.")
+
+RESUME_FREELANCE_AREAS = [
+    "Website development",
+    "Full-stack application development",
+    "API integration",
+    "Responsive UI implementation",
+    "Website maintenance",
+    "Debugging and performance improvements",
+    "Project planning and client communication",
+]
+
+# Downloadables that must exist on disk for the buttons to be honest.
+# Regenerate the PDF with: python assets/_resume_pdf.py
+RESUME_PDF = "assets/Pradeep_Maurya_Resume.pdf"
+RESUME_DOCX = "assets/Pradeep_Maurya_Resume.docx"
 
 STATS = [
     ("Years in tech", "02"),
@@ -816,12 +927,12 @@ def credentials_table(root):
             '<span role="columnheader">Year</span>'
             '<span role="columnheader">Issuer</span>'
             '<span role="columnheader" class="sr-only">Link</span></div>')
-    for title, focus, issuer, year in CREDENTIALS:
+    for title, focus, issuer, year, _kind in CREDENTIALS:
         rows += (f'<div class="rec__row" role="row" data-award-row>'
                  f'<span role="cell" class="rec__title">{title}</span>'
                  f'<span role="cell">{focus}</span>'
                  f'<span role="cell" class="mono">{year or "—"}</span>'
-                 f'<span role="cell">{issuer}</span>'
+                 f'<span role="cell">{issuer or "—"}</span>'
                  f'<span role="cell" class="rec__arrow" aria-hidden="true"></span></div>')
     return f'''<section class="rec section wrap" aria-labelledby="rec-title">
 <div class="section-head">
@@ -1294,6 +1405,7 @@ def page_about():
 </div>
 <div class="exp__copy">
 <p class="exp__text" data-reveal>{ABOUT_EXPERIENCE_BLURB}</p>
+<a href="experience.html" class="label u-link" data-cursor="hover" data-reveal>View Full Experience {ARROW}</a>
 <a href="resume.html" class="label u-link" data-cursor="hover" data-reveal>Full résumé {ARROW}</a>
 </div>
 </div>
@@ -1488,50 +1600,125 @@ full application.</p>
 
 
 def page_resume():
+    """The resume, in two presentation modes.
+
+    Screen: the site's own layout — sticky contact aside, revealed blocks.
+    Print:  assets/css/print.css collapses it to a single-column document,
+            drops the chrome and the animation transforms, and swaps the
+            display hero for .res__printhead. Section order is the
+            conventional one (summary, skills, experience, projects,
+            education, certifications) in the DOM, so print, PDF export and
+            an ATS parser all read it in that order.
+    """
     root = ""
+
+    skills = "".join(
+        f'<div class="res__line" data-reveal>'
+        f'<dt class="res__dt">{heading}</dt>'
+        f'<dd>{", ".join(items)}</dd></div>'
+        for heading, items in RESUME_SKILLS
+    )
+
     exp = ""
     for e in EXPERIENCE:
         points = "".join(f'<li>{pt}</li>' for pt in e["points"])
+        meta = [e["org"]]
+        if e.get("managed_by"):
+            meta.append(f'Managed by {e["managed_by"]}')
+        if e.get("product"):
+            meta.append(f'Product: {e["product"]}')
+        tech = ""
+        if e.get("tech"):
+            tech = (f'<p class="res__tech mono muted">'
+                    f'Technologies: {", ".join(e["tech"])}</p>')
         exp += (f'<div class="res__line" data-reveal>'
-                f'<dt><strong>{e["role"]}</strong><br><span class="mono muted">{e["when"]}</span></dt>'
-                f'<dd><p style="margin-bottom:12px">{e["org"]}'
-                 + (f' · Managed by {e["managed_by"]}' if e.get("managed_by") else "")
-                 + (f' · Product: {e["product"]}' if e.get("product") else "")
-                 + '</p>'
-                f'<ul class="res__list">{points}</ul></dd></div>')
+                f'<dt class="res__dt"><strong class="res__role">{strip_tags(e["role"])}</strong>'
+                f'<span class="res__when mono">{e["when"]}</span></dt>'
+                f'<dd><p class="res__org">{" · ".join(meta)}</p>'
+                f'<ul class="res__list">{points}</ul>{tech}</dd></div>')
 
+    areas = "".join(f'<li>{a}</li>' for a in RESUME_FREELANCE_AREAS)
+
+    picks = [x for x in PROJECTS if x["slug"] in RESUME_PROJECT_SLUGS]
     proj = ""
-    for p in PROJECTS:
+    for p in picks:
+        live = ""
+        if p["link"]:
+            label = p["link"].replace("https://", "").rstrip("/")
+            live = (f'<p class="res__link"><a class="u-link" href="{p["link"]}"'
+                    f'{external(p["link"])}>{label} {ARROW}</a></p>')
         proj += (f'<div class="res__line" data-reveal>'
-                 f'<dt><strong>{p["full"]}</strong><br><span class="mono muted">{p["year"]}</span></dt>'
-                 f'<dd><p style="margin-bottom:10px">{p["lead"]}</p>'
-                 f'<p class="mono muted">{p["stack"]}</p></dd></div>')
+                 f'<dt class="res__dt"><strong class="res__role">{p["full"]}</strong>'
+                 f'<span class="res__when mono">{p["year"]}</span></dt>'
+                 f'<dd><p class="res__lead">{p["summary"]}</p>'
+                 f'<p class="res__tech mono muted">Stack: {p["stack"]}</p>'
+                 f'<p class="res__tech mono muted">Contribution: {p["scope"]}</p>'
+                 f'{live}'
+                 f'<p class="res__more"><a class="u-link" '
+                 f'href="work/{p["slug"]}.html" data-cursor="hover">Case study {ARROW}</a>'
+                 f'</p></dd></div>')
 
-    skills = ""
-    for num, name, items in SKILL_GROUPS:
-        skills += (f'<div class="res__line" data-reveal>'
-                   f'<dt class="label muted">{name}</dt><dd>{", ".join(items)}</dd></div>')
+    def creds(kind):
+        out = ""
+        for title, focus, issuer, year, k in CREDENTIALS:
+            if k != kind:
+                continue
+            detail = " · ".join(x for x in (issuer, year) if x)
+            out += (f'<div class="res__line" data-reveal>'
+                    f'<dt class="res__dt"><strong class="res__role">{title}</strong></dt>'
+                    f'<dd><p>{focus}</p>'
+                    + (f'<p class="res__tech mono muted">{detail}</p>' if detail else "")
+                    + '</dd></div>')
+        return out
 
-    creds = ""
-    for title, focus, issuer, year in CREDENTIALS:
-        creds += (f'<div class="res__line" data-reveal>'
-                  f'<dt><strong>{title}</strong></dt>'
-                  f'<dd>{focus}<br><span class="mono muted">{issuer}</span></dd></div>')
+    education = creds("education")
+    certs = creds("certification")
 
-    return head(f"Résumé — {ME['name']}",
-                f"Résumé of {ME['name']}, {ME['role']} — experience, projects, skills and certifications.",
-                root, "resume.html") + f'''
+    # Only rendered if the file is actually on disk — the brief was explicit
+    # that a download must not be advertised unless it exists.
+    pdf = (f'<a class="btn btn--solid" href="{RESUME_PDF}" download '
+           f'data-cursor="hover">Download Resume PDF '
+           f'<span class="arrow" aria-hidden="true">{ARROW}</span></a>'
+           if (ROOT / RESUME_PDF).exists() else "")
+    docx = (f'<p><a class="u-link" href="{RESUME_DOCX}" download>'
+            f'Word version (.docx) {ARROW}</a></p>'
+            if (ROOT / RESUME_DOCX).exists() else "")
+
+    contact_line = " · ".join([
+        ME["email"], ME["phone"], ME["region"],
+        SITE_URL.replace("https://", ""),
+        ME["linkedin"].replace("https://", "").rstrip("/"),
+        ME["github"].replace("https://", "").rstrip("/"),
+    ])
+
+    return head(f"{ME['name']} | Full Stack Developer Resume",
+                f"View {ME['name']}'s resume, technical skills, professional experience, "
+                "and projects in full-stack development and software engineering.",
+                root, "resume.html",
+                extra_css=f'\n<link rel="stylesheet" href="{root}assets/css/print.css" media="print">'
+                ) + f'''
 <body>
 {header("Résumé", root)}
 <main id="main">
-<section class="wh wrap">
-<p class="label muted wh__kicker"><span class="dot"></span> Curriculum vitae</p>
+
+<section class="wh wrap res__head">
+<p class="label muted wh__kicker"><span class="dot"></span> Résumé</p>
 <h1 class="wh__title display" data-split>
-<span class="line-mask"><span>Résumé<span class="accent">.</span></span></span>
+<span class="line-mask"><span>{ME['first']}</span></span>
+<span class="line-mask"><span>{ME['name'].split()[-1]}<span class="accent">.</span></span></span>
 </h1>
+<p class="ph__tag label" data-reveal style="margin-top:22px;display:inline-block">Full Stack Developer | Software Engineer</p>
+<p class="cb__lead" data-reveal style="margin-top:24px">{RESUME_TAGLINE}</p>
+<div class="bth__ctas" data-reveal>
+{pdf}
+<button type="button" class="btn" data-print data-cursor="hover">Print / Save as PDF <span class="arrow" aria-hidden="true">{ARROW}</span></button>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Contact Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
 </section>
+
 <section class="res wrap">
 <div class="res__grid">
+
 <aside class="res__aside">
 <div>
 <p class="label muted" style="margin-bottom:12px">Name</p>
@@ -1546,38 +1733,71 @@ def page_resume():
 </div>
 <div>
 <p class="label muted" style="margin-bottom:12px">Links</p>
-<p><a class="u-link" href="{ME['linkedin']}" target="_blank" rel="noopener">LinkedIn {ARROW}</a></p>
+<p><a class="u-link" href="index.html" data-cursor="hover">Portfolio {ARROW}</a></p>
 <p><a class="u-link" href="{ME['github']}" target="_blank" rel="noopener">GitHub {ARROW}</a></p>
+<p><a class="u-link" href="{ME['linkedin']}" target="_blank" rel="noopener">LinkedIn {ARROW}</a></p>
 </div>
-<a class="btn" href="assets/Pradeep_Maurya_Resume.docx" download data-cursor="hover">
-Download résumé <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<div>
+<p class="label muted" style="margin-bottom:12px">On this site</p>
+<p><a class="u-link" href="experience.html" data-cursor="hover">Experience {ARROW}</a></p>
+<p><a class="u-link" href="skills.html" data-cursor="hover">Skills {ARROW}</a></p>
+<p><a class="u-link" href="work.html" data-cursor="hover">Work {ARROW}</a></p>
+<p><a class="u-link" href="about.html" data-cursor="hover">About {ARROW}</a></p>
+</div>
+<div>
+<p class="label muted" style="margin-bottom:12px">Download</p>
+{docx}
+<p><button type="button" class="u-link res__printlink" data-print>Print / Save as PDF {ARROW}</button></p>
+</div>
 </aside>
 
-<div>
-<div class="res__block">
-<h2 class="res__h">Professional summary</h2>
-<p class="muted" style="font-size:1.1rem;line-height:1.6">{ME['summary']}</p>
+<div class="res__doc">
+
+<header class="res__printhead" aria-hidden="true">
+<p class="res__printname">{ME['name']}</p>
+<p class="res__printrole">Full Stack Developer | Software Engineer</p>
+<p class="res__printtag">{RESUME_TAGLINE}</p>
+<p class="res__printmeta">{contact_line}</p>
+</header>
+
+<div class="res__block" id="summary">
+<h2 class="res__h">Summary</h2>
+{"".join(f'<p class="res__p">{p}</p>' for p in RESUME_SUMMARY)}
 </div>
 
-<div class="res__block">
-<h2 class="res__h">Work experience</h2>
-<dl>{exp}</dl>
-</div>
-
-<div class="res__block">
-<h2 class="res__h">Projects</h2>
-<dl>{proj}</dl>
-</div>
-
-<div class="res__block">
-<h2 class="res__h">Technical skills</h2>
+<div class="res__block" id="skills">
+<h2 class="res__h">Technical Skills</h2>
 <dl>{skills}</dl>
 </div>
 
-<div class="res__block">
-<h2 class="res__h">Certifications &amp; education</h2>
-<dl>{creds}</dl>
+<div class="res__block" id="experience">
+<h2 class="res__h">Professional Experience</h2>
+<dl>{exp}</dl>
 </div>
+
+<div class="res__block" id="freelance">
+<h2 class="res__h">Freelance &amp; Independent Development</h2>
+<p class="res__p">{RESUME_FREELANCE}</p>
+<ul class="res__list res__list--inline">{areas}</ul>
+<p class="res__note muted">{FREELANCE['note']}</p>
+</div>
+
+<div class="res__block" id="projects">
+<h2 class="res__h">Projects</h2>
+<dl>{proj}</dl>
+<p class="res__more res__more--all"><a class="u-link" href="work.html" data-cursor="hover">All projects {ARROW}</a></p>
+</div>
+
+<div class="res__block" id="education">
+<h2 class="res__h">Education</h2>
+<dl>{education}</dl>
+</div>
+
+<div class="res__block" id="certifications">
+<h2 class="res__h">Certifications</h2>
+<dl>{certs}</dl>
+</div>
+
 </div>
 </div>
 </section>
@@ -1586,84 +1806,157 @@ Download résumé <span class="arrow" aria-hidden="true">{ARROW}</span></a>
 {chrome_end(root)}'''
 
 
+
 def page_contact():
+    """Contact page.
+
+    The form posts to /api/contact (see api/contact.js). Delivery needs
+    RESEND_API_KEY in the Vercel environment; without it the endpoint
+    answers 503 and the front end falls back to the visitor's own mail
+    client rather than claiming a message was sent.
+    """
     root = ""
+
     socials = "".join(
         f'<a href="{url}"{external(url)} data-cursor="hover">'
         f'<span>{name}</span><span class="mono muted">{ARROW}</span></a>'
         for name, url in SOCIALS
     )
-    return head(f"Contact — {ME['name']}",
-                f"Get in touch with {ME['name']} — {ME['email']}", root, "contact.html") + f'''
+    # The portfolio itself is a verified link, and it belongs with the others.
+    socials += (f'<a href="index.html" data-cursor="hover">'
+                f'<span>Portfolio</span>'
+                f'<span class="mono muted">{ARROW}</span></a>')
+
+    topics = "".join(
+        f'<li class="cap" data-reveal><span class="cap__num mono">{n}</span>'
+        f'<div class="cap__body"><h3 class="cap__title">{t}</h3>'
+        f'<p class="cap__desc muted">{d}</p></div></li>'
+        for n, t, d in CONTACT_TOPICS
+    )
+    options = "".join(f'<option value="{t}"></option>' for _, t, _ in CONTACT_TOPICS)
+
+    return head(f"Contact {ME['name']} | {ME['role']}",
+                f"Get in touch with {ME['name']}, {article(ME['role'])} {ME['role']} — "
+                "full-time opportunities, freelance development, web application "
+                "projects and technical collaboration.",
+                root, "contact.html") + f'''
 <body>
 {header("Contact", root)}
 <main id="main">
+
 <section class="ch wrap">
-<p class="label muted ch__kicker"><span class="dot"></span> Open to new opportunities</p>
+<div class="ch__bg" aria-hidden="true"><canvas data-flow="0.45"></canvas></div>
+<p class="label muted ch__kicker"><span class="dot"></span> Get in touch</p>
 <h1 class="ch__title display" data-split>
-<span class="line-mask"><span>Have an Idea?</span></span>
-<span class="line-mask"><span>Let's <span class="accent">Build It</span> Together.</span></span>
+<span class="line-mask"><span>Let's Build</span></span>
+<span class="line-mask"><span>Something <span class="accent">Great</span>.</span></span>
 </h1>
+<p class="cb__lead ch__lead" data-reveal>{CONTACT_INTRO}</p>
 </section>
 
 <section class="cb wrap">
 <div class="cb__main">
-<p class="cb__lead" data-reveal>Whether you're a startup, a growing business, or an individual with a great idea, I'm open to discussing web development projects, software solutions, and freelance collaborations. Let's turn your requirements into a practical, well-designed digital product.</p>
+<p class="cb__lead" data-reveal>{CONTACT_AUDIENCE}</p>
+
 <form class="form" data-contact-form action="/api/contact" method="post" novalidate
+      aria-labelledby="form-title"
       toolname="send_message"
-      tooldescription="Send a message to Pradeep Maurya. Delivers a real email, so confirm the wording with the user first.">
+      tooldescription="Send a message to {ME['name']}. Delivers a real email, so confirm the wording with the user first.">
+<h2 id="form-title" class="sr-only">Send a message</h2>
+
 <div class="field">
-<label class="label muted" for="f-name">Your name</label>
-<input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
+<label class="label muted" for="f-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
+<input toolparamdescription="Sender&#39;s full name." id="f-name" name="name" type="text"
+       placeholder="Jane Doe" required maxlength="120" autocomplete="name"
+       aria-describedby="e-name">
+<p class="field__error" id="e-name" data-error-for="name" aria-live="polite"></p>
 </div>
+
 <div class="field">
-<label class="label muted" for="f-email">Email</label>
-<input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email">
+<label class="label muted" for="f-email">Email <span class="field__req" aria-hidden="true">*</span></label>
+<input toolparamdescription="Sender&#39;s email address, used as the reply-to." id="f-email"
+       name="email" type="email" placeholder="jane@company.com" required maxlength="254"
+       autocomplete="email" inputmode="email" aria-describedby="e-email">
+<p class="field__error" id="e-email" data-error-for="email" aria-live="polite"></p>
 </div>
+
 <div class="field">
-<label class="label muted" for="f-company">Company <span class="muted">(optional)</span></label>
-<input toolparamdescription="Optional company or organisation name." id="f-company" name="company" type="text" placeholder="Company name" autocomplete="organization">
+<label class="label muted" for="f-subject">Subject <span class="muted">(optional)</span></label>
+<input toolparamdescription="Optional subject or enquiry type." id="f-subject" name="subject"
+       type="text" list="enquiry-types" maxlength="160" autocomplete="off"
+       placeholder="Freelance project, full-time role, collaboration…"
+       aria-describedby="e-subject f-subject-hint">
+<datalist id="enquiry-types">{options}</datalist>
+<p class="field__hint muted" id="f-subject-hint">Pick a suggestion or write your own.</p>
+<p class="field__error" id="e-subject" data-error-for="subject" aria-live="polite"></p>
 </div>
+
 <div class="field">
-<label class="label muted" for="f-message">Message</label>
-<textarea toolparamdescription="The message body." id="f-message" name="message" rows="4" placeholder="What are you building?" required></textarea>
+<label class="label muted" for="f-message">Message <span class="field__req" aria-hidden="true">*</span></label>
+<textarea toolparamdescription="The message body." id="f-message" name="message" rows="4"
+          placeholder="What are you building?" required maxlength="5000"
+          aria-describedby="e-message"></textarea>
+<p class="field__error" id="e-message" data-error-for="message" aria-live="polite"></p>
 </div>
+
 <div class="form__trap" aria-hidden="true">
 <label for="f-website">Website</label>
 <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
 </div>
-<p class="mono" data-form-status></p>
+
+<p class="form__status mono" data-form-status role="status" aria-live="polite"></p>
+
 <div class="form__foot">
-<button class="btn" type="submit" data-cursor="hover">Send message <span class="arrow" aria-hidden="true">{ARROW}</span></button>
-<p class="form__consent muted">By sending this you agree to your details being used to reply. See the <a class="u-link" href="privacy.html">privacy note</a>.</p>
+<button class="btn btn--solid" type="submit" data-cursor="hover" data-submit>
+<span data-submit-label>Send Message</span>
+<span class="arrow" aria-hidden="true">{ARROW}</span>
+</button>
+<p class="form__consent muted">Your name, email and message are used only to reply to you. See the <a class="u-link" href="privacy.html">privacy note</a>.</p>
 </div>
 </form>
 </div>
 
-<aside class="cb__aside">
+<aside class="cb__aside" aria-labelledby="reach-title">
+<h2 id="reach-title" class="sr-only">Contact details</h2>
 <div>
-<p class="label muted" style="margin-bottom:14px">Email</p>
-<a class="cb__email u-link" href="mailto:{ME['email']}" data-cursor="hover">{ME['email']}</a>
+<p class="label muted cb__label">Email</p>
+<a class="cb__email u-link" href="mailto:{ME['email']}" data-contact-email data-cursor="hover">{ME['email']}</a>
 </div>
 <div>
-<p class="label muted" style="margin-bottom:14px">Phone</p>
+<p class="label muted cb__label">Phone</p>
 <a class="cb__email u-link" href="tel:{ME['phone_href']}" data-cursor="hover">{ME['phone']}</a>
 </div>
 <div>
-<p class="label muted" style="margin-bottom:14px">Based in</p>
+<p class="label muted cb__label">Based in</p>
 <p>{ME['region']}</p>
 <p class="cb__time mono muted">Local time <span data-clock>--:--:--</span> IST</p>
 </div>
 <div>
-<p class="label muted" style="margin-bottom:14px">Elsewhere</p>
+<p class="label muted cb__label">Elsewhere</p>
 <div class="cb__socials">{socials}</div>
 </div>
 </aside>
 </section>
 
+<div class="theme-light">
+<section class="caps section wrap" id="topics" aria-labelledby="topics-title">
+<div class="caps__aside"><div class="caps__sticky">
+<p class="label muted"><span class="dot"></span> Enquiries</p>
+<h2 id="topics-title" class="section-title" data-split>
+<span class="line-mask"><span>What can we</span></span>
+<span class="line-mask"><span class="accent">discuss?</span></span>
+</h2>
+<p class="muted" style="max-width:360px">Pick whichever is closest — the subject field above
+takes the same list.</p>
+</div></div>
+<ol class="caps__list">{topics}</ol>
+</section>
+</div>
+
 </main>
 {footer(root)}
 {chrome_end(root)}'''
+
 
 
 def page_project(p, index):
@@ -1842,6 +2135,8 @@ JSON or form-encoded bodies.</p>
 <dd>string, required, max 120</dd></div>
 <div class="res__line" data-reveal><dt class="label muted">email</dt>
 <dd>string, required, max 254 — used as the reply-to address</dd></div>
+<div class="res__line" data-reveal><dt class="label muted">subject</dt>
+<dd>string, optional, max 160 — used as the subject of the delivered mail</dd></div>
 <div class="res__line" data-reveal><dt class="label muted">company</dt>
 <dd>string, optional, max 160</dd></div>
 <div class="res__line" data-reveal><dt class="label muted">message</dt>
@@ -1878,6 +2173,140 @@ false green.</p>
 {chrome_end(root)}'''
 
 
+def page_experience():
+    """Dedicated career page. about.html keeps its own #experience summary —
+    the brief required that anchor to keep working."""
+    root = ""
+
+    roles = ""
+    for e in EXPERIENCE:
+        points = "".join(f'<li>{pt}</li>' for pt in e["points"])
+        tech = ""
+        if e.get("tech"):
+            chips = "".join(f'<li class="label">{t}</li>' for t in e["tech"])
+            tech = f'<ul class="sk__items exp__tech">{chips}</ul>'
+        roles += (f'<li class="exp__item" data-reveal>'
+                  f'<span class="exp__num mono">{e["num"]}</span>'
+                  f'<div><h3 class="exp__role">{strip_tags(e["role"])}</h3>'
+                  f'<p class="exp__org">{e["org"]}</p>'
+                  + (f'<p class="exp__when mono">Managed by {e["managed_by"]}</p>'
+                     if e.get("managed_by") else "")
+                  + (f'<p class="exp__when mono">Product: {e["product"]}</p>'
+                     if e.get("product") else "")
+                  + f'<p class="exp__when mono">{e["when"]}</p></div>'
+                  f'<div><ul class="exp__points">{points}</ul>{tech}</div></li>')
+
+    areas = "".join(f'<li class="label">{a}</li>' for a in FREELANCE["areas"])
+
+    skills = ""
+    for num, name, items in EXPERIENCE_SKILLS:
+        lis = "".join(f'<li class="label">{i}</li>' for i in items)
+        skills += (f'<div class="sk__group" data-reveal>'
+                   f'<div><span class="sk__num mono">{num}</span>'
+                   f'<h3 class="sk__name">{name}</h3></div>'
+                   f'<ul class="sk__items">{lis}</ul></div>')
+
+    picks = [x for x in PROJECTS if x["slug"] in ABOUT_PROJECT_SLUGS]
+    cards = ""
+    for i, pr in enumerate(picks):
+        live = (f'<span class="label accent card__live">Live {ARROW}</span>'
+                if pr["link"] else "")
+        cards += (f'<a class="card" href="work/{pr["slug"]}.html" data-reveal '
+                  f'style="--d:{i*0.06:.2f}s" data-cursor="view" data-cursor-label="Open" '
+                  f'data-cursor-name="{pr["name"]}">'
+                  f'<span class="card__media"><img src="assets/img/{cover(pr["slug"])}" '
+                  f'alt="{pr["name"]} — {pr["meta"]} project cover" loading="lazy" '
+                  f'decoding="async" width="2560" height="1600"></span>'
+                  f'<span class="card__meta"><span class="mono muted">{i+1:02d}</span>'
+                  f'<span class="card__title">{pr["name"]}</span>'
+                  f'<span class="label muted">{pr["year"]}</span></span>'
+                  f'<span class="label muted card__tags">{pr["summary"]}{live}</span></a>')
+
+    return head(f"Professional Experience | {ME['name']}",
+                f"Explore {ME['name']}'s professional experience in web development, full-stack "
+                "engineering, software projects, and modern application development.",
+                root, "experience.html") + f'''
+<body>
+{header("Experience", root)}
+<main id="main">
+
+<section class="wh wrap">
+<p class="label muted wh__kicker"><span class="dot"></span> Career</p>
+<h1 class="wh__title wh__title--long display" data-split>
+<span class="line-mask"><span>Professional</span></span>
+<span class="line-mask"><span><span class="accent">Experience</span>.</span></span>
+</h1>
+<p class="ph__tag label" data-reveal style="margin-top:22px;display:inline-block">Building digital experiences, developing web applications, and solving real-world problems through software engineering.</p>
+<p class="cb__lead" data-reveal style="margin-top:24px">I'm {ME['name']}, a Full Stack Developer
+and Software Engineer focused on modern web development, application functionality, and practical
+digital solutions. My experience combines professional product development, technical
+problem-solving, and a commitment to continuous learning.</p>
+<div class="bth__ctas" data-reveal>
+<a href="resume.html" class="btn" data-cursor="hover">View Résumé <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Contact Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
+</section>
+
+<section class="exp section wrap" id="timeline" aria-labelledby="timeline-title">
+<div class="exp__head">
+<div>
+<p class="label muted exp__kicker"><span class="dot"></span> Career timeline</p>
+<h2 id="timeline-title" class="exp__title display" data-split>
+<span class="line-mask"><span>Where I've</span></span>
+<span class="line-mask"><span><span class="accent">worked</span>.</span></span>
+</h2>
+</div>
+<div class="exp__copy">
+<p class="exp__text" data-reveal>Contribute to web development and digital product initiatives,
+focusing on responsive interfaces, application functionality, reusable components, and integration
+between frontend interfaces and backend services.</p>
+</div>
+</div>
+<ol class="exp__list">{roles}</ol>
+</section>
+
+<section class="exp section wrap" id="freelance" aria-labelledby="freelance-title">
+<div class="exp__head">
+<div>
+<p class="label muted exp__kicker"><span class="dot"></span> {FREELANCE['kind']}</p>
+<h2 id="freelance-title" class="exp__title display" data-split>
+<span class="line-mask"><span>Freelance &amp;</span></span>
+<span class="line-mask"><span><span class="accent">independent</span>.</span></span>
+</h2>
+</div>
+<div class="exp__copy">
+<p class="exp__text" data-reveal>{FREELANCE['description']}</p>
+<p class="muted" data-reveal style="font-size:.95rem">{FREELANCE['note']}</p>
+</div>
+</div>
+<ul class="sk__items" data-reveal>{areas}</ul>
+</section>
+
+<section class="sk wrap" id="projects" aria-labelledby="proj-title">
+<div class="section-head">
+<h2 id="proj-title" class="section-title" data-split>
+<span class="line-mask"><span>Selected project experience<span class="accent">.</span></span></span>
+</h2>
+<a href="work.html" class="label u-link" data-cursor="hover">All projects {ARROW}</a>
+</div>
+</section>
+<section class="grid wrap" aria-label="Selected projects">{cards}</section>
+
+<section class="sk wrap" id="skills" aria-labelledby="skills-title">
+<div class="section-head">
+<h2 id="skills-title" class="section-title" data-split>
+<span class="line-mask"><span>Skills used in my work<span class="accent">.</span></span></span>
+</h2>
+<a href="skills.html" class="label u-link" data-cursor="hover">Full skill set {ARROW}</a>
+</div>
+{skills}
+</section>
+
+</main>
+{footer(root)}
+{chrome_end(root)}'''
+
+
 def page_404():
     root = ""
     return head(f"Not found — {ME['name']}", "That page doesn't exist.", root, "404.html") + f'''
@@ -1898,12 +2327,38 @@ def page_404():
 # ============================================================
 #  WRITE
 # ============================================================
+# ============================================================
+#  CONTACT PAGE
+# ============================================================
+CONTACT_INTRO = ("Have a project in mind, an opportunity to discuss, or an idea worth "
+                 "exploring? I'd be glad to hear from you. Share a few details below, "
+                 "and let's start a conversation.")
+
+CONTACT_AUDIENCE = ("Recruiters, clients, founders and fellow developers are all welcome — "
+                    "whether it's a role to fill, a product to build, or a question about "
+                    "something on this site.")
+
+# The form's enquiry-type suggestions are generated from the first column, so
+# the datalist and this list can never drift apart.
+CONTACT_TOPICS = [
+    ("01", "Full-time opportunities",
+     "Full-stack, frontend or backend engineering roles."),
+    ("02", "Freelance development",
+     "Websites and web applications, taken from brief to deployment."),
+    ("03", "Web application development",
+     "React, Next.js and Node.js products with real functionality behind them."),
+    ("04", "Technical collaboration",
+     "Side projects, open source, or a second pair of hands on a build."),
+    ("05", "Other professional enquiries",
+     "Anything else worth a conversation."),
+]
+
 PRIVACY = [
     ("p", "This site is a personal portfolio. It does not run analytics, advertising or third-party trackers, "
           "and it sets no cookies."),
     ("h2", "What is collected"),
-    ("p", "Nothing automatically. If you use the contact form, the details you type — name, email, optional "
-          "company and your message — are used solely to reply to you."),
+    ("p", "Nothing automatically. If you use the contact form, the details you type — name, email, an "
+          "optional subject and your message — are used solely to reply to you."),
     ("h2", "How the contact form works"),
     ("p", "Unless a form endpoint is configured, the form opens your own email client with the message "
           "pre-filled. In that case nothing is transmitted to this site at all; you send the email yourself."),
@@ -1941,6 +2396,7 @@ API_ERRORS = {
     "email_invalid": "Email is not a valid address.",
     "name_too_long": "Name exceeds 120 characters.",
     "email_too_long": "Email exceeds 254 characters.",
+    "subject_too_long": "Subject exceeds 160 characters.",
     "company_too_long": "Company exceeds 160 characters.",
     "message_too_long": "Message exceeds 5000 characters.",
 }
@@ -2016,6 +2472,8 @@ def openapi_json():
                     "properties": {
                         "name": {"type": "string", "maxLength": 120},
                         "email": {"type": "string", "format": "email", "maxLength": 254},
+                        "subject": {"type": "string", "maxLength": 160,
+                                    "description": "Optional subject or enquiry type."},
                         "company": {"type": "string", "maxLength": 160},
                         "message": {"type": "string", "maxLength": 5000},
                         "website": {
@@ -2488,6 +2946,7 @@ PRIORITY = {
     "index.html": "1.0",
     "work.html": "0.9",
     "about.html": "0.9",
+    "experience.html": "0.8",
     "resume.html": "0.8",
     "skills.html": "0.8",
     "contact.html": "0.8",
@@ -2602,9 +3061,11 @@ def _md_head(title, path, description):
             f"Canonical: {site_url(path)}", "", "---", ""]
 
 
-def _md_projects():
-    out = ["## Selected work", ""]
-    for i, p in enumerate(PROJECTS, 1):
+def _md_projects(slugs=None, heading="Selected work"):
+    """All projects, or just `slugs` (in PROJECTS order) when given."""
+    picks = PROJECTS if slugs is None else [p for p in PROJECTS if p["slug"] in slugs]
+    out = [f"## {heading}", ""]
+    for i, p in enumerate(picks, 1):
         out.append(f"{i}. **{p['name']}** — {p['meta']} ({p['year']})")
         out.append(f"   {p['summary']}")
         out.append(f"   Stack: {p['stack']}")
@@ -2622,7 +3083,10 @@ def _md_experience():
         if e.get("managed_by"):
             line += f" (managed by {e['managed_by']})"
         out += [line, f"*{e['when']}*", ""]
-        out += [f"- {strip_tags(pt)}" for pt in e["points"]] + [""]
+        out += [f"- {strip_tags(pt)}" for pt in e["points"]]
+        if e.get("tech"):
+            out += ["", f"Technologies: {', '.join(e['tech'])}"]
+        out += [""]
     return out
 
 
@@ -2635,9 +3099,10 @@ def _md_skills():
 
 def _md_credentials():
     out = ["## Certifications & education", ""]
-    for title, focus, issuer, year in CREDENTIALS:
-        out.append(f"- **{strip_tags(title)}** — {strip_tags(focus)} ({issuer}"
-                   + (f", {year}" if year else "") + ")")
+    for title, focus, issuer, year, _kind in CREDENTIALS:
+        detail = ", ".join(x for x in (issuer, year) if x)
+        out.append(f"- **{strip_tags(title)}** — {strip_tags(focus)}"
+                   + (f" ({detail})" if detail else ""))
     return out + [""]
 
 
@@ -2695,21 +3160,51 @@ def markdown_page(path):
                          + _md_skills())
 
     if path == "resume.html":
-        body = _md_head(f"Résumé — {name}", path, ME["role_long"])
-        body += ["## Professional summary", "", ME["summary"], ""]
-        body += _md_experience() + _md_projects() + _md_skills()
+        body = _md_head(f"{name} | Full Stack Developer Resume", path,
+                        "Full Stack Developer | Software Engineer — " + RESUME_TAGLINE)
+        body += ["## Summary", ""] + [p for pair in
+                                      ((p, "") for p in RESUME_SUMMARY) for p in pair]
+        body += ["## Technical Skills", ""]
+        body += [f"- **{strip_tags(h)}**: {', '.join(i)}" for h, i in RESUME_SKILLS]
+        body.append("")
+        body += _md_experience()
+        body += ["## Freelance & Independent Development", "", RESUME_FREELANCE, "",
+                 FREELANCE["note"], ""]
+        body += [f"- {a}" for a in RESUME_FREELANCE_AREAS] + [""]
+        body += _md_projects(RESUME_PROJECT_SLUGS, "Projects")
         body += _md_credentials() + _md_contact()
         return "\n".join(body)
 
     if path == "contact.html":
-        return "\n".join(_md_head(f"Contact — {name}", path,
-                                  "Open to new opportunities.") + _md_contact())
+        body = _md_head(f"Contact {name} | {ME['role']}", path, CONTACT_INTRO)
+        body += _md_contact()
+        body += ["## What can we discuss?", ""]
+        body += [f"- **{t}** — {d}" for _, t, d in CONTACT_TOPICS]
+        body += ["",
+                 "Send a message with `POST /api/contact` "
+                 "(fields: name, email, subject, message) or email the address above.",
+                 ""]
+        return "\n".join(body)
 
     if path in ("privacy.html", "terms.html"):
         label = "Privacy" if path == "privacy.html" else "Terms"
         blocks = PRIVACY if path == "privacy.html" else TERMS
         return "\n".join(_md_head(f"{label} — {name}", path,
                                   f"{label} for {name}'s portfolio.") + _md_doc(blocks))
+
+    if path == "experience.html":
+        body = _md_head(f"Professional Experience — {name}", path,
+                        "Career timeline, freelance work, projects and skills.")
+        body += _md_experience()
+        body += [f"## {strip_tags(FREELANCE['title'])}", "",
+                 f"*{FREELANCE['kind']}*", "", FREELANCE["description"], "",
+                 FREELANCE["note"], ""]
+        body += [f"- {a}" for a in FREELANCE["areas"]] + [""]
+        body += _md_projects()
+        body += ["## Skills used", ""]
+        body += [f"- **{strip_tags(n)}**: {', '.join(i)}" for _, n, i in EXPERIENCE_SKILLS]
+        body.append("")
+        return "\n".join(body)
 
     if path == "docs/api.html":
         base = SITE_URL.rstrip("/")
@@ -2725,6 +3220,7 @@ def markdown_page(path):
             "| --- | --- | --- |",
             "| name | string | required, max 120 |",
             "| email | string | required, max 254 — used as the reply-to address |",
+            "| subject | string | optional, max 160 — becomes the mail subject |",
             "| company | string | optional, max 160 |",
             "| message | string | required, max 5000 |",
             "| website | string | honeypot — leave empty |",
@@ -2861,6 +3357,7 @@ def main():
         "skills.html": page_skills(),
         "resume.html": page_resume(),
         "contact.html": page_contact(),
+        "experience.html": page_experience(),
         "privacy.html": page_doc("Privacy", "privacy", PRIVACY),
         "terms.html": page_doc("Terms", "terms", TERMS),
         "docs/api.html": page_api_docs(),

@@ -225,6 +225,11 @@ ul, ol { padding: 0; list-style: none }
   transform: scaleY(0);
 }
 .btn:hover { border-color: var(--accent) }
+/* Primary action: the accent fill is already there, just show it at rest
+   and let the hover sweep lift it off instead of laying it on. */
+.btn--solid { border-color: var(--accent) }
+.btn--solid:before { transform: scaleY(1) }
+.btn--solid:hover:before { transform-origin: top; transform: scaleY(0) }
 .btn:hover:before { transform: scaleY(1) }
 .btn .arrow { transition: transform .6s var(--ease-out) }
 .btn:hover .arrow { transform: translate(4px) }
@@ -517,3 +522,18 @@ html:not(.js) .preloader { display: none }
 .preloader__count { font-size: var(--fs-mega); align-self: end; line-height: .8 }
 .preloader__bar { background: var(--line); height: 1px; margin-top: 24px; overflow: hidden }
 .preloader__bar span { background: var(--accent); transform-origin: 0; height: 100%; display: block; transform: scaleX(0) }
+
+/* ---------- Reduced motion ----------
+   A blanket off-switch for decoration. app.js reads the same preference and
+   skips the GSAP entrance animations, so content is simply there on load
+   rather than sliding in. Focus rings and layout are untouched. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.js [data-reveal] { opacity: 1; transform: none }
+  .line-mask > * { transform: none }
+}

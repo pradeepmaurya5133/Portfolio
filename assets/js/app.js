@@ -27,6 +27,16 @@
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var FINE_POINTER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // One source of truth for the motion preference — the canvas animations
+  // each had their own copy of this check.
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Read from the page rather than hard-coded, so the address lives in
+  // exactly one place (build.py) and the mailto fallback cannot go stale.
+  var CONTACT_EMAIL = (function () {
+    var a = document.querySelector('[data-contact-email]') ||
+            document.querySelector('a[href^="mailto:"]');
+    return a ? a.getAttribute('href').replace(/^mailto:/, '').split('?')[0] : '';
+  })();
 
   /* ---------- Smooth scroll ---------- */
   var lenis = null;
@@ -57,13 +67,29 @@
     var header = $('[data-header]');
     if (!header) return;
 
-    var last = 0;
     var hero = $('[data-hero]');
+    var last = window.scrollY || 0;
+    var hidden = false;
+
+    // Lenis eases asymptotically into the end of the page, so the final
+    // scroll events arrive as sub-pixel deltas whose sign flips back and
+    // forth. Comparing each one against the previous value made the header
+    // hide and show repeatedly at the bottom of a page — the flicker. Only
+    // treat movement as a direction change once it clears this threshold,
+    // which leaves normal scrolling untouched and ignores the jitter.
+    var DELTA = 8;
+
     var update = function (y) {
-      header.classList.toggle('is-hidden', y > 160 && y > last && !document.body.classList.contains('menu-open'));
+      y = Math.max(0, y);
+      var moved = y - last;
+      if (Math.abs(moved) >= DELTA) {
+        hidden = moved > 0 && y > 160;
+        last = y;
+      }
+      if (document.body.classList.contains('menu-open')) hidden = false;
+      header.classList.toggle('is-hidden', hidden);
       header.classList.toggle('is-scrolled', y > 40);
       header.classList.toggle('is-transparent', !!hero && y < hero.offsetHeight - header.offsetHeight);
-      last = y;
     };
     update(window.scrollY);
     if (lenis) lenis.on('scroll', function (e) { update(e.scroll); });
@@ -265,6 +291,13 @@
         }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
+
+    // Reduced motion: show everything at once instead of sliding it in.
+    if (REDUCED) {
+      $$('[data-reveal]').forEach(function (el) { el.classList.add('is-in'); });
+      $$('[data-split] .line-mask > span').forEach(function (el) { gsap.set(el, { yPercent: 0 }); });
+      return;
+    }
 
     $$('[data-reveal]').forEach(function (el) { io.observe(el); });
 
@@ -571,6 +604,23 @@
     });
   }
 
+  /* ---------- Print / Save as PDF ---------- */
+  function initPrint() {
+    var btns = $$('[data-print]');
+    if (!btns.length) return;
+    btns.forEach(function (el) {
+      el.addEventListener('click', function () {
+        /* Lenis keeps the page on a transform, and ScrollTrigger pins
+           leave inline styles behind. Both confuse pagination, so stop
+           the smooth scroller and jump to the top before printing. */
+        if (lenis) lenis.stop();
+        window.scrollTo(0, 0);
+        window.print();
+        if (lenis) lenis.start();
+      });
+    });
+  }
+
   /* ---------- Protect media ---------- */
   function initMediaGuards() {
     document.addEventListener('contextmenu', function (e) {
@@ -587,16 +637,20 @@
     if (!form) return;
 
     var status = $('[data-form-status]', form);
+    var submit = $('[data-submit]', form);
+    var label = $('[data-submit-label]', form);
+    var sendLabel = label ? label.textContent : 'Send Message';
     var split = null;
+    var inflight = false;   // guards against a double submit
+    var touched = false;    // only validate live once they've tried once
 
     var say = function (state, text) {
       if (split) { split.revert(); split = null; }
       status.dataset.state = state;
       status.textContent = text;
-      if (state !== 'sending') {
-        split = new SplitText(status, { type: 'words', mask: 'words' });
-        gsap.from(split.words, { yPercent: 110, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.035 });
-      }
+      if (state === 'sending' || REDUCED) return;
+      split = new SplitText(status, { type: 'words', mask: 'words' });
+      gsap.from(split.words, { yPercent: 110, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.035 });
     };
 
     // Readable text for the error codes POST /api/contact can return.
@@ -607,32 +661,105 @@
       email_invalid: "That email address doesn't look right.",
       name_too_long: 'That name is too long.',
       email_too_long: 'That email address is too long.',
+      subject_too_long: 'That subject is too long — 160 characters max.',
       company_too_long: 'That company name is too long.',
       message_too_long: 'That message is too long — 5000 characters max.'
     };
 
+    /* ---------- inline, per-field validation ---------- */
+
+    // Same shape as the server's, deliberately — a field the API would
+    // reject should never pass here and come back as a surprise.
+    var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    var checkField = function (el) {
+      var v = (el.value || '').trim();
+      var max = parseInt(el.getAttribute('maxlength'), 10);
+      if (el.required && !v) {
+        return el.name === 'message' ? 'Please add a message.'
+             : el.name === 'email' ? 'Please add your email.'
+             : 'Please add your name.';
+      }
+      if (v && max && v.length > max) return 'Please keep this under ' + max + ' characters.';
+      if (el.type === 'email' && v && !EMAIL.test(v)) {
+        return "That email address doesn't look right.";
+      }
+      return '';
+    };
+
+    var showFieldError = function (el, message) {
+      var slot = $('[data-error-for="' + el.name + '"]', form);
+      if (slot) slot.textContent = message;
+      el.setAttribute('aria-invalid', message ? 'true' : 'false');
+      el.closest('.field').classList.toggle('is-invalid', !!message);
+      return !message;
+    };
+
+    // Returns the first invalid control, or null when the form is clean.
+    var validateAll = function () {
+      var first = null;
+      $$('input[name], textarea[name]', form).forEach(function (el) {
+        if (el.name === 'website') return;   // the honeypot is never shown
+        var message = checkField(el);
+        showFieldError(el, message);
+        if (message && !first) first = el;
+      });
+      return first;
+    };
+
+    $$('input[name], textarea[name]', form).forEach(function (el) {
+      if (el.name === 'website') return;
+      // Nagging someone mid-sentence is hostile, so wait until they have
+      // submitted once; after that, correct the message as they fix it.
+      el.addEventListener('blur', function () { if (touched) showFieldError(el, checkField(el)); });
+      el.addEventListener('input', function () {
+        if (touched && el.getAttribute('aria-invalid') === 'true') {
+          showFieldError(el, checkField(el));
+        }
+      });
+    });
+
+    /* ---------- submission ---------- */
+
+    var setBusy = function (busy) {
+      inflight = busy;
+      submit.disabled = busy;
+      submit.setAttribute('aria-busy', busy ? 'true' : 'false');
+      if (label) label.textContent = busy ? 'Sending…' : sendLabel;
+    };
+
     // Last resort: hand the message to the visitor's own mail client, so a
-    // missing API key or a dead provider never costs an enquiry.
+    // missing API key or a dead provider never costs an enquiry. This is
+    // NOT a success — the message has not been delivered yet, and the
+    // status wording says so.
     var mailtoFallback = function (data) {
       var body = 'Name: ' + (data.get('name') || '') +
                  '\nEmail: ' + (data.get('email') || '') +
-                 '\nCompany: ' + (data.get('company') || '') +
+                 '\nSubject: ' + (data.get('subject') || '') +
                  '\n\n' + (data.get('message') || '');
-      say('sent', 'Opening your mail app so you can send it directly — thank you!');
-      window.location.href = 'mailto:pradeepmaurya2002@gmail.com' +
-        '?subject=' + encodeURIComponent('Portfolio enquiry from ' + (data.get('name') || 'website')) +
+      say('notice', 'Direct sending is unavailable right now — opening your mail app with the message ready to send.');
+      window.location.href = 'mailto:' + CONTACT_EMAIL +
+        '?subject=' + encodeURIComponent(data.get('subject') || ('Portfolio enquiry from ' + (data.get('name') || 'website'))) +
         '&body=' + encodeURIComponent(body);
     };
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      var submit = $('button[type=submit]', form);
+      if (inflight) return;
+
+      touched = true;
+      var invalid = validateAll();
+      if (invalid) {
+        say('error', 'Please check the highlighted fields.');
+        invalid.focus();
+        return;
+      }
+
       var endpoint = form.getAttribute('action');
       var data = new FormData(form);
-
       if (!endpoint || endpoint === '#') return mailtoFallback(data);
 
-      submit.disabled = true;
+      setBusy(true);
       say('sending', 'Sending…');
       try {
         var res = await fetch(endpoint, {
@@ -642,24 +769,29 @@
         });
         var json = await res.json().catch(function () { return {}; });
 
-        if (res.ok) {
+        // Only the endpoint confirming delivery counts as sent.
+        if (res.ok && json.ok !== false) {
           form.reset();
           form.classList.add('is-sent');
-          say('sent', "Thanks for your message. I'll get back to you within 24 hours.");
+          touched = false;
+          $$('.field.is-invalid', form).forEach(function (f) { f.classList.remove('is-invalid'); });
+          say('sent', 'Thank you — your message has been sent. I will reply to the email address you gave.');
           return;
         }
 
-        // 400 is the visitor's input — tell them what to fix. Anything else
-        // is our problem, so don't make them retype it.
+        // 400 is the visitor's input — tell them what to fix, and leave
+        // everything they typed exactly where it is.
         if (res.status === 400 && MESSAGES[json.error]) {
           say('error', MESSAGES[json.error]);
+          var field = $('[name="' + String(json.error).split('_')[0] + '"]', form);
+          if (field) { showFieldError(field, MESSAGES[json.error]); field.focus(); }
           return;
         }
         mailtoFallback(data);
       } catch (err) {
         mailtoFallback(data);   // offline, blocked, CORS — still recoverable
       } finally {
-        submit.disabled = false;
+        setBusy(false);
       }
     });
   }
@@ -675,7 +807,7 @@
     var canvases = $$('canvas[data-streams]');
     if (!canvases.length) return;
 
-    var STILL = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var STILL = REDUCED;
     var ACCENT = '226,35,86';
     var PALE = '255,206,218';
 
@@ -839,7 +971,7 @@
     var canvases = $$('canvas[data-plexus]');
     if (!canvases.length) return;
 
-    var STILL = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var STILL = REDUCED;
     var LINE = '236,146,170';   // light rose — the mesh itself
     var ACCENT = '226,35,86';   // brand accent — nodes, rays, glow
     var LINK = 0.40;            // join nodes closer than this in model space
@@ -1067,7 +1199,7 @@
   function initHeroCanvas() {
     var canvases = $$('canvas[data-flow]');
     if (!canvases.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (REDUCED) return;
 
     canvases.forEach(function (canvas) {
       var ctx = canvas.getContext('2d');
@@ -1192,6 +1324,7 @@
     initAwardRows();
     initFilters();
     initToTop();
+    initPrint();
     initContactForm();
     initMediaGuards();
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });

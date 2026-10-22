@@ -108,6 +108,11 @@
             "format": "email",
             "maxLength": 254
           },
+          "subject": {
+            "type": "string",
+            "maxLength": 160,
+            "description": "Optional subject or enquiry type."
+          },
           "company": {
             "type": "string",
             "maxLength": 160
@@ -148,7 +153,8 @@
               "message_required",
               "message_too_long",
               "name_required",
-              "name_too_long"
+              "name_too_long",
+              "subject_too_long"
             ]
           }
         }

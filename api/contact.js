@@ -19,7 +19,9 @@ const DEFAULT_TO = "pradeepmaurya2002@gmail.com";
 // pradeepmaury.in is verified there, its shared test sender is the fallback.
 const DEFAULT_FROM = "Portfolio <onboarding@resend.dev>";
 
-const LIMITS = { name: 120, email: 254, company: 160, message: 5000 };
+// `company` is kept alongside `subject` because the published OpenAPI
+// description and the WebMCP tool already offer it; both are optional.
+const LIMITS = { name: 120, email: 254, subject: 160, company: 160, message: 5000 };
 
 function readBody(req) {
   // Vercel parses JSON and form bodies for us, but be defensive about a raw
@@ -86,10 +88,17 @@ export default async function handler(req, res) {
   const lines = [
     `Name:    ${data.name}`,
     `Email:   ${data.email}`,
+    data.subject ? `Subject: ${data.subject}` : null,
     data.company ? `Company: ${data.company}` : null,
     "",
     data.message,
   ].filter((l) => l !== null);
+
+  // The visitor's own words make a far more useful inbox subject than a
+  // generic one, but keep the name so the sender is visible in the list.
+  const subject = data.subject
+    ? `Portfolio — ${data.subject} (${data.name})`
+    : `Portfolio enquiry — ${data.name}`;
 
   try {
     const sent = await fetch("https://api.resend.com/emails", {
@@ -104,7 +113,7 @@ export default async function handler(req, res) {
         // reply_to means hitting reply in the inbox answers the sender,
         // not the no-reply address the mail was sent from.
         reply_to: data.email,
-        subject: `Portfolio enquiry — ${data.name}`,
+        subject,
         text: lines.join("\n"),
       }),
     });

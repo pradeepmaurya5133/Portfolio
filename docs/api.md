@@ -16,6 +16,7 @@ Delivers the contact form. Accepts JSON or form-encoded bodies.
 | --- | --- | --- |
 | name | string | required, max 120 |
 | email | string | required, max 254 — used as the reply-to address |
+| subject | string | optional, max 160 — becomes the mail subject |
 | company | string | optional, max 160 |
 | message | string | required, max 5000 |
 | website | string | honeypot — leave empty |
@@ -46,3 +47,4 @@ Liveness and configuration status — the `status` relation in the API catalog.
 - `message_too_long` — Message exceeds 5000 characters.
 - `name_required` — Name was empty.
 - `name_too_long` — Name exceeds 120 characters.
+- `subject_too_long` — Subject exceeds 160 characters.

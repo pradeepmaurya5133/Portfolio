@@ -1,26 +1,40 @@
-# Résumé — Pradeep Maurya
+# Pradeep Maurya | Full Stack Developer Resume
 
-Full Stack Developer & Software Engineer
+Full Stack Developer | Software Engineer — Building responsive web applications, reliable backend services, and practical digital solutions.
 
 Canonical: https://www.pradeepmaury.in/resume.html
 
 ---
 
-## Professional summary
+## Summary
 
-I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
+I am a Full Stack Developer and Software Engineer focused on developing modern web applications and practical digital solutions. My technical toolkit includes JavaScript, TypeScript, React.js, Next.js, Node.js, and Python, with an interest in building responsive user interfaces, integrating APIs, and developing maintainable application functionality.
+
+I contribute to web development initiatives associated with IntelligenceX.org, including ConsentX and RegulatoryBridge. I am interested in opportunities involving full-stack development, software engineering, and freelance projects where I can contribute to useful, reliable digital products.
+
+## Technical Skills
+
+- **Languages & Web Technologies**: JavaScript, TypeScript, Python, SQL, HTML5, CSS3
+- **Frontend Development**: React.js, Next.js, Tailwind CSS, Bootstrap, Redux Toolkit, Responsive web design, Reusable UI components
+- **Backend Development**: Node.js, Express.js, Python, Django, REST API development, API integration
+- **Databases**: PostgreSQL, Prisma
+- **Testing & QA**: Manual testing, API testing (Postman), Web testing
+- **Tools & Workflow**: Git, GitHub, VS Code, PyCharm, Postman, npm, Vercel
+- **Data & Reporting**: MS Excel, Power BI
 
 ## Experience
 
 ### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Develop and maintain responsive web interfaces.
-- Build reusable UI components and implement frontend functionality.
-- Integrate APIs and contribute to full stack application development.
-- Troubleshoot technical issues and improve maintainability.
-- Collaborate on product features using appropriate modern web technologies.
-- Project work: ConsentX and RegulatoryBridge.
+- Develop and maintain responsive web interfaces using modern frontend technologies.
+- Implement reusable UI components and application functionality.
+- Contribute to development initiatives associated with ConsentX and RegulatoryBridge.
+- Integrate APIs and support communication between frontend and backend services.
+- Troubleshoot technical issues and improve code maintainability.
+- Contribute to ongoing product improvements and application development.
+
+Technologies: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Node.js, Python
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
@@ -28,13 +42,29 @@ I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate abo
 - Supported software testing, quality assurance, data management, reporting and process-improvement activities.
 - Helped coordinate tasks and resolve issues while maintaining focus on accuracy and delivery quality.
 
+Technologies: Manual Testing, API Testing, MS Excel, Power BI
+
 ### Data Entry & Document Verification Operator — SBI Credit Card — Alexis Global Pvt. Ltd.
 *Jan 2025 — Jun 2025*
 
 - Entered and maintained customer application records with attention to accuracy and confidentiality.
 - Verified customer documents against process requirements and coordinated resolution of discrepancies.
 
-## Selected work
+## Freelance & Independent Development
+
+Develop and explore web solutions through independent projects, portfolio development, and freelance-oriented work, with a focus on responsive interfaces, practical application functionality, and maintainable code.
+
+The projects below are self-directed builds rather than paid client engagements. I am open to freelance work.
+
+- Website development
+- Full-stack application development
+- API integration
+- Responsive UI implementation
+- Website maintenance
+- Debugging and performance improvements
+- Project planning and client communication
+
+## Projects
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
    A consent-focused digital solution designed to support consent management and privacy-related workflows.
@@ -48,42 +78,18 @@ I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate abo
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
 
-3. **Bakery** — Full-Stack / E-commerce (2025)
-   A complete bakery shop — storefront, cart and secure accounts, built end to end.
-   Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT
-   Detail: https://www.pradeepmaury.in/work/bakery.html
-
-4. **Xamlysis** — Web App / QA (2025)
-   An online examination portal — the kind of app where a bug has a deadline attached.
-   Stack: JavaScript, Node.js, REST APIs, manual & API testing
-   Detail: https://www.pradeepmaury.in/work/xamlysis.html
-
-5. **Movie Scraper** — Python / Data Pipeline (2025)
-   A Django app that pulls movie data from several sources and refuses to trust any of them.
-   Stack: Python, Django, data validation
-   Detail: https://www.pradeepmaury.in/work/movie-scraper.html
-
-6. **Portfolio** — Static Site / Serverless (2026)
+3. **Portfolio** — Static Site / Serverless (2026)
    A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
    Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
    Live: https://www.pradeepmaury.in
    Detail: https://www.pradeepmaury.in/work/portfolio.html
 
-## Technical skills
-
-- **Frontend Development**: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Tailwind CSS, Bootstrap
-- **Backend Development**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
-- **Tools & Development Workflow**: Git, GitHub, VS Code, API testing, Debugging, Deployment, npm
-- **Databases & State**: PostgreSQL, Prisma, Redux Toolkit
-- **Testing & QA**: Manual Testing, API Testing (Postman), Web Testing, PyCharm
-- **Data & Reporting**: MS Excel, Power BI
-
 ## Certifications & education
 
-- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React (Certification)
+- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React
 - **Python Full-Stack Development** — Python, Django, full-stack web (DUCAT IT Training Institute, Noida)
 - **Full-Stack Development** — Full-stack web development (Coding Seekho, Pune (Online))
-- **B.Tech — Computer Science** — Computer Science & Engineering (Institution to be added)
+- **B.Tech** — Computer Science & Engineering
 
 ## Contact
 

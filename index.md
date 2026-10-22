@@ -62,10 +62,10 @@ I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate abo
 
 ## Certifications & education
 
-- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React (Certification)
+- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React
 - **Python Full-Stack Development** — Python, Django, full-stack web (DUCAT IT Training Institute, Noida)
 - **Full-Stack Development** — Full-stack web development (Coding Seekho, Pune (Online))
-- **B.Tech — Computer Science** — Computer Science & Engineering (Institution to be added)
+- **B.Tech** — Computer Science & Engineering
 
 ## Contact
 

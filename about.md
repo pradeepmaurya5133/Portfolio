@@ -15,18 +15,22 @@ Based in Shree Enclave Panditwari, Dehradun, India.
 ### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Develop and maintain responsive web interfaces.
-- Build reusable UI components and implement frontend functionality.
-- Integrate APIs and contribute to full stack application development.
-- Troubleshoot technical issues and improve maintainability.
-- Collaborate on product features using appropriate modern web technologies.
-- Project work: ConsentX and RegulatoryBridge.
+- Develop and maintain responsive web interfaces using modern frontend technologies.
+- Implement reusable UI components and application functionality.
+- Contribute to development initiatives associated with ConsentX and RegulatoryBridge.
+- Integrate APIs and support communication between frontend and backend services.
+- Troubleshoot technical issues and improve code maintainability.
+- Contribute to ongoing product improvements and application development.
+
+Technologies: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Node.js, Python
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
 
 - Supported software testing, quality assurance, data management, reporting and process-improvement activities.
 - Helped coordinate tasks and resolve issues while maintaining focus on accuracy and delivery quality.
+
+Technologies: Manual Testing, API Testing, MS Excel, Power BI
 
 ### Data Entry & Document Verification Operator — SBI Credit Card — Alexis Global Pvt. Ltd.
 *Jan 2025 — Jun 2025*
@@ -36,10 +40,10 @@ Based in Shree Enclave Panditwari, Dehradun, India.
 
 ## Certifications & education
 
-- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React (Certification)
+- **Front-End Development** — HTML, CSS, Bootstrap, JavaScript, React
 - **Python Full-Stack Development** — Python, Django, full-stack web (DUCAT IT Training Institute, Noida)
 - **Full-Stack Development** — Full-stack web development (Coding Seekho, Pune (Online))
-- **B.Tech — Computer Science** — Computer Science & Engineering (Institution to be added)
+- **B.Tech** — Computer Science & Engineering
 
 ## Contact
 
