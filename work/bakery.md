@@ -2,7 +2,7 @@
 
 A complete bakery shop — storefront, cart and secure accounts, built end to end.
 
-Canonical: https://pradeepmaurya.com/work/bakery.html
+Canonical: https://www.pradeepmaury.in/work/bakery.html
 
 ---
 

@@ -2,7 +2,7 @@
 
 A regulatory compliance platform — dense information that still has to be quick to read.
 
-Canonical: https://pradeepmaurya.com/work/regulatorybridge.html
+Canonical: https://www.pradeepmaury.in/work/regulatorybridge.html
 
 ---
 

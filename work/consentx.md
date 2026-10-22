@@ -2,7 +2,7 @@
 
 A consent management platform where privacy choices have to be captured, stored and proven.
 
-Canonical: https://pradeepmaurya.com/work/consentx.html
+Canonical: https://www.pradeepmaury.in/work/consentx.html
 
 ---
 

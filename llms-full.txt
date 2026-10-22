@@ -2,7 +2,7 @@
 
 > Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
 
-Generated 2026-10-22 from https://pradeepmaurya.com.
+Generated 2026-10-22 from https://www.pradeepmaury.in.
 Each section below is one page of the site.
 
 ---
@@ -11,7 +11,7 @@ Each section below is one page of the site.
 
 Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
 
-Canonical: https://pradeepmaurya.com/
+Canonical: https://www.pradeepmaury.in/
 
 ---
 
@@ -32,28 +32,28 @@ Computer Science graduate with hands-on experience in web development, software 
    A consent management platform where privacy choices have to be captured, stored and proven.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
-   Detail: https://pradeepmaurya.com/work/consentx.html
+   Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
    A regulatory compliance platform — dense information that still has to be quick to read.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
-   Detail: https://pradeepmaurya.com/work/regulatorybridge.html
+   Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
 
 3. **Bakery** — Full-Stack / E-commerce (2025)
    A complete bakery shop — storefront, cart and secure accounts, built end to end.
    Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT
-   Detail: https://pradeepmaurya.com/work/bakery.html
+   Detail: https://www.pradeepmaury.in/work/bakery.html
 
 4. **Xamlysis** — Web App / QA (2025)
    An online examination portal — the kind of app where a bug has a deadline attached.
    Stack: JavaScript, Node.js, REST APIs, manual & API testing
-   Detail: https://pradeepmaurya.com/work/xamlysis.html
+   Detail: https://www.pradeepmaury.in/work/xamlysis.html
 
 5. **Movie Scraper** — Python / Data Pipeline (2025)
    A Django app that pulls movie data from several sources and refuses to trust any of them.
    Stack: Python, Django, data validation
-   Detail: https://pradeepmaurya.com/work/movie-scraper.html
+   Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
 ## How I can help
 
@@ -84,7 +84,7 @@ Computer Science graduate with hands-on experience in web development, software 
 
 Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
 
-Canonical: https://pradeepmaurya.com/about.html
+Canonical: https://www.pradeepmaury.in/about.html
 
 ---
 
@@ -135,7 +135,7 @@ Based in Shree Enclave Panditwari, Dehradun, India.
 
 Full Stack Developer | Software Engineer
 
-Canonical: https://pradeepmaurya.com/resume.html
+Canonical: https://www.pradeepmaury.in/resume.html
 
 ---
 
@@ -171,28 +171,28 @@ Computer Science graduate with hands-on experience in web development, software 
    A consent management platform where privacy choices have to be captured, stored and proven.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
-   Detail: https://pradeepmaurya.com/work/consentx.html
+   Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
    A regulatory compliance platform — dense information that still has to be quick to read.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
-   Detail: https://pradeepmaurya.com/work/regulatorybridge.html
+   Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
 
 3. **Bakery** — Full-Stack / E-commerce (2025)
    A complete bakery shop — storefront, cart and secure accounts, built end to end.
    Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT
-   Detail: https://pradeepmaurya.com/work/bakery.html
+   Detail: https://www.pradeepmaury.in/work/bakery.html
 
 4. **Xamlysis** — Web App / QA (2025)
    An online examination portal — the kind of app where a bug has a deadline attached.
    Stack: JavaScript, Node.js, REST APIs, manual & API testing
-   Detail: https://pradeepmaurya.com/work/xamlysis.html
+   Detail: https://www.pradeepmaury.in/work/xamlysis.html
 
 5. **Movie Scraper** — Python / Data Pipeline (2025)
    A Django app that pulls movie data from several sources and refuses to trust any of them.
    Stack: Python, Django, data validation
-   Detail: https://pradeepmaurya.com/work/movie-scraper.html
+   Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
 ## Technical skills
 
@@ -224,7 +224,7 @@ Computer Science graduate with hands-on experience in web development, software 
 
 What I work with, grouped by stack layer.
 
-Canonical: https://pradeepmaurya.com/skills.html
+Canonical: https://www.pradeepmaury.in/skills.html
 
 ---
 
@@ -243,7 +243,7 @@ Canonical: https://pradeepmaurya.com/skills.html
 
 Projects by Pradeep Maurya.
 
-Canonical: https://pradeepmaurya.com/work.html
+Canonical: https://www.pradeepmaury.in/work.html
 
 ---
 
@@ -253,28 +253,28 @@ Canonical: https://pradeepmaurya.com/work.html
    A consent management platform where privacy choices have to be captured, stored and proven.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
-   Detail: https://pradeepmaurya.com/work/consentx.html
+   Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
    A regulatory compliance platform — dense information that still has to be quick to read.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
-   Detail: https://pradeepmaurya.com/work/regulatorybridge.html
+   Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
 
 3. **Bakery** — Full-Stack / E-commerce (2025)
    A complete bakery shop — storefront, cart and secure accounts, built end to end.
    Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT
-   Detail: https://pradeepmaurya.com/work/bakery.html
+   Detail: https://www.pradeepmaury.in/work/bakery.html
 
 4. **Xamlysis** — Web App / QA (2025)
    An online examination portal — the kind of app where a bug has a deadline attached.
    Stack: JavaScript, Node.js, REST APIs, manual & API testing
-   Detail: https://pradeepmaurya.com/work/xamlysis.html
+   Detail: https://www.pradeepmaury.in/work/xamlysis.html
 
 5. **Movie Scraper** — Python / Data Pipeline (2025)
    A Django app that pulls movie data from several sources and refuses to trust any of them.
    Stack: Python, Django, data validation
-   Detail: https://pradeepmaurya.com/work/movie-scraper.html
+   Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
 ---
 
@@ -282,7 +282,7 @@ Canonical: https://pradeepmaurya.com/work.html
 
 A consent management platform where privacy choices have to be captured, stored and proven.
 
-Canonical: https://pradeepmaurya.com/work/consentx.html
+Canonical: https://www.pradeepmaury.in/work/consentx.html
 
 ---
 
@@ -315,7 +315,7 @@ Each change went through manual web testing plus API checks in Postman, so regre
 
 A regulatory compliance platform — dense information that still has to be quick to read.
 
-Canonical: https://pradeepmaurya.com/work/regulatorybridge.html
+Canonical: https://www.pradeepmaury.in/work/regulatorybridge.html
 
 ---
 
@@ -348,7 +348,7 @@ On an information-dense platform, how fast a page becomes readable matters as mu
 
 A complete bakery shop — storefront, cart and secure accounts, built end to end.
 
-Canonical: https://pradeepmaurya.com/work/bakery.html
+Canonical: https://www.pradeepmaury.in/work/bakery.html
 
 ---
 
@@ -380,7 +380,7 @@ Prisma over PostgreSQL kept the data model explicit and migrations reviewable in
 
 An online examination portal — the kind of app where a bug has a deadline attached.
 
-Canonical: https://pradeepmaurya.com/work/xamlysis.html
+Canonical: https://www.pradeepmaury.in/work/xamlysis.html
 
 ---
 
@@ -412,7 +412,7 @@ On a portal under time pressure, "it reliably works" is the feature users actual
 
 A Django app that pulls movie data from several sources and refuses to trust any of them.
 
-Canonical: https://pradeepmaurya.com/work/movie-scraper.html
+Canonical: https://www.pradeepmaury.in/work/movie-scraper.html
 
 ---
 
@@ -444,7 +444,7 @@ Normalising differing source formats into a single schema is what makes the coll
 
 Open to new opportunities.
 
-Canonical: https://pradeepmaurya.com/contact.html
+Canonical: https://www.pradeepmaury.in/contact.html
 
 ---
 
@@ -462,7 +462,7 @@ Canonical: https://pradeepmaurya.com/contact.html
 
 Privacy for Pradeep Maurya's portfolio.
 
-Canonical: https://pradeepmaurya.com/privacy.html
+Canonical: https://www.pradeepmaury.in/privacy.html
 
 ---
 
@@ -490,7 +490,7 @@ Questions about this note: pradeepmaurya2002@gmail.com.
 
 Terms for Pradeep Maurya's portfolio.
 
-Canonical: https://pradeepmaurya.com/terms.html
+Canonical: https://www.pradeepmaury.in/terms.html
 
 ---
 

@@ -2,7 +2,7 @@
 
 Privacy for Pradeep Maurya's portfolio.
 
-Canonical: https://pradeepmaurya.com/privacy.html
+Canonical: https://www.pradeepmaury.in/privacy.html
 
 ---
 

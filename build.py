@@ -15,10 +15,15 @@ import re
 
 ROOT = pathlib.Path(__file__).parent
 
-# Absolute base URL used by sitemap.xml and robots.txt. Sitemaps require
-# absolute URLs, so point this at your real domain before deploying.
+# Absolute base URL used by sitemap.xml, canonicals, llms.txt and robots.txt.
 # No trailing slash.
-SITE_URL = "https://pradeepmaurya.com"
+#
+# This must be the host that actually SERVES the site, not the one that
+# redirects to it. Vercel currently 308s the apex to www, so www is canonical;
+# pointing canonicals at the apex would aim every one of them at a redirect.
+# To prefer the shorter apex instead, switch the primary domain in
+# Vercel → Project → Settings → Domains, then drop the "www." here.
+SITE_URL = "https://www.pradeepmaury.in"
 
 # ============================================================
 #  PERSONAL DATA  (sourced from Pradeep_Maurya_Resume.docx)
@@ -998,14 +1003,14 @@ def page_contact():
 <section class="ch wrap">
 <p class="label muted ch__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h1 class="ch__title display" data-split>
-<span class="line-mask"><span>Let's</span></span>
-<span class="line-mask"><span>talk<span class="accent">.</span></span></span>
+<span class="line-mask"><span>Let's Build</span></span>
+<span class="line-mask"><span>Something <span class="accent">Amazing</span></span></span>
 </h1>
 </section>
 
 <section class="cb wrap">
 <div class="cb__main">
-<p class="cb__lead" data-reveal>Feel free to reach me if you believe we can build something great together, or if you just want to talk (:</p>
+<p class="cb__lead" data-reveal>Have a project in mind? Drop me a message and I'll get back to you within 24 hours.</p>
 <form class="form" data-contact-form action="#" method="post" novalidate>
 <div class="field">
 <label class="label muted" for="f-name">Your name</label>
@@ -1323,10 +1328,13 @@ def headers_file(md_paths):
         "# Markdown twins, so an agent can find the text-only form of a page.",
     ]
     for path in md_paths:
-        out += [
-            "/" + path,
-            f'  Link: <{md_href(path)}>; rel="alternate"; type="text/markdown"',
-        ]
+        rule = f'  Link: <{md_href(path)}>; rel="alternate"; type="text/markdown"'
+        # The homepage is reached as "/", which does not match an
+        # "/index.html" rule — emit both or the home page, the one scanners
+        # actually test, silently misses its alternate link.
+        if path == "index.html":
+            out += ["/", rule]
+        out += ["/" + path, rule]
     out += [
         "",
         "/*.md",
@@ -1340,6 +1348,70 @@ def headers_file(md_paths):
         "  Content-Type: text/plain; charset=utf-8",
     ]
     return "\n".join(out) + "\n"
+
+
+def vercel_json(md_paths):
+    """Vercel reads neither `_headers` (Netlify/CF Pages) nor `.htaccess`
+    (Apache) — without this file the site ships no Link headers at all.
+
+    Each page gets ONE complete Link value rather than relying on Vercel
+    merging a site-wide rule with a per-page one, since same-key headers from
+    overlapping rules override rather than append.
+    """
+    rules = [{
+        "source": "/(.*)",
+        "headers": [
+            {"key": "Link", "value": link_header()},
+            {"key": "Vary", "value": "Accept"},
+        ],
+    }]
+    for path in md_paths:
+        combined = f'{link_header()}, <{md_href(path)}>; rel="alternate"; type="text/markdown"'
+        sources = ["/"] if path == "index.html" else []
+        sources.append("/" + path)
+        for source in sources:
+            rules.append({
+                "source": source,
+                "headers": [
+                    {"key": "Link", "value": combined},
+                    {"key": "Vary", "value": "Accept"},
+                ],
+            })
+    rules += [
+        {"source": "/(.*).md",
+         "headers": [{"key": "Content-Type", "value": "text/markdown; charset=utf-8"}]},
+        {"source": "/llms.txt",
+         "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]},
+        {"source": "/llms-full.txt",
+         "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]},
+    ]
+
+    # Accept-based rewrites, one explicit entry per page.
+    #
+    # A single wildcard like "/:path*.html" -> "/:path*.md" reads tidier, but
+    # path-to-regexp's segment modifiers make that pattern ambiguous against
+    # nested paths such as /work/bakery.html, and Vercel's router can't be
+    # tested locally. There are only 13 pages and this file is generated, so
+    # spelling them out costs nothing and removes the guesswork.
+    #
+    # Vercel's `has` matches a regex against the header, so it can't compare
+    # q-values the way the Worker does — a client sending
+    # `text/markdown;q=0.1` would still get markdown. Browsers never send
+    # text/markdown at all, so HTML stays the default where it matters.
+    md_accept = [{"type": "header", "key": "accept", "value": "(.*)text/markdown(.*)"}]
+    rewrites = [{"source": "/", "has": md_accept, "destination": "/index.md"}]
+    for path in md_paths:
+        rewrites.append({
+            "source": "/" + path,
+            "has": md_accept,
+            "destination": md_href(path),
+        })
+
+    return json.dumps({
+        "$schema": "https://openapi.vercel.sh/vercel.json",
+        "headers": rules,
+        "rewrites": rewrites,
+    }, indent=2) + "\n"
 
 
 def htaccess_file():
@@ -1757,6 +1829,7 @@ def main():
         "llms.txt": llms_txt(),
         "llms-full.txt": llms_full_txt(md_pages),
         "_headers": headers_file(sorted(md_html)),
+        "vercel.json": vercel_json(sorted(md_html)),
         ".htaccess": htaccess_file(),
     }
     for path, text in extras.items():

@@ -2,7 +2,7 @@
 
 A Django app that pulls movie data from several sources and refuses to trust any of them.
 
-Canonical: https://pradeepmaurya.com/work/movie-scraper.html
+Canonical: https://www.pradeepmaury.in/work/movie-scraper.html
 
 ---
 

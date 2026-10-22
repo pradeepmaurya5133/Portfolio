@@ -2,7 +2,7 @@
 
 What I work with, grouped by stack layer.
 
-Canonical: https://pradeepmaurya.com/skills.html
+Canonical: https://www.pradeepmaury.in/skills.html
 
 ---
 

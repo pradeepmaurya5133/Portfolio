@@ -2,7 +2,7 @@
 
 Open to new opportunities.
 
-Canonical: https://pradeepmaurya.com/contact.html
+Canonical: https://www.pradeepmaury.in/contact.html
 
 ---
 

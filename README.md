@@ -10,9 +10,14 @@ Open `index.html` directly, or serve the folder (recommended — some browsers
 restrict fonts over `file://`):
 
 ```sh
-python -m http.server 8000
-# then visit http://localhost:8000
+python serve.py          # http://localhost:8000
 ```
+
+Use `serve.py`, not `python -m http.server`. The plain server ignores
+`_headers` and `.htaccess`, so locally you get no `Link` response headers and
+no `Accept: text/markdown` negotiation — the site looks broken to any
+agent-readiness scanner even though the deployed config is correct.
+`serve.py` applies both, so local matches production.
 
 ## Pages
 
@@ -89,7 +94,8 @@ and the same relation ships as a `Link:` header per page in `_headers`.
 | Cloudflare (proxied) | Nothing here — turn on **Rules → Settings → Markdown for Agents** in the dashboard |
 | Apache | Already done: `.htaccess` rewrites to the `.md` twin when `Accept` matches |
 | Netlify / Cloudflare Pages | `_headers` sets the content type; add an edge function using `markdown-for-agents.worker.js` |
-| Workers / Vercel | Deploy `markdown-for-agents.worker.js` as a Worker or middleware |
+| Vercel (this site) | Already done: `vercel.json` sets headers and rewrites |
+| Workers | Deploy `markdown-for-agents.worker.js` |
 
 The negotiation compares q-values, so `text/markdown;q=0.5,text/html;q=0.9`
 still gets HTML. `Vary: Accept` is set on both forms so a cache can't replay a
@@ -132,11 +138,30 @@ what you want and nothing more. Flip `ai-input` to `no` if you'd rather
 assistants didn't quote the site in answers, but then the `llms.txt` and
 markdown-for-agents work is sending the opposite message.
 
-## Before you deploy
+## Deployment
 
-Set `SITE_URL` at the top of `build.py` to your real domain (no trailing slash)
-and re-run the build. Sitemaps require absolute URLs, so until that's changed
-both `sitemap.xml` and `robots.txt` point at a placeholder domain.
+Live at **https://www.pradeepmaury.in** on **Vercel**.
+
+`SITE_URL` uses the **www** host because Vercel currently 308-redirects
+the apex to it. Canonicals must name the host that actually serves the
+page — pointing them at a redirect is an SEO smell. To use the shorter
+apex instead, make it the primary domain in Vercel → Project → Settings →
+Domains, then drop the `www.` from `SITE_URL` and rebuild.
+
+`SITE_URL` at the top of `build.py` drives every absolute URL — sitemap,
+canonicals, `llms.txt`, `robots.txt`. Change it there and rebuild; nothing else
+needs touching.
+
+**Vercel reads `vercel.json` only.** It ignores `_headers` (Netlify, Cloudflare
+Pages) and `.htaccess` (Apache) — both are generated for portability but are
+inert here, and are simply served as static files. `vercel.json` carries the
+`Link` headers and the `Accept: text/markdown` rewrites.
+
+Caveat on the rewrites: Vercel's `has` condition matches a regex against the
+Accept header, so it can't compare q-values the way `markdown-for-agents.worker.js`
+does. A client sending `text/markdown;q=0.1` would still get markdown. Browsers
+never send `text/markdown` at all, so HTML stays the default where it matters.
+Deploy the Worker as middleware if you want strict q-value handling.
 
 The sitemap is derived from the page list, so new pages appear automatically —
 `404.html` is excluded, and `index.html` is listed as the bare root (`/`) so it

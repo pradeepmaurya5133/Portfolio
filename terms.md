@@ -2,7 +2,7 @@
 
 Terms for Pradeep Maurya's portfolio.
 
-Canonical: https://pradeepmaurya.com/terms.html
+Canonical: https://www.pradeepmaury.in/terms.html
 
 ---
 

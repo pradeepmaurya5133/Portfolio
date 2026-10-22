@@ -2,7 +2,7 @@
 
 Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
 
-Canonical: https://pradeepmaurya.com/about.html
+Canonical: https://www.pradeepmaury.in/about.html
 
 ---
 

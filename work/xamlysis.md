@@ -2,7 +2,7 @@
 
 An online examination portal — the kind of app where a bug has a deadline attached.
 
-Canonical: https://pradeepmaurya.com/work/xamlysis.html
+Canonical: https://www.pradeepmaury.in/work/xamlysis.html
 
 ---
 
