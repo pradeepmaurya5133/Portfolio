@@ -184,6 +184,19 @@
       ]
     },
     {
+      "source": "/work/portfolio.html",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</about.html>; rel=\"author\", <https://github.com/pradeepmaurya5133/>; rel=\"me\", <https://linkedin.com/in/pradeep-maurya-b82b5820b/>; rel=\"me\", <mailto:pradeepmaurya2002@gmail.com>; rel=\"me\", </privacy.html>; rel=\"privacy-policy\", </terms.html>; rel=\"terms-of-service\", </.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", </docs/api.html>; rel=\"service-doc\"; type=\"text/html\", </work/portfolio.md>; rel=\"alternate\"; type=\"text/markdown\""
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
+    },
+    {
       "source": "/work/regulatorybridge.html",
       "headers": [
         {
@@ -433,6 +446,17 @@
         }
       ],
       "destination": "/work/movie-scraper.md"
+    },
+    {
+      "source": "/work/portfolio.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(.*)text/markdown(.*)"
+        }
+      ],
+      "destination": "/work/portfolio.md"
     },
     {
       "source": "/work/regulatorybridge.html",

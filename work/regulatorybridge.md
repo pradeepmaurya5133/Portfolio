@@ -1,6 +1,6 @@
 # RegulatoryBridge — Pradeep Maurya
 
-A regulatory compliance platform — dense information that still has to be quick to read.
+A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
 
 Canonical: https://www.pradeepmaury.in/work/regulatorybridge.html
 
@@ -14,8 +14,8 @@ Alongside that I handled debugging and testing passes, and performance-focused u
 
 ## Details
 
-- Role: Full Stack Developer
-- Context: iLeads Auxiliary Services (SS IntelligenceX)
+- Role: Web Developer
+- Context: SS IntelligenceX Private Limited
 - Year: 2026
 - Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
 - Scope: Website development, responsive design, feature refinement, debugging, testing, performance

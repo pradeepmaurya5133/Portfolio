@@ -30,6 +30,8 @@ SHOTS = {
     "consentx":         ("Screenshot 2026-10-21 172520.png", 72),
     "regulatorybridge": ("Screenshot 2026-10-21 172727.png", 67),
     "xamlysis":         ("Screenshot 2026-10-21 172902.png", 23),
+    # Headless capture of this site — no browser chrome to crop.
+    "portfolio":        ("portfolio-home.png", 0),
 }
 
 W, H = 2560, 1600

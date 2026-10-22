@@ -1,6 +1,6 @@
 # Pradeep Maurya — Full Stack Developer
 
-Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
+I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions.
 
 Canonical: https://www.pradeepmaury.in/
 
@@ -8,7 +8,7 @@ Canonical: https://www.pradeepmaury.in/
 
 ## About
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 ## At a glance
 
@@ -20,13 +20,13 @@ Computer Science graduate with hands-on experience in web development, software 
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -46,13 +46,19 @@ Computer Science graduate with hands-on experience in web development, software 
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html
+
 ## How I can help
 
-- **Frontend Development**: Responsive interfaces in React, Next.js and TypeScript, styled with Tailwind CSS or Bootstrap. Layouts that hold together from a narrow phone to a wide desktop, without a separate mobile codebase.
-- **Backend & APIs**: Node.js and Express services, Python and Django applications, and REST APIs designed to be consumed — including AI API integration where a product needs it.
-- **Full-Stack Product Work**: End-to-end features across the stack: PostgreSQL and Prisma for data, Redux Toolkit for client state, JWT for secure user management — one coherent path from schema to screen.
-- **Testing & QA**: Manual web testing, API testing in Postman and systematic debugging. Finding the defect before a user does is cheaper than every alternative.
-- **Data & Reporting**: Data management and analysis with MS Excel and Power BI, plus validation checks that keep a data flow reliable across multiple sources.
+- **Web Development**: Responsive, accessible, and high-performance websites designed around business goals and user needs.
+- **Full Stack Development**: End-to-end web applications featuring modern frontend interfaces, backend services, API integration, and database connectivity.
+- **Custom Software Development**: Practical software solutions that help businesses simplify workflows, improve productivity, and solve real-world challenges.
+- **API Integration & Backend Development**: Reliable backend services, REST API integration, and maintainable application architectures.
+- **Website Maintenance & Optimization**: Website improvements, bug fixes, performance optimization, and ongoing technical support.
 
 ## Certifications & education
 

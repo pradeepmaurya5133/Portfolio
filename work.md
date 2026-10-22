@@ -9,13 +9,13 @@ Canonical: https://www.pradeepmaury.in/work.html
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -34,3 +34,9 @@ Canonical: https://www.pradeepmaury.in/work.html
    A Django app that pulls movie data from several sources and refuses to trust any of them.
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
+
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html

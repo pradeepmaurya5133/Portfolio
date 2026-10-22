@@ -1,6 +1,6 @@
 # Résumé — Pradeep Maurya
 
-Full Stack Developer | Software Engineer
+Full Stack Developer & Software Engineer
 
 Canonical: https://www.pradeepmaury.in/resume.html
 
@@ -8,17 +8,19 @@ Canonical: https://www.pradeepmaury.in/resume.html
 
 ## Professional summary
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 ## Experience
 
-### Full Stack Developer — iLeads Auxiliary Services Private Limited
+### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.
-- Support development, debugging, testing and refinement of web experiences using modern web technologies.
-- Work on product and project deliverables associated with SS IntelligenceX Private Limited.
-- Project work: ConsentX.io and RegulatoryBridge.com.
+- Develop and maintain responsive web interfaces.
+- Build reusable UI components and implement frontend functionality.
+- Integrate APIs and contribute to full stack application development.
+- Troubleshoot technical issues and improve maintainability.
+- Collaborate on product features using appropriate modern web technologies.
+- Project work: ConsentX and RegulatoryBridge.
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
@@ -35,13 +37,13 @@ Computer Science graduate with hands-on experience in web development, software 
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -61,14 +63,20 @@ Computer Science graduate with hands-on experience in web development, software 
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html
+
 ## Technical skills
 
-- **Frontend**: HTML, CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS, Bootstrap
-- **Backend & APIs**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Frontend Development**: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Tailwind CSS, Bootstrap
+- **Backend Development**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Tools & Development Workflow**: Git, GitHub, VS Code, API testing, Debugging, Deployment, npm
 - **Databases & State**: PostgreSQL, Prisma, Redux Toolkit
-- **Testing & Tools**: Manual Testing, API Testing (Postman), Web Testing, Visual Studio Code, PyCharm
-- **Data & Collaboration**: MS Excel, Power BI, Git, GitHub
-- **Professional**: Communication, Teamwork, Analytical thinking, Attention to detail, Adaptability
+- **Testing & QA**: Manual Testing, API Testing (Postman), Web Testing, PyCharm
+- **Data & Reporting**: MS Excel, Power BI
 
 ## Certifications & education
 

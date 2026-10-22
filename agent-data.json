@@ -7,7 +7,7 @@
     "phone": "+91 95199 65133",
     "github": "https://github.com/pradeepmaurya5133/",
     "linkedin": "https://linkedin.com/in/pradeep-maurya-b82b5820b/",
-    "summary": "Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications."
+    "summary": "I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions."
   },
   "projects": [
     {
@@ -15,9 +15,9 @@
       "slug": "consentx",
       "year": "2026",
       "category": "Full-Stack / UI Engineering",
-      "summary": "A consent management platform where privacy choices have to be captured, stored and proven.",
+      "summary": "A consent-focused digital solution designed to support consent management and privacy-related workflows.",
       "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
-      "role": "Full Stack Developer",
+      "role": "Web Developer",
       "url": "https://www.pradeepmaury.in/work/consentx.html",
       "live": "https://consentx.io"
     },
@@ -26,9 +26,9 @@
       "slug": "regulatorybridge",
       "year": "2026",
       "category": "Web Development / QA",
-      "summary": "A regulatory compliance platform — dense information that still has to be quick to read.",
+      "summary": "A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.",
       "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
-      "role": "Full Stack Developer",
+      "role": "Web Developer",
       "url": "https://www.pradeepmaury.in/work/regulatorybridge.html",
       "live": "https://regulatorybridge.com"
     },
@@ -64,24 +64,35 @@
       "role": "Developer",
       "url": "https://www.pradeepmaury.in/work/movie-scraper.html",
       "live": null
+    },
+    {
+      "name": "Portfolio",
+      "slug": "portfolio",
+      "year": "2026",
+      "category": "Static Site / Serverless",
+      "summary": "A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.",
+      "stack": "Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions",
+      "role": "Designer and developer",
+      "url": "https://www.pradeepmaury.in/work/portfolio.html",
+      "live": "https://www.pradeepmaury.in"
     }
   ],
   "skills": [
     {
-      "group": "Frontend",
+      "group": "Frontend Development",
       "items": [
-        "HTML",
-        "CSS",
+        "HTML5",
+        "CSS3",
         "JavaScript",
-        "React",
-        "Next.js",
         "TypeScript",
+        "React.js",
+        "Next.js",
         "Tailwind CSS",
         "Bootstrap"
       ]
     },
     {
-      "group": "Backend & APIs",
+      "group": "Backend Development",
       "items": [
         "Node.js",
         "Express.js",
@@ -89,6 +100,18 @@
         "Django",
         "REST APIs",
         "AI API integration"
+      ]
+    },
+    {
+      "group": "Tools & Development Workflow",
+      "items": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "API testing",
+        "Debugging",
+        "Deployment",
+        "npm"
       ]
     },
     {
@@ -100,45 +123,34 @@
       ]
     },
     {
-      "group": "Testing & Tools",
+      "group": "Testing & QA",
       "items": [
         "Manual Testing",
         "API Testing (Postman)",
         "Web Testing",
-        "Visual Studio Code",
         "PyCharm"
       ]
     },
     {
-      "group": "Data & Collaboration",
+      "group": "Data & Reporting",
       "items": [
         "MS Excel",
-        "Power BI",
-        "Git",
-        "GitHub"
-      ]
-    },
-    {
-      "group": "Professional",
-      "items": [
-        "Communication",
-        "Teamwork",
-        "Analytical thinking",
-        "Attention to detail",
-        "Adaptability"
+        "Power BI"
       ]
     }
   ],
   "experience": [
     {
-      "role": "Full Stack Developer",
-      "org": "iLeads Auxiliary Services Private Limited",
+      "role": "Web Developer",
+      "org": "SS IntelligenceX Private Limited",
       "period": "Aug 2026 — Present",
       "highlights": [
-        "Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.",
-        "Support development, debugging, testing and refinement of web experiences using modern web technologies.",
-        "Work on product and project deliverables associated with SS IntelligenceX Private Limited.",
-        "Project work: ConsentX.io and RegulatoryBridge.com."
+        "Develop and maintain responsive web interfaces.",
+        "Build reusable UI components and implement frontend functionality.",
+        "Integrate APIs and contribute to full stack application development.",
+        "Troubleshoot technical issues and improve maintainability.",
+        "Collaborate on product features using appropriate modern web technologies.",
+        "Project work: ConsentX and RegulatoryBridge."
       ]
     },
     {

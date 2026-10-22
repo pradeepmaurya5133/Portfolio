@@ -1,6 +1,6 @@
 # Pradeep Maurya — complete site content
 
-> Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
+> I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions.
 
 Generated 2026-10-22 from https://www.pradeepmaury.in.
 Each section below is one page of the site.
@@ -9,7 +9,7 @@ Each section below is one page of the site.
 
 # Pradeep Maurya — Full Stack Developer
 
-Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
+I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions.
 
 Canonical: https://www.pradeepmaury.in/
 
@@ -17,7 +17,7 @@ Canonical: https://www.pradeepmaury.in/
 
 ## About
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 ## At a glance
 
@@ -29,13 +29,13 @@ Computer Science graduate with hands-on experience in web development, software 
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -55,13 +55,19 @@ Computer Science graduate with hands-on experience in web development, software 
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html
+
 ## How I can help
 
-- **Frontend Development**: Responsive interfaces in React, Next.js and TypeScript, styled with Tailwind CSS or Bootstrap. Layouts that hold together from a narrow phone to a wide desktop, without a separate mobile codebase.
-- **Backend & APIs**: Node.js and Express services, Python and Django applications, and REST APIs designed to be consumed — including AI API integration where a product needs it.
-- **Full-Stack Product Work**: End-to-end features across the stack: PostgreSQL and Prisma for data, Redux Toolkit for client state, JWT for secure user management — one coherent path from schema to screen.
-- **Testing & QA**: Manual web testing, API testing in Postman and systematic debugging. Finding the defect before a user does is cheaper than every alternative.
-- **Data & Reporting**: Data management and analysis with MS Excel and Power BI, plus validation checks that keep a data flow reliable across multiple sources.
+- **Web Development**: Responsive, accessible, and high-performance websites designed around business goals and user needs.
+- **Full Stack Development**: End-to-end web applications featuring modern frontend interfaces, backend services, API integration, and database connectivity.
+- **Custom Software Development**: Practical software solutions that help businesses simplify workflows, improve productivity, and solve real-world challenges.
+- **API Integration & Backend Development**: Reliable backend services, REST API integration, and maintainable application architectures.
+- **Website Maintenance & Optimization**: Website improvements, bug fixes, performance optimization, and ongoing technical support.
 
 ## Certifications & education
 
@@ -82,25 +88,27 @@ Computer Science graduate with hands-on experience in web development, software 
 
 # About — Pradeep Maurya
 
-Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
+I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions.
 
 Canonical: https://www.pradeepmaury.in/about.html
 
 ---
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 Based in Shree Enclave Panditwari, Dehradun, India.
 
 ## Experience
 
-### Full Stack Developer — iLeads Auxiliary Services Private Limited
+### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.
-- Support development, debugging, testing and refinement of web experiences using modern web technologies.
-- Work on product and project deliverables associated with SS IntelligenceX Private Limited.
-- Project work: ConsentX.io and RegulatoryBridge.com.
+- Develop and maintain responsive web interfaces.
+- Build reusable UI components and implement frontend functionality.
+- Integrate APIs and contribute to full stack application development.
+- Troubleshoot technical issues and improve maintainability.
+- Collaborate on product features using appropriate modern web technologies.
+- Project work: ConsentX and RegulatoryBridge.
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
@@ -133,7 +141,7 @@ Based in Shree Enclave Panditwari, Dehradun, India.
 
 # Résumé — Pradeep Maurya
 
-Full Stack Developer | Software Engineer
+Full Stack Developer & Software Engineer
 
 Canonical: https://www.pradeepmaury.in/resume.html
 
@@ -141,17 +149,19 @@ Canonical: https://www.pradeepmaury.in/resume.html
 
 ## Professional summary
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 ## Experience
 
-### Full Stack Developer — iLeads Auxiliary Services Private Limited
+### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.
-- Support development, debugging, testing and refinement of web experiences using modern web technologies.
-- Work on product and project deliverables associated with SS IntelligenceX Private Limited.
-- Project work: ConsentX.io and RegulatoryBridge.com.
+- Develop and maintain responsive web interfaces.
+- Build reusable UI components and implement frontend functionality.
+- Integrate APIs and contribute to full stack application development.
+- Troubleshoot technical issues and improve maintainability.
+- Collaborate on product features using appropriate modern web technologies.
+- Project work: ConsentX and RegulatoryBridge.
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
@@ -168,13 +178,13 @@ Computer Science graduate with hands-on experience in web development, software 
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -194,14 +204,20 @@ Computer Science graduate with hands-on experience in web development, software 
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html
+
 ## Technical skills
 
-- **Frontend**: HTML, CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS, Bootstrap
-- **Backend & APIs**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Frontend Development**: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Tailwind CSS, Bootstrap
+- **Backend Development**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Tools & Development Workflow**: Git, GitHub, VS Code, API testing, Debugging, Deployment, npm
 - **Databases & State**: PostgreSQL, Prisma, Redux Toolkit
-- **Testing & Tools**: Manual Testing, API Testing (Postman), Web Testing, Visual Studio Code, PyCharm
-- **Data & Collaboration**: MS Excel, Power BI, Git, GitHub
-- **Professional**: Communication, Teamwork, Analytical thinking, Attention to detail, Adaptability
+- **Testing & QA**: Manual Testing, API Testing (Postman), Web Testing, PyCharm
+- **Data & Reporting**: MS Excel, Power BI
 
 ## Certifications & education
 
@@ -230,12 +246,12 @@ Canonical: https://www.pradeepmaury.in/skills.html
 
 ## Technical skills
 
-- **Frontend**: HTML, CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS, Bootstrap
-- **Backend & APIs**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Frontend Development**: HTML5, CSS3, JavaScript, TypeScript, React.js, Next.js, Tailwind CSS, Bootstrap
+- **Backend Development**: Node.js, Express.js, Python, Django, REST APIs, AI API integration
+- **Tools & Development Workflow**: Git, GitHub, VS Code, API testing, Debugging, Deployment, npm
 - **Databases & State**: PostgreSQL, Prisma, Redux Toolkit
-- **Testing & Tools**: Manual Testing, API Testing (Postman), Web Testing, Visual Studio Code, PyCharm
-- **Data & Collaboration**: MS Excel, Power BI, Git, GitHub
-- **Professional**: Communication, Teamwork, Analytical thinking, Attention to detail, Adaptability
+- **Testing & QA**: Manual Testing, API Testing (Postman), Web Testing, PyCharm
+- **Data & Reporting**: MS Excel, Power BI
 
 ---
 
@@ -250,13 +266,13 @@ Canonical: https://www.pradeepmaury.in/work.html
 ## Selected work
 
 1. **ConsentX** — Full-Stack / UI Engineering (2026)
-   A consent management platform where privacy choices have to be captured, stored and proven.
+   A consent-focused digital solution designed to support consent management and privacy-related workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://consentx.io
    Detail: https://www.pradeepmaury.in/work/consentx.html
 
 2. **RegulatoryBridge** — Web Development / QA (2026)
-   A regulatory compliance platform — dense information that still has to be quick to read.
+   A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
    Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
    Live: https://regulatorybridge.com
    Detail: https://www.pradeepmaury.in/work/regulatorybridge.html
@@ -276,11 +292,17 @@ Canonical: https://www.pradeepmaury.in/work.html
    Stack: Python, Django, data validation
    Detail: https://www.pradeepmaury.in/work/movie-scraper.html
 
+6. **Portfolio** — Static Site / Serverless (2026)
+   A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+   Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+   Live: https://www.pradeepmaury.in
+   Detail: https://www.pradeepmaury.in/work/portfolio.html
+
 ---
 
 # ConsentX — Pradeep Maurya
 
-A consent management platform where privacy choices have to be captured, stored and proven.
+A consent-focused digital solution designed to support consent management and privacy-related workflows.
 
 Canonical: https://www.pradeepmaury.in/work/consentx.html
 
@@ -294,8 +316,8 @@ Beyond the frontend, I picked up backend tasks and application functionality, de
 
 ## Details
 
-- Role: Full Stack Developer
-- Context: iLeads Auxiliary Services (SS IntelligenceX)
+- Role: Web Developer
+- Context: SS IntelligenceX Private Limited
 - Year: 2026
 - Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
 - Scope: Website development, responsive UI, user-facing functionality, testing, usability
@@ -313,7 +335,7 @@ Each change went through manual web testing plus API checks in Postman, so regre
 
 # RegulatoryBridge — Pradeep Maurya
 
-A regulatory compliance platform — dense information that still has to be quick to read.
+A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.
 
 Canonical: https://www.pradeepmaury.in/work/regulatorybridge.html
 
@@ -327,8 +349,8 @@ Alongside that I handled debugging and testing passes, and performance-focused u
 
 ## Details
 
-- Role: Full Stack Developer
-- Context: iLeads Auxiliary Services (SS IntelligenceX)
+- Role: Web Developer
+- Context: SS IntelligenceX Private Limited
 - Year: 2026
 - Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
 - Scope: Website development, responsive design, feature refinement, debugging, testing, performance
@@ -437,6 +459,39 @@ Checks run before anything is stored, which keeps the database trustworthy inste
 ### Multiple sources, one shape
 
 Normalising differing source formats into a single schema is what makes the collected data actually usable.
+
+---
+
+# Portfolio — Pradeep Maurya
+
+A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+
+Canonical: https://www.pradeepmaury.in/work/portfolio.html
+
+---
+
+A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services.
+
+Every page is generated by a Python build script from a single data source, so the same facts drive the HTML, the sitemap, the structured data and the machine-readable versions of each page. Editing one entry updates the site everywhere it appears.
+
+The front end is vanilla JavaScript with GSAP and Lenis — no framework — and the contact form is backed by a serverless function on Vercel with validation, spam filtering and a graceful fallback when mail delivery is unavailable.
+
+## Details
+
+- Role: Designer and developer
+- Context: Self-directed
+- Year: 2026
+- Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions
+- Scope: Design, build, content pipeline, contact API and deployment
+- Live: https://www.pradeepmaury.in
+
+### One source of truth
+
+Content lives in structured data rather than in markup, so a change to a project or a job title propagates to every page, feed and metadata file in a single build.
+
+### Built to be read by machines too
+
+Alongside the HTML, each page is published as markdown, with an OpenAPI description for the contact API and discovery metadata for automated clients.
 
 ---
 

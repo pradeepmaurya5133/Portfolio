@@ -1,6 +1,6 @@
 # ConsentX — Pradeep Maurya
 
-A consent management platform where privacy choices have to be captured, stored and proven.
+A consent-focused digital solution designed to support consent management and privacy-related workflows.
 
 Canonical: https://www.pradeepmaury.in/work/consentx.html
 
@@ -14,8 +14,8 @@ Beyond the frontend, I picked up backend tasks and application functionality, de
 
 ## Details
 
-- Role: Full Stack Developer
-- Context: iLeads Auxiliary Services (SS IntelligenceX)
+- Role: Web Developer
+- Context: SS IntelligenceX Private Limited
 - Year: 2026
 - Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs
 - Scope: Website development, responsive UI, user-facing functionality, testing, usability

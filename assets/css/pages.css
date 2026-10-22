@@ -489,6 +489,10 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 .wh__kicker { align-items: center; gap: 12px; margin-bottom: 28px; display: flex }
 .nowrap { white-space: nowrap }
 .wh__title { font-size: var(--fs-display) }
+/* --fs-display is sized for one-word page titles (WORK. SKILLS.). A full
+   sentence at that size wraps every masked line in two, which breaks the
+   reveal. Step down so each line holds. */
+.wh__title--long { font-size: clamp(1.9rem, 5.4vw, 5.4rem); line-height: 1 }
 .filters { flex-wrap: wrap; gap: 8px; margin-top: clamp(40px, 5vw, 72px); display: flex }
 .chip {
   border: 1px solid var(--line);
@@ -927,6 +931,60 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
   transition: background-color .4s, border-color .4s, color .4s;
 }
 .sk__items li:hover { background: var(--accent); border-color: var(--accent); color: #fff }
+/* Learning interest, not experience. Outlined and dimmed so it reads as a
+   different claim at a glance; the markup also carries a screen-reader
+   "Learning:" prefix so the distinction isn't purely visual. */
+.sk__items li.is-learning {
+  border-style: dashed;
+  border-color: var(--line);
+  color: var(--muted);
+}
+.sk__items li.is-learning:hover {
+  background: 0 0;
+  border-color: var(--muted);
+  color: var(--paper);
+}
+/* "Live" marker on project cards that have a real URL */
+.card__live { margin-left: 10px; white-space: nowrap }
+
+/* Core stack — the one place technologies get extra visual weight */
+.sk__items--core li {
+  font-size: .78rem;
+  padding: 14px 22px;
+  letter-spacing: .1em;
+  border-color: #ffffff33;
+}
+
+/* Short description under a skill category heading */
+.sk__blurb { margin-top: 14px; max-width: 320px; font-size: .95rem; line-height: 1.5 }
+
+/* Secondary skills, collapsed. Native <details> — keyboard accessible with
+   no JavaScript, and the summary states the count so the group stays honest
+   while closed. */
+.sk__more { margin-top: 14px }
+.sk__more > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  transition: color .3s var(--ease-out);
+}
+.sk__more > summary::-webkit-details-marker { display: none }
+.sk__more > summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .4s var(--ease-out);
+}
+.sk__more[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px) }
+.sk__more > summary:hover { color: var(--paper) }
+.sk__more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px }
+.sk__more .sk__items { margin-top: 12px }
 @media (width <= 900px) { .sk__group { grid-template-columns: 1fr } }
 
 /* ============================================================

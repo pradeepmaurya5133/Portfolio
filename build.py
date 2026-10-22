@@ -12,6 +12,7 @@ import json
 import os
 import pathlib
 import re
+import urllib.parse
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -32,7 +33,7 @@ ME = {
     "name": "Pradeep Maurya",
     "first": "Pradeep",
     "role": "Full Stack Developer",
-    "role_long": "Full Stack Developer | Software Engineer",
+    "role_long": "Full Stack Developer & Software Engineer",
     "email": "pradeepmaurya2002@gmail.com",
     "phone": "+91 95199 65133",
     "phone_href": "+919519965133",
@@ -41,11 +42,17 @@ ME = {
     "linkedin": "https://linkedin.com/in/pradeep-maurya-b82b5820b/",
     "github": "https://github.com/pradeepmaurya5133/",
     "year": "2026",
-    "tagline": "Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.",
-    "summary": ("Computer Science graduate with hands-on experience in web development, software testing and "
-                "data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, "
-                "TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building "
-                "responsive interfaces, improving application usability and debugging web applications."),
+    "tagline": ("I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions."),
+    "headline": "Building Modern Web Experiences & Scalable Software Solutions",
+    "tech_line": "React.js · Next.js · Node.js · TypeScript · Python",
+    "meta_description": ("Pradeep Maurya is a Full Stack Developer and Software Engineer specializing in modern web applications, frontend development, backend APIs, and custom software solutions."),
+    "summary": ("I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions."),
+    "about": [
+        "I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications.",
+        "I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.",
+        "My technical toolkit includes HTML, CSS, JavaScript, TypeScript, React.js, Next.js, Node.js, and Python. I enjoy solving real-world problems, learning modern technologies, and turning complex requirements into reliable digital products.",
+        "I am open to freelance projects, professional collaborations, and opportunities to contribute to impactful software products.",
+    ],
 }
 
 def article(word):
@@ -84,12 +91,12 @@ PROJECTS = [
         "tags": ["fullstack", "frontend", "testing"],
         "tag_labels": "Full-Stack · Responsive UI · Testing",
         "year": "2026",
-        "role": "Full Stack Developer",
-        "org": "iLeads Auxiliary Services (SS IntelligenceX)",
+        "role": "Web Developer",
+        "org": "SS IntelligenceX Private Limited",
         "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
         "scope": "Website development, responsive UI, user-facing functionality, testing, usability",
         "link": "https://consentx.io",
-        "summary": "A consent management platform where privacy choices have to be captured, stored and proven.",
+        "summary": "A consent-focused digital solution designed to support consent management and privacy-related workflows.",
         "lead": ("Contributed to full-stack development and ongoing enhancement of ConsentX.io — a consent "
                  "management platform — covering responsive UI, user-facing functionality, testing and "
                  "usability improvements."),
@@ -117,12 +124,12 @@ PROJECTS = [
         "tags": ["fullstack", "frontend", "testing"],
         "tag_labels": "Web Development · Responsive Design · Performance",
         "year": "2026",
-        "role": "Full Stack Developer",
-        "org": "iLeads Auxiliary Services (SS IntelligenceX)",
+        "role": "Web Developer",
+        "org": "SS IntelligenceX Private Limited",
         "stack": "React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs",
         "scope": "Website development, responsive design, feature refinement, debugging, testing, performance",
         "link": "https://regulatorybridge.com",
-        "summary": "A regulatory compliance platform — dense information that still has to be quick to read.",
+        "summary": "A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows.",
         "lead": ("Contributed to website development and improvements for RegulatoryBridge.com, covering "
                  "responsive design, feature refinement, debugging, testing and performance-focused updates."),
         "body": [
@@ -234,24 +241,59 @@ PROJECTS = [
                                             "makes the collected data actually usable."),
         ],
     },
+    {
+        "slug": "portfolio",
+        "name": "Portfolio",
+        "full": "Personal Portfolio Website",
+        "meta": "Static Site / Serverless",
+        "tags": ["fullstack", "frontend", "backend"],
+        "tag_labels": "Python Generator · Vanilla JS · GSAP · Vercel",
+        "year": "2026",
+        "role": "Designer and developer",
+        "org": "Self-directed",
+        "stack": ("Python (static site generator), HTML, CSS, vanilla JavaScript, "
+                  "GSAP, Lenis, Vercel serverless functions"),
+        "scope": "Design, build, content pipeline, contact API and deployment",
+        "link": SITE_URL,
+        "summary": ("A personal portfolio showcasing my technical expertise, selected projects, "
+                    "professional experience, and freelance development services."),
+        "lead": ("A personal portfolio showcasing my technical expertise, selected projects, "
+                 "professional experience, and freelance development services."),
+        "body": [
+            ("Every page is generated by a Python build script from a single data source, so the "
+             "same facts drive the HTML, the sitemap, the structured data and the machine-readable "
+             "versions of each page. Editing one entry updates the site everywhere it appears."),
+            ("The front end is vanilla JavaScript with GSAP and Lenis — no framework — and the "
+             "contact form is backed by a serverless function on Vercel with validation, spam "
+             "filtering and a graceful fallback when mail delivery is unavailable."),
+        ],
+        "notes": [
+            ("One source of truth", "Content lives in structured data rather than in markup, so a "
+             "change to a project or a job title propagates to every page, feed and metadata file "
+             "in a single build."),
+            ("Built to be read by machines too", "Alongside the HTML, each page is published as "
+             "markdown, with an OpenAPI description for the contact API and discovery metadata "
+             "for automated clients."),
+        ],
+    },
 ]
 
 CAPABILITIES = [
-    ("01", "Frontend Development",
-     "Responsive interfaces in React, Next.js and TypeScript, styled with Tailwind CSS or Bootstrap. "
-     "Layouts that hold together from a narrow phone to a wide desktop, without a separate mobile codebase."),
-    ("02", "Backend &amp; APIs",
-     "Node.js and Express services, Python and Django applications, and REST APIs designed to be consumed — "
-     "including AI API integration where a product needs it."),
-    ("03", "Full-Stack Product Work",
-     "End-to-end features across the stack: PostgreSQL and Prisma for data, Redux Toolkit for client state, "
-     "JWT for secure user management — one coherent path from schema to screen."),
-    ("04", "Testing &amp; QA",
-     "Manual web testing, API testing in Postman and systematic debugging. Finding the defect before a user "
-     "does is cheaper than every alternative."),
-    ("05", "Data &amp; Reporting",
-     "Data management and analysis with MS Excel and Power BI, plus validation checks that keep a data flow "
-     "reliable across multiple sources."),
+    ("01", "Web Development",
+     "Responsive, accessible, and high-performance websites designed around business goals "
+     "and user needs."),
+    ("02", "Full Stack Development",
+     "End-to-end web applications featuring modern frontend interfaces, backend services, "
+     "API integration, and database connectivity."),
+    ("03", "Custom Software Development",
+     "Practical software solutions that help businesses simplify workflows, improve "
+     "productivity, and solve real-world challenges."),
+    ("04", "API Integration &amp; Backend Development",
+     "Reliable backend services, REST API integration, and maintainable application "
+     "architectures."),
+    ("05", "Website Maintenance &amp; Optimization",
+     "Website improvements, bug fixes, performance optimization, and ongoing technical "
+     "support."),
 ]
 
 TOOLS = ["Visual Studio Code", "PyCharm", "Git", "GitHub", "Postman", "npm",
@@ -259,29 +301,92 @@ TOOLS = ["Visual Studio Code", "PyCharm", "Git", "GitHub", "Postman", "npm",
 PLATFORMS = ["Web", "Responsive Mobile", "REST APIs", "Node.js", "Django", "PostgreSQL"]
 
 SKILL_GROUPS = [
-    ("01", "Frontend", ["HTML", "CSS", "JavaScript", "React", "Next.js", "TypeScript",
-                        "Tailwind CSS", "Bootstrap"]),
-    ("02", "Backend &amp; APIs", ["Node.js", "Express.js", "Python", "Django", "REST APIs",
-                                  "AI API integration"]),
-    ("03", "Databases &amp; State", ["PostgreSQL", "Prisma", "Redux Toolkit"]),
-    ("04", "Testing &amp; Tools", ["Manual Testing", "API Testing (Postman)", "Web Testing",
-                                   "Visual Studio Code", "PyCharm"]),
-    ("05", "Data &amp; Collaboration", ["MS Excel", "Power BI", "Git", "GitHub"]),
-    ("06", "Professional", ["Communication", "Teamwork", "Analytical thinking",
-                            "Attention to detail", "Adaptability"]),
+    ("01", "Frontend Development", ["HTML5", "CSS3", "JavaScript", "TypeScript",
+                                    "React.js", "Next.js", "Tailwind CSS", "Bootstrap"]),
+    ("02", "Backend Development", ["Node.js", "Express.js", "Python", "Django", "REST APIs",
+                                   "AI API integration"]),
+    ("03", "Tools &amp; Development Workflow", ["Git", "GitHub", "VS Code", "API testing",
+                                                "Debugging", "Deployment", "npm"]),
+    ("04", "Databases &amp; State", ["PostgreSQL", "Prisma", "Redux Toolkit"]),
+    ("05", "Testing &amp; QA", ["Manual Testing", "API Testing (Postman)", "Web Testing",
+                                "PyCharm"]),
+    ("06", "Data &amp; Reporting", ["MS Excel", "Power BI"]),
 ]
+
+# Development philosophy. Replaced the earlier "Why work with me" list, which
+# covered the same ground in weaker language.
+PHILOSOPHY = [
+    ("01", "Build With Purpose",
+     "Understand the problem before selecting a technical solution."),
+    ("02", "Keep Code Maintainable",
+     "Prefer readable, reusable, and well-structured implementations."),
+    ("03", "Focus on User Experience",
+     "Build interfaces that are intuitive, accessible, and responsive."),
+    ("04", "Learn Continuously",
+     "Explore modern development practices and improve through practical "
+     "implementation."),
+    ("05", "Collaborate Effectively",
+     "Value clear communication, constructive feedback, and shared goals."),
+]
+
+# Framed for prospective freelance clients — a short list, deliberately not a
+# second copy of the homepage Services cards.
+HELP_WITH = [
+    "Responsive website development",
+    "Full-stack web applications",
+    "Backend services and API integration",
+    "Custom software solutions",
+    "Website maintenance and improvements",
+]
+
+ABOUT_STORY = [
+    ("My interest in software development comes from the ability to turn ideas into working "
+     "digital products. I enjoy understanding how applications work, exploring new technologies, "
+     "and building solutions that are both useful and maintainable."),
+    ("My development work spans frontend interfaces, backend functionality, API integration, and "
+     "web application development. I focus on writing clean code, creating responsive user "
+     "experiences, and continuously improving my technical knowledge."),
+    ("I believe that good software is more than code. It requires thoughtful problem-solving, "
+     "clear communication, attention to detail, and an understanding of the people who use it."),
+]
+
+ABOUT_PERSONAL = ("I enjoy exploring new development approaches, solving technical challenges, "
+                  "and improving the way software is built. I value consistency, curiosity, and "
+                  "a willingness to learn from every project.")
+
+# Condensed for About — the full breakdown lives on the Work page.
+ABOUT_EXPERTISE = [
+    ("01", "Frontend", ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js"]),
+    ("02", "Backend", ["Node.js", "Python", "REST API development", "API integration"]),
+    ("03", "Software Development", ["Responsive interfaces", "Reusable components", "Debugging",
+                                    "Application architecture", "Maintainable code"]),
+    ("04", "Tools", ["Git", "GitHub", "VS Code", "Postman", "npm", "Vercel"]),
+]
+
+ABOUT_EXPERIENCE_BLURB = (
+    "I contribute to web development initiatives involving modern frontend technologies, "
+    "application functionality, and digital product development. My work includes developing "
+    "user interfaces, implementing features, integrating APIs, and improving application "
+    "usability and maintainability.")
+
+# Three shown on About; the rest live on the Work page.
+ABOUT_PROJECT_SLUGS = ["consentx", "regulatorybridge", "portfolio"]
 
 EXPERIENCE = [
     {
         "num": "01",
-        "role": "Full Stack Developer",
-        "org": "iLeads Auxiliary Services Private Limited",
+        "role": "Web Developer",
+        "org": "SS IntelligenceX Private Limited",
+        "managed_by": "iLeads Auxiliary Services Pvt. Ltd.",
+        "product": "IntelligenceX.org",
         "when": "Aug 2026 — Present",
         "points": [
-            "Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.",
-            "Support development, debugging, testing and refinement of web experiences using modern web technologies.",
-            "Work on product and project deliverables associated with SS IntelligenceX Private Limited.",
-            "Project work: ConsentX.io and RegulatoryBridge.com.",
+            "Develop and maintain responsive web interfaces.",
+            "Build reusable UI components and implement frontend functionality.",
+            "Integrate APIs and contribute to full stack application development.",
+            "Troubleshoot technical issues and improve maintainability.",
+            "Collaborate on product features using appropriate modern web technologies.",
+            "Project work: ConsentX and RegulatoryBridge.",
         ],
     },
     {
@@ -306,6 +411,220 @@ EXPERIENCE = [
     },
 ]
 
+# ============================================================
+#  WORK PAGE — technical expertise
+# ============================================================
+# Two tiers, kept separate on purpose. The brief for this page was explicit
+# that unverified technologies must not read as experience.
+#
+#   "using"    — evidenced by the résumé or by code in this repository.
+#   "learning" — shown as a learning interest only, and rendered in a visibly
+#                different style with a screen-reader label. EDIT THIS LIST:
+#                it is the one place on the site not derived from evidence.
+#
+# Deliberately omitted entirely: Java, PHP, C, C++, C#, Go, Rust, Ruby, Swift,
+# Kotlin, Dart, Vue, Angular, Svelte, Laravel, Spring Boot, .NET, AWS, Azure,
+# GCP, Nginx, Apache. Listing ~20 untouched technologies would pad the page
+# without telling a recruiter anything true.
+TECH_STACK = [
+    ("01", "Languages &amp; Web Technologies",
+     ["JavaScript", "TypeScript", "Python", "SQL", "HTML5", "CSS3"],
+     ["Bash / Shell"]),
+    ("02", "Frontend Development",
+     ["React.js", "Next.js", "Tailwind CSS", "Bootstrap", "Redux Toolkit",
+      "Responsive Web Design", "UI Component Development"],
+     ["Sass / SCSS", "Accessibility (WCAG)", "Frontend Performance"]),
+    ("03", "Backend Development",
+     ["Node.js", "Express.js", "Python", "Django", "REST API Development",
+      "Authentication &amp; Authorization (JWT)", "Serverless Functions"],
+     ["FastAPI", "GraphQL"]),
+    ("04", "Databases &amp; Data Management",
+     ["PostgreSQL", "Prisma (ORM)", "SQL", "Data Modeling", "Data Validation"],
+     ["MongoDB", "SQLite", "Redis"]),
+    ("05", "Software Engineering",
+     ["Object-Oriented Programming", "Clean Code Principles", "Version Control",
+      "API Design", "Debugging", "Code Review", "Documentation"],
+     ["Data Structures &amp; Algorithms", "Design Patterns", "SOLID Principles",
+      "System Design Fundamentals"]),
+    ("06", "Tools, DevOps &amp; Deployment",
+     ["Git", "GitHub", "VS Code", "PyCharm", "Postman", "npm", "Vercel",
+      "Command Line"],
+     ["Docker", "CI/CD (GitHub Actions)", "Linux"]),
+    ("07", "AI-Powered Development &amp; Integrations",
+     ["AI / LLM API Integration", "AI-Assisted Development"],
+     ["Chatbot Integration", "Workflow Automation"]),
+]
+
+# Step 7 of the brief — capabilities, not technologies.
+FULLSTACK_HIGHLIGHTS = [
+    "End-to-End Web Application Development", "Frontend and Backend Integration",
+    "REST API Development and Consumption", "Authentication and Authorization",
+    "Database Integration", "Form Validation and Error Handling",
+    "Application State Management", "Responsive Design",
+    "Debugging and Testing", "Performance Optimization",
+    "Secure Development Practices", "Maintainable Code and Reusable Components",
+]
+
+APPROACH = [
+    ("01", "Understand", "Understand requirements and define scope."),
+    ("02", "Plan", "Plan the application structure and technical approach."),
+    ("03", "Build", "Build the user interface and backend functionality."),
+    ("04", "Integrate", "Integrate APIs and databases where needed."),
+    ("05", "Test", "Test, debug, and improve performance."),
+    ("06", "Deploy", "Prepare the application for deployment and maintenance."),
+]
+
+# ============================================================
+#  SKILLS PAGE
+# ============================================================
+# Twelve technologies given visual priority — the ones evidenced across the
+# résumé and this repository.
+CORE_STACK = [
+    "HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js",
+    "Node.js", "Python", "REST APIs", "Git", "GitHub", "VS Code",
+]
+
+# (num, category, blurb, verified[], secondary[])
+#
+#   verified  — evidenced by the résumé or by code in this repository.
+#   secondary — collapsed behind a <details>, labelled "familiar / exploring",
+#               and styled differently. NOT claimed as experience.
+#
+# ⚠ The `secondary` lists are the only content on this site not derived from
+# evidence. Prune them to what is actually true before publishing.
+SKILLS_MATRIX = [
+    ("A", "Programming Languages &amp; Web Technologies",
+     "The languages I write day to day, and the wider set I have had some exposure to.",
+     ["JavaScript (ES6+)", "TypeScript", "Python", "SQL", "HTML5", "CSS3"],
+     ["Bash / Shell", "Java", "PHP", "C", "C++", "C#", "Go", "Rust", "Ruby",
+      "Swift", "Kotlin", "Dart"]),
+
+    ("B", "Frontend Development",
+     "Building responsive, component-driven interfaces that hold up on real devices.",
+     ["Semantic HTML5", "CSS3", "Responsive Web Design", "Flexbox &amp; CSS Grid",
+      "DOM Manipulation", "React.js", "Next.js", "Component Architecture",
+      "Reusable UI Components", "State Management (Redux Toolkit)",
+      "Form Handling &amp; Validation", "API Integration", "Tailwind CSS", "Bootstrap",
+      "SEO-Friendly Markup"],
+     ["Sass / SCSS", "Material UI", "Accessibility (WCAG)", "Web Performance Optimization",
+      "Vue.js", "Angular", "Svelte"]),
+
+    ("C", "Backend Development",
+     "Server-side logic, application structure and the plumbing behind the interface.",
+     ["Node.js", "Express.js", "Python", "Django", "Server-Side Development",
+      "Business Logic", "Error Handling", "Request Validation",
+      "Authentication &amp; Authorization", "Serverless Functions"],
+     ["Middleware Design", "File Upload Handling", "Background Jobs",
+      "Backend Performance Optimization", "Flask", "FastAPI"]),
+
+    ("D", "API Development &amp; Integration",
+     "Designing endpoints that are pleasant to consume, and consuming other people's well.",
+     ["REST API Development", "REST API Consumption", "HTTP Methods &amp; Status Codes",
+      "JSON Data Exchange", "Request Validation", "Authentication &amp; Authorization",
+      "Error Handling", "API Documentation (OpenAPI)", "Third-Party API Integration",
+      "API Testing (Postman)"],
+     ["Pagination &amp; Filtering", "Webhooks", "GraphQL Fundamentals"]),
+
+    ("E", "Databases &amp; Data Management",
+     "Relational data modelling, migrations and keeping stored data trustworthy.",
+     ["PostgreSQL", "SQL", "Prisma (ORM)", "Schema Design", "CRUD Operations",
+      "Relationships &amp; Indexing", "Data Validation", "Database Migrations"],
+     ["Query Optimization", "MySQL", "SQLite", "MongoDB", "Redis", "Firebase",
+      "Supabase", "Microsoft SQL Server"]),
+
+    ("F", "Full Stack Engineering",
+     "I approach full-stack development as an integrated process, connecting user "
+     "interfaces, server-side logic, APIs, and data storage to deliver cohesive "
+     "digital products.",
+     ["End-to-End Application Development", "Frontend &amp; Backend Integration",
+      "Client-Server Architecture", "Authentication Workflows", "Database Connectivity",
+      "Application State Management", "Form Validation", "Error &amp; Loading States",
+      "Reusable Modules", "Environment Configuration", "Debugging",
+      "Maintainable Architecture"],
+     ["File &amp; Media Handling", "Performance Optimization"]),
+
+    ("G", "Software Engineering Fundamentals",
+     "The principles underneath the frameworks — some practised daily, some studied.",
+     ["Object-Oriented Programming", "Clean Code", "Modular Architecture",
+      "Separation of Concerns", "Code Reuse", "Error Handling", "Debugging",
+      "Technical Documentation", "Code Review", "Problem-Solving"],
+     ["Data Structures &amp; Algorithms", "SOLID Principles", "Design Patterns",
+      "System Design Fundamentals", "Agile Development"]),
+
+    ("H", "Testing &amp; Quality Assurance",
+     "A year in QA before development — testing is a habit here, not an afterthought.",
+     ["Manual Testing", "API Testing", "Regression Testing",
+      "Form &amp; Input Validation", "Browser Compatibility Testing",
+      "Responsive Testing", "Debugging &amp; Error Diagnosis"],
+     ["Unit Testing", "Integration Testing", "End-to-End Testing", "Jest", "Vitest",
+      "React Testing Library", "Playwright", "Cypress", "Pytest"]),
+
+    ("I", "Git &amp; Development Workflow",
+     "Version control and the day-to-day mechanics of working on a codebase.",
+     ["Git", "GitHub", "Version Control", "Branching &amp; Merging", "Pull Requests",
+      "Conflict Resolution", "Code Reviews", "README Documentation",
+      "Package Management (npm)"],
+     ["Issue Tracking", "pnpm", "Collaborative Workflows"]),
+
+    ("J", "DevOps, Deployment &amp; Cloud",
+     "Getting an application out of localhost and keeping it running.",
+     ["Local Development Environments", "Environment Variables",
+      "Build &amp; Deployment Workflows", "Vercel", "Command-Line Tools",
+      "Serverless Deployment"],
+     ["Docker", "GitHub Actions", "CI/CD Fundamentals", "Linux Fundamentals",
+      "Netlify", "Application Logging", "Basic Monitoring", "Nginx", "Apache",
+      "AWS", "Microsoft Azure", "Google Cloud Platform"]),
+
+    ("K", "Web Security",
+     "Development-level security practice — not a security certification or "
+     "penetration-testing background.",
+     ["Input Validation", "Secure Authentication Practices",
+      "Authorization &amp; Access Control", "Environment Secret Management", "HTTPS",
+      "CORS", "SQL Injection Prevention (parameterised queries / ORM)"],
+     ["Password Handling Fundamentals", "XSS Awareness", "CSRF Awareness",
+      "Dependency Updates", "OWASP Fundamentals"]),
+
+    ("L", "Performance &amp; Accessibility",
+     "Making pages fast to read and usable by everyone who lands on them.",
+     ["Responsive Layouts", "Semantic HTML", "Keyboard Accessibility",
+      "Image Optimization", "Lazy Loading", "Efficient API Requests",
+      "Mobile-First Design", "Readable Typography"],
+     ["Accessible Navigation", "Code Splitting", "Rendering Optimization",
+      "Browser Performance Tools", "Core Web Vitals"]),
+
+    ("M", "AI &amp; Automation",
+     "Two different things, kept separate: integrating AI into applications, and "
+     "using AI tooling while building them.",
+     ["AI / LLM API Integration", "AI-Assisted Development", "AI-Assisted Debugging"],
+     ["Prompt Engineering", "Chatbot Development", "Workflow Automation",
+      "OpenAI API", "Anthropic API"]),
+
+    ("N", "Freelance Development &amp; Client Collaboration",
+     "As a freelance developer, I aim to understand each client's goals, recommend "
+     "practical technical solutions, communicate clearly throughout development, and "
+     "deliver maintainable websites and applications aligned with the agreed scope.",
+     ["Requirement Gathering", "Client Communication", "Project Scoping",
+      "Technical Recommendations", "Project Planning", "Progress Updates",
+      "Feedback Implementation", "Testing &amp; Bug Fixing", "Documentation",
+      "Website Maintenance"],
+     ["Task Estimation", "Milestone Planning", "Deployment Coordination",
+      "Technical Handover", "Post-Launch Improvements"]),
+]
+
+DEV_APPROACH = [
+    ("01", "Understand the Problem",
+     "Clarify requirements, users, constraints, and desired outcomes."),
+    ("02", "Choose the Right Technology",
+     "Select tools and frameworks according to project requirements rather than "
+     "trends alone."),
+    ("03", "Build With Quality",
+     "Write maintainable code and develop responsive, accessible interfaces."),
+    ("04", "Test and Improve",
+     "Validate key workflows, fix issues, and refine application performance."),
+    ("05", "Deliver and Maintain",
+     "Support deployment, documentation, and agreed post-launch improvements."),
+]
+
 CREDENTIALS = [
     ("Front-End Development", "HTML, CSS, Bootstrap, JavaScript, React", "Certification", ""),
     ("Python Full-Stack Development", "Python, Django, full-stack web", "DUCAT IT Training Institute, Noida", ""),
@@ -322,7 +641,7 @@ STATS = [
 
 # Real screenshots live as .jpg (see assets/img/_frame_screenshot.py); the rest
 # fall back to the generated .svg placeholder of the same name.
-SCREENSHOTS = {"consentx", "regulatorybridge", "xamlysis"}
+SCREENSHOTS = {"consentx", "regulatorybridge", "xamlysis", "portfolio"}
 
 
 def cover(slug):
@@ -431,14 +750,14 @@ def footer(root):
 <section class="cta wrap" aria-labelledby="cta-title">
 <p class="label muted cta__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h2 id="cta-title" class="cta__title display" data-split>
-<span class="line-mask"><span>Let's build</span></span>
-<span class="line-mask"><span>something <span class="accent">great</span></span></span>
+<span class="line-mask"><span>Ready to Build</span></span>
+<span class="line-mask"><span>Something <span class="accent">Great</span>?</span></span>
 </h2>
 <div class="cta__row">
-<p class="cta__copy muted">A frontend that needs rebuilding, an API that needs writing, or a product that needs someone to test it properly. If you think I can help, let's talk.</p>
+<p class="cta__copy muted">Let's discuss your project and make it happen.</p>
 <div class="cta__actions">
 <a href="mailto:{ME['email']}" class="cta__email u-link">{ME['email']}</a>
-<a href="{root}contact.html" class="btn" data-cursor="hover">Start a conversation <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="{root}contact.html#f-name" class="btn" data-cursor="hover">Hire Me Now <span class="arrow" aria-hidden="true">{ARROW}</span></a>
 </div>
 </div>
 </section>
@@ -526,8 +845,7 @@ def capabilities_block():
     return f'''<section class="caps section wrap" aria-labelledby="caps-title">
 <div class="caps__aside"><div class="caps__sticky">
 <h2 id="caps-title" class="section-title" data-split>
-<span class="line-mask"><span>How can</span></span>
-<span class="line-mask"><span class="accent">I help?</span></span>
+<span class="line-mask"><span>Services<span class="accent">.</span></span></span>
 </h2>
 <div class="tagsets">
 <div class="tagset"><p class="label muted tagset__label">Tools</p>
@@ -573,11 +891,12 @@ def page_index():
                      f'<img src="assets/img/{cover(p["slug"])}" alt="" loading="lazy" decoding="async" '
                      f'width="2560" height="1600"></div>')
 
-    rotate = '["web apps","interfaces","REST APIs","dashboards","platforms","e-commerce","exam portals"]'
+    rotate = ('["web experiences","software solutions","digital products",'
+              '"web applications","user interfaces"]')
 
     return head(
-        f"{ME['name']} — {ME['role']}",
-        ME["tagline"], root, "index.html"
+        f"{ME['name']} | {ME['role_long']}",
+        ME["meta_description"], root, "index.html"
     ) + f'''
 <body data-preloader>
 {preloader()}
@@ -592,26 +911,28 @@ def page_index():
 </div>
 <div class="hero__content wrap">
 <h1 class="hero__title display" data-hero-title>
-<span class="sr-only">I build web apps, interfaces, REST APIs, dashboards, platforms that perform.</span>
+<span class="sr-only">{ME['headline']}</span>
 <span class="hero__line" aria-hidden="true">
-<span data-hero-line>I build</span>
-<span class="accent hero__rotate" data-rotate='{rotate}'>web apps</span>
+<span data-hero-line>Building modern</span>
+<span class="accent hero__rotate" data-rotate='{rotate}'>web experiences</span>
 </span>
 <span class="hero__line hero__line--pill" aria-hidden="true">
 <a href="about.html" class="pill" data-pill data-cursor="view" data-cursor-label="About me" tabindex="-1">
 <img src="assets/img/portrait-pill.jpg" alt="" loading="eager" fetchpriority="high" width="720" height="304">
 </a>
-<span data-hero-line>that perform<span class="accent">.</span></span>
+<span data-hero-line>&amp; scalable software<span class="accent">.</span></span>
 </span>
 </h1>
 <div class="hero__bottom">
-<p class="hero__intro" data-hero-fade>{ME['role']} in {ME['city']}, India — building responsive frontends in React and Next.js, Node and Django backends, and the tests that keep them honest.</p>
-<a href="resume.html" class="reel-btn label" data-hero-fade data-cursor="hover">
-<span class="reel-btn__text">View résumé</span>
-<span class="reel-btn__icon" aria-hidden="true">
-<svg viewBox="0 0 14 16" width="13" height="15"><path d="M1.5 1.6L12.5 8L1.5 14.4Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-</span>
-</a>
+<div>
+<p class="hero__intro" data-hero-fade>{ME['tagline']}</p>
+<p class="label muted" data-hero-fade style="margin-top:18px">{ME['tech_line']}</p>
+</div>
+<div class="bth__ctas" data-hero-fade style="margin-top:0">
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Hire Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="work.html" class="btn" data-cursor="hover">View My Projects <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="contact.html" class="label u-link" data-cursor="hover">Contact Me {ARROW}</a>
+</div>
 </div>
 </div>
 </section>
@@ -659,9 +980,9 @@ def page_index():
 <span class="line-mask"><span>Privacy</span></span>
 <span class="line-mask"><span>at <span class="accent">scale</span>.</span></span>
 </h2>
-<p class="bth__lead" data-reveal>Full-stack work on ConsentX.io and RegulatoryBridge.com.</p>
+<p class="bth__lead" data-reveal>Full stack development on ConsentX and RegulatoryBridge.</p>
 <p class="bth__text muted" data-reveal>
-At iLeads Auxiliary Services I contribute to frontend and backend development across two live platforms built with SS IntelligenceX — a consent management platform and a regulatory compliance platform. Responsive UI improvements, application functionality, debugging, testing and performance work on products people use in production.
+As a Web Developer at SS IntelligenceX Private Limited, managed by iLeads Auxiliary Services Pvt. Ltd., I work on two live platforms under the IntelligenceX.org product: a consent management solution and a regulatory compliance solution. My work covers responsive web interfaces, reusable UI components, API integration and full stack application development.
 </p>
 <div class="bth__ctas" data-reveal>
 <a href="work/consentx.html" class="btn" data-cursor="hover">See ConsentX <span class="arrow" aria-hidden="true">{ARROW}</span></a>
@@ -683,7 +1004,7 @@ At iLeads Auxiliary Services I contribute to frontend and backend development ac
 </dl>
 <blockquote class="bth__quote" data-reveal>
 <p>&ldquo;Ship it, then try to break it on purpose. The bug you find yourself is the one that never reaches a user.&rdquo;</p>
-<footer class="mono muted">{ME['name']} // {ME['role']} @ iLeads</footer>
+<footer class="mono muted">{ME['name']} // Web Developer @ SS IntelligenceX</footer>
 </blockquote>
 </div>
 </section>
@@ -707,41 +1028,133 @@ def page_work():
         f'<button class="chip label" data-filter="{key}" aria-pressed="{str(key == "all").lower()}" '
         f'data-cursor="hover">{label}</button>' for key, label in filters
     )
+
     cards = ""
     for i, p in enumerate(PROJECTS):
+        # Live link shown only where a real URL exists — no invented repos.
+        live = (f'<span class="label accent card__live">Live {ARROW}</span>'
+                if p["link"] else "")
         cards += (f'<a class="card" href="work/{p["slug"]}.html" data-tags="{"|".join(p["tags"])}" '
                   f'data-reveal style="--d:{i*0.06:.2f}s" data-cursor="view" data-cursor-label="Open" '
                   f'data-cursor-name="{p["name"]}">'
-                  f'<span class="card__media"><img src="assets/img/{cover(p["slug"])}" alt="{p["name"]} cover" '
+                  f'<span class="card__media"><img src="assets/img/{cover(p["slug"])}" '
+                  f'alt="{p["name"]} — {p["meta"]} project cover" '
                   f'loading="lazy" decoding="async" width="2560" height="1600"></span>'
                   f'<span class="card__meta"><span class="mono muted">{i+1:02d}</span>'
                   f'<span class="card__title">{p["name"]}</span>'
                   f'<span class="label muted">{p["year"]}</span></span>'
-                  f'<span class="label muted card__tags">{p["tag_labels"]}</span></a>')
+                  f'<span class="label muted card__tags">{p["tag_labels"]}{live}</span></a>')
 
-    return head(f"Work — {ME['name']}",
-                f"Selected web development projects by {ME['name']}: consent and compliance platforms, "
-                f"e-commerce, an exam portal and a Django data pipeline.", root, "work.html") + f'''
+    # Technical expertise — reuses .sk__group / .sk__items from the Skills page.
+    # Learning-interest items get .is-learning plus a screen-reader prefix, so
+    # the distinction survives for someone not seeing the styling.
+    stack = ""
+    for num, name, using, learning in TECH_STACK:
+        items = "".join(f'<li class="label">{t}</li>' for t in using)
+        items += "".join(
+            f'<li class="label is-learning">'
+            f'<span class="sr-only">Learning: </span>{t}</li>' for t in learning)
+        stack += (f'<div class="sk__group" data-reveal>'
+                  f'<div><span class="sk__num mono">{num}</span>'
+                  f'<h3 class="sk__name">{name}</h3></div>'
+                  f'<ul class="sk__items">{items}</ul></div>')
+
+    highlights = "".join(f'<li class="label">{h}</li>' for h in FULLSTACK_HIGHLIGHTS)
+
+    approach = "".join(
+        f'<li class="cap" data-reveal><span class="cap__num mono">{n}</span>'
+        f'<div class="cap__body"><h3 class="cap__title">{t}</h3>'
+        f'<p class="cap__desc muted">{d}</p></div></li>'
+        for n, t, d in APPROACH
+    )
+
+    return head(f"Work &amp; Technical Expertise — {ME['name']}",
+                "Full stack development capabilities, programming languages, frameworks, "
+                f"databases, tools and selected projects by {ME['name']}.",
+                root, "work.html") + f'''
 <body>
 {header("Work", root)}
 <main id="main">
+
 <section class="wh wrap">
 <div class="wh__bg" aria-hidden="true">
 <canvas data-plexus="1" data-plexus-ray="150"></canvas>
 <div class="wh__shade"></div>
 <div class="wh__scan"></div>
 </div>
-<p class="label muted wh__kicker"><span class="dot"></span> Selected projects</p>
-<h1 class="wh__title display" data-split>
-<span class="line-mask"><span>Work<span class="accent">.</span></span></span>
+<p class="label muted wh__kicker"><span class="dot"></span> My work &amp; technical expertise</p>
+<h1 class="wh__title wh__title--long display" data-split>
+<span class="line-mask"><span>Building Digital Products.</span></span>
+<span class="line-mask"><span>Engineering <span class="accent">Solutions</span>.</span></span>
 </h1>
-<p class="cb__lead" data-reveal style="margin-top:28px">Platforms in production, full-stack side projects and the testing work that sits underneath them. {len(PROJECTS)} projects.</p>
+<p class="cb__lead" data-reveal style="margin-top:28px">I'm {ME['name']}, a Full Stack Developer
+and Software Engineer passionate about building modern web applications, scalable backend systems,
+and practical software solutions. Explore my technical expertise, development capabilities, and
+selected projects across the software development lifecycle.</p>
+<div class="bth__ctas" data-reveal>
+<a href="#projects" class="btn" data-cursor="hover">Explore My Projects <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Let's Work Together <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
 <div class="filters" data-filters role="group" aria-label="Filter projects">{chips}</div>
 </section>
-<section class="grid wrap">{cards}</section>
+
+<section class="grid wrap" id="projects" aria-label="Selected projects">{cards}</section>
+
+<section class="sk wrap" id="expertise" aria-labelledby="expertise-title">
+<div class="section-head">
+<h2 id="expertise-title" class="section-title" data-split>
+<span class="line-mask"><span>Technical expertise<span class="accent">.</span></span></span>
+</h2>
+<p class="label muted">Solid = working with · Outlined = learning</p>
+</div>
+{stack}
+</section>
+
+<section class="section wrap" id="full-stack" aria-labelledby="fs-title">
+<div class="section-head">
+<h2 id="fs-title" class="section-title" data-split>
+<span class="line-mask"><span>Full stack engineering<span class="accent">.</span></span></span>
+</h2>
+</div>
+<p class="cb__lead" data-reveal style="margin-bottom:40px">I build web applications by connecting
+modern user interfaces with backend services, APIs, and data storage. My approach focuses on
+maintainable architecture, responsive experiences, reliable functionality, and practical solutions
+to real-world requirements.</p>
+<ul class="sk__items" data-reveal>{highlights}</ul>
+</section>
+
+<div class="theme-light">
+<section class="caps section wrap" id="approach" aria-labelledby="approach-title">
+<div class="caps__aside"><div class="caps__sticky">
+<h2 id="approach-title" class="section-title" data-split>
+<span class="line-mask"><span>How I</span></span>
+<span class="line-mask"><span class="accent">work.</span></span>
+</h2>
+<p class="muted" style="max-width:360px">A consistent path from requirement to deployment, whatever
+the size of the project.</p>
+</div></div>
+<ol class="caps__list">{approach}</ol>
+</section>
+</div>
+
+<section class="section wrap" id="hire" aria-labelledby="hire-title">
+<h2 id="hire-title" class="section-title" data-split>
+<span class="line-mask"><span>Have a Project</span></span>
+<span class="line-mask"><span>in <span class="accent">Mind</span>?</span></span>
+</h2>
+<p class="cb__lead" data-reveal style="margin-top:28px">Whether you need a responsive website, a
+full-stack web application, an API integration, or a custom software solution, let's discuss your
+requirements and find the right technical approach.</p>
+<div class="bth__ctas" data-reveal>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Contact Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="{ME['github']}" target="_blank" rel="noopener" class="btn" data-cursor="hover">View My GitHub <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
+</section>
+
 </main>
 {footer(root)}
 {chrome_end(root)}'''
+
 
 
 def page_about():
@@ -751,28 +1164,66 @@ def page_about():
         points = "".join(f'<li>{pt}</li>' for pt in e["points"])
         exp += (f'<li class="exp__item" data-reveal>'
                 f'<span class="exp__num mono">{e["num"]}</span>'
-                f'<div><h3 class="exp__role">{e["role"]}</h3>'
+                f'<div><h3 class="exp__role">{strip_tags(e["role"])}</h3>'
                 f'<p class="exp__org">{e["org"]}</p>'
-                f'<p class="exp__when mono">{e["when"]}</p></div>'
+                + (f'<p class="exp__when mono">Managed by {e["managed_by"]}</p>'
+                   if e.get("managed_by") else "")
+                + (f'<p class="exp__when mono">Product: {e["product"]}</p>'
+                   if e.get("product") else "")
+                + f'<p class="exp__when mono">{e["when"]}</p></div>'
                 f'<ul class="exp__points">{points}</ul></li>')
 
     tldr = [
-        ("Career", "2 years across web development, QA and data support"),
+        ("Role", "Web Developer at SS IntelligenceX Private Limited"),
         ("Based in", "Dehradun, Uttarakhand, India"),
         ("Education", "B.Tech — Computer Science"),
-        ("Skillset", "React, Next.js, TypeScript, Tailwind, Node.js, Express, Python, Django, PostgreSQL, Prisma, Redux Toolkit, REST APIs"),
-        ("Testing", "Manual testing, API testing with Postman, web testing, debugging"),
-        ("Data", "MS Excel, Power BI, data validation and reporting"),
-        ("Currently", "Full Stack Developer at iLeads Auxiliary Services"),
+        ("Focus", "Full stack web development, APIs and practical software solutions"),
+        ("Open to", "Freelance projects, collaborations and full-time opportunities"),
     ]
     tldr_rows = "".join(
         f'<div class="tldr__row" data-reveal><dt class="label muted">{k}</dt><dd>{v}</dd></div>'
         for k, v in tldr
     )
 
-    return head(f"About — {ME['name']}",
-                f"{ME['name']} is {article(ME['role'])} {ME['role']} based in {ME['city']}, India, working across "
-                f"frontend, backend, testing and data.", root, "about.html") + f'''
+    story = "".join(f'<p data-reveal>{para}</p>' for para in ABOUT_STORY[1:])
+
+    expertise = ""
+    for num, name, items in ABOUT_EXPERTISE:
+        lis = "".join(f'<li class="label">{i}</li>' for i in items)
+        expertise += (f'<div class="sk__group" data-reveal>'
+                      f'<div><span class="sk__num mono">{num}</span>'
+                      f'<h3 class="sk__name">{name}</h3></div>'
+                      f'<ul class="sk__items">{lis}</ul></div>')
+
+    picks = [x for x in PROJECTS if x["slug"] in ABOUT_PROJECT_SLUGS]
+    cards = ""
+    for i, pr in enumerate(picks):
+        live = (f'<span class="label accent card__live">Live {ARROW}</span>'
+                if pr["link"] else "")
+        cards += (f'<a class="card" href="work/{pr["slug"]}.html" data-reveal '
+                  f'style="--d:{i*0.06:.2f}s" data-cursor="view" data-cursor-label="Open" '
+                  f'data-cursor-name="{pr["name"]}">'
+                  f'<span class="card__media"><img src="assets/img/{cover(pr["slug"])}" '
+                  f'alt="{pr["name"]} — {pr["meta"]} project cover" loading="lazy" '
+                  f'decoding="async" width="2560" height="1600"></span>'
+                  f'<span class="card__meta"><span class="mono muted">{i+1:02d}</span>'
+                  f'<span class="card__title">{pr["name"]}</span>'
+                  f'<span class="label muted">{pr["year"]}</span></span>'
+                  f'<span class="label muted card__tags">{pr["summary"]}{live}</span></a>')
+
+    philosophy = "".join(
+        f'<li class="cap" data-reveal><span class="cap__num mono">{n}</span>'
+        f'<div class="cap__body"><h3 class="cap__title">{t}</h3>'
+        f'<p class="cap__desc muted">{d}</p></div></li>'
+        for n, t, d in PHILOSOPHY
+    )
+
+    help_items = "".join(f'<li class="label">{h}</li>' for h in HELP_WITH)
+
+    return head(f"About {ME['name']} | {ME['role_long']}",
+                f"Learn about {ME['name']}, a Full Stack Developer and Software Engineer focused "
+                "on modern web applications, frontend development, backend services, and practical "
+                "software solutions.", root, "about.html") + f'''
 <body>
 {header("About", root)}
 <main id="main">
@@ -780,10 +1231,10 @@ def page_about():
 <section class="ph" data-project-hero aria-labelledby="ph-title">
 <div class="ph__top wrap label" data-ph-fade>
 <a href="index.html" class="u-link" data-cursor="hover">{ARROW_BACK} Home</a>
-<span class="muted">About</span>
+<span class="muted">A little about me</span>
 </div>
 <h1 id="ph-title" class="ph__title display">
-<span class="sr-only">About {ME['name']}</span>
+<span class="sr-only">Turning Ideas Into Digital Experiences</span>
 <span aria-hidden="true" class="ph__word" data-fit>
 <span data-ph-left>PRAD</span><span data-ph-right>EEP</span>
 </span>
@@ -793,11 +1244,15 @@ def page_about():
 <span>Dehradun // Uttarakhand // India</span>
 </p>
 <div class="ph__media" data-ph-media>
-<img src="assets/img/portrait.jpg" alt="Portrait of {ME['name']}" loading="eager" fetchpriority="high" width="900" height="900">
+<img src="assets/img/portrait.jpg" alt="Portrait of {ME['name']}, Full Stack Developer" loading="eager" fetchpriority="high" width="900" height="900">
 </div>
 <div class="ph__bottom wrap">
-<p class="ph__summary" data-ph-fade>{ME['tagline']}</p>
-<p class="ph__tag label" data-ph-fade>{ME['role_long']} — {ME['city']}, India</p>
+<p class="ph__summary" data-ph-fade>Turning Ideas Into Digital Experiences</p>
+<p class="ph__tag label" data-ph-fade>Full Stack Developer | Software Engineer | Freelance Developer</p>
+<div class="bth__ctas" data-ph-fade style="margin-top:4px;justify-content:center">
+<a href="work.html" class="btn" data-cursor="hover">Explore My Work <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Contact Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
 </div>
 <div class="ph__foot wrap" data-ph-fade>
 <span class="mono muted">© {ME['name']}</span>
@@ -805,16 +1260,15 @@ def page_about():
 </div>
 </section>
 
-<section class="bio wrap">
-<p class="label muted bio__kicker"><span class="dot"></span> Profile</p>
+<section class="bio wrap" id="story" aria-labelledby="story-title">
+<p class="label muted bio__kicker"><span class="dot"></span> <span id="story-title">My journey in software development</span></p>
 <div class="bio__text">
-<p class="lead" data-reveal>I'm a Computer Science graduate based in Dehradun, working as {article(ME['role'])} {ME['role']} at iLeads Auxiliary Services on two live platforms — ConsentX.io and RegulatoryBridge.com.</p>
-<p class="lead" data-reveal>My work spans the full stack: responsive interfaces in React and Next.js, backends in Node.js and Django, and the manual and API testing that keeps both honest. Before this I spent a year in QA and data support, which is where the testing habit came from.</p>
-<p data-reveal>{ME['summary']}</p>
+<p class="lead" data-reveal>{ABOUT_STORY[0]}</p>
+{story}
 <blockquote class="mission" data-reveal>
-<span class="accent">&ldquo;</span>I'd rather ship a smaller feature that holds up than a bigger one that needs a hotfix on Monday. Build it, test it properly, then put it in front of people.<span class="accent">&rdquo;</span>
+<span class="accent">&ldquo;</span>{ABOUT_PERSONAL}<span class="accent">&rdquo;</span>
 </blockquote>
-<p class="currently" data-reveal><span class="dot dot--round pulse" aria-hidden="true"></span> Open to new opportunities — <a class="u-link" href="contact.html">get in touch</a></p>
+<p class="currently" data-reveal><span class="dot dot--round pulse" aria-hidden="true"></span> Open to freelance projects and new opportunities — <a class="u-link" href="contact.html">get in touch</a></p>
 </div>
 </section>
 
@@ -832,65 +1286,205 @@ def page_about():
 <section class="exp section wrap" id="experience" aria-labelledby="exp-title">
 <div class="exp__head">
 <div>
-<p class="label muted exp__kicker"><span class="dot"></span> Work experience</p>
+<p class="label muted exp__kicker"><span class="dot"></span> Professional experience</p>
 <h2 id="exp-title" class="exp__title display" data-split>
 <span class="line-mask"><span>Where I've</span></span>
 <span class="line-mask"><span><span class="accent">worked</span>.</span></span>
 </h2>
 </div>
 <div class="exp__copy">
-<p class="exp__text" data-reveal>Three roles in two years, moving from data verification through QA into full-stack web development. Each one left something behind: accuracy, a testing instinct, and now the code itself.</p>
+<p class="exp__text" data-reveal>{ABOUT_EXPERIENCE_BLURB}</p>
 <a href="resume.html" class="label u-link" data-cursor="hover" data-reveal>Full résumé {ARROW}</a>
 </div>
 </div>
 <ol class="exp__list">{exp}</ol>
 </section>
 
-<div class="theme-light">
-{credentials_table(root)}
+<section class="sk wrap" id="expertise" aria-labelledby="skills-title">
+<div class="section-head">
+<h2 id="skills-title" class="section-title" data-split>
+<span class="line-mask"><span>Technical expertise<span class="accent">.</span></span></span>
+</h2>
+<a href="work.html#expertise" class="label u-link" data-cursor="hover">Full skills overview {ARROW}</a>
 </div>
+{expertise}
+</section>
+
+<section class="grid wrap" id="projects" aria-label="Selected projects">{cards}</section>
+<section class="wrap" style="padding-bottom:clamp(64px,8vw,120px)">
+<a href="work.html" class="btn" data-reveal data-cursor="hover">View All Projects <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</section>
+
+<div class="theme-light">
+<section class="caps section wrap" id="philosophy" aria-labelledby="phil-title">
+<div class="caps__aside"><div class="caps__sticky">
+<h2 id="phil-title" class="section-title" data-split>
+<span class="line-mask"><span>Development</span></span>
+<span class="line-mask"><span class="accent">philosophy.</span></span>
+</h2>
+<p class="muted" style="max-width:360px">How I approach building software, whatever the project.</p>
+</div></div>
+<ol class="caps__list">{philosophy}</ol>
+</section>
+</div>
+
+<section class="sk wrap" id="help" aria-labelledby="help-title">
+<div class="section-head">
+<h2 id="help-title" class="section-title" data-split>
+<span class="line-mask"><span>What I can help with<span class="accent">.</span></span></span>
+</h2>
+</div>
+<p class="cb__lead" data-reveal style="margin-bottom:32px">I am open to discussing projects where thoughtful engineering and practical problem-solving can help turn an idea into a working digital product.</p>
+<ul class="sk__items" data-reveal>{help_items}</ul>
+</section>
+
+{credentials_table(root)}
+
+<section class="section wrap" id="connect" aria-labelledby="connect-title">
+<h2 id="connect-title" class="section-title" data-split>
+<span class="line-mask"><span>Let's Build</span></span>
+<span class="line-mask"><span>Something <span class="accent">Meaningful</span>.</span></span>
+</h2>
+<p class="cb__lead" data-reveal style="margin-top:28px">Have a project idea, a development challenge, or an opportunity to collaborate? I'd be happy to connect and discuss how we can bring your ideas to life.</p>
+<div class="bth__ctas" data-reveal>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Get in Touch <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="work.html" class="btn" data-cursor="hover">Explore My Work <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+</div>
+</section>
 
 </main>
 {footer(root)}
 {chrome_end(root)}'''
+
 
 
 def page_skills():
     root = ""
+
+    core = "".join(f'<li class="label">{t}</li>' for t in CORE_STACK)
+
+    # Verified skills sit in the open; secondary ones collapse into a native
+    # <details>, which is keyboard-accessible and needs no JavaScript. The
+    # summary states the count so the group is honest even while closed.
     groups = ""
-    for num, name, items in SKILL_GROUPS:
-        lis = "".join(f'<li class="label">{i}</li>' for i in items)
+    for num, name, blurb, verified, secondary in SKILLS_MATRIX:
+        pills = "".join(f'<li class="label">{t}</li>' for t in verified)
+        more = ""
+        if secondary:
+            extra = "".join(
+                f'<li class="label is-learning">'
+                f'<span class="sr-only">Familiar or exploring: </span>{t}</li>'
+                for t in secondary)
+            more = (f'<details class="sk__more">'
+                    f'<summary class="label muted">'
+                    f'+ {len(secondary)} familiar / exploring</summary>'
+                    f'<ul class="sk__items">{extra}</ul></details>')
         groups += (f'<div class="sk__group" data-reveal>'
                    f'<div><span class="sk__num mono">{num}</span>'
-                   f'<h2 class="sk__name">{name}</h2></div>'
-                   f'<ul class="sk__items">{lis}</ul></div>')
+                   f'<h3 class="sk__name">{name}</h3>'
+                   f'<p class="sk__blurb muted">{blurb}</p></div>'
+                   f'<div><ul class="sk__items">{pills}</ul>{more}</div></div>')
 
-    return head(f"Skills — {ME['name']}",
-                "Technical skills: frontend, backend and APIs, databases and state, testing and tools, "
-                "data and collaboration.", root, "skills.html") + f'''
+    approach = "".join(
+        f'<li class="cap" data-reveal><span class="cap__num mono">{n}</span>'
+        f'<div class="cap__body"><h3 class="cap__title">{t}</h3>'
+        f'<p class="cap__desc muted">{d}</p></div></li>'
+        for n, t, d in DEV_APPROACH
+    )
+
+    picks = [x for x in PROJECTS if x["slug"] in ABOUT_PROJECT_SLUGS]
+    cards = ""
+    for i, pr in enumerate(picks):
+        live = (f'<span class="label accent card__live">Live {ARROW}</span>'
+                if pr["link"] else "")
+        cards += (f'<a class="card" href="work/{pr["slug"]}.html" data-reveal '
+                  f'style="--d:{i*0.06:.2f}s" data-cursor="view" data-cursor-label="Open" '
+                  f'data-cursor-name="{pr["name"]}">'
+                  f'<span class="card__media"><img src="assets/img/{cover(pr["slug"])}" '
+                  f'alt="{pr["name"]} — {pr["meta"]} project cover" loading="lazy" '
+                  f'decoding="async" width="2560" height="1600"></span>'
+                  f'<span class="card__meta"><span class="mono muted">{i+1:02d}</span>'
+                  f'<span class="card__title">{pr["name"]}</span>'
+                  f'<span class="label muted">{pr["year"]}</span></span>'
+                  f'<span class="label muted card__tags">{pr["stack"]}{live}</span></a>')
+
+    return head(f"{ME['name']} | Full Stack Developer Skills &amp; Expertise",
+                f"Explore {ME['name']}'s full-stack development skills, including frontend "
+                "technologies, backend development, APIs, databases, software engineering, "
+                "and freelance web development.", root, "skills.html") + f'''
 <body>
 {header("Skills", root)}
 <main id="main">
+
 <section class="wh wrap">
-<div class="wh__bg" aria-hidden="true">
-<canvas data-streams="1"></canvas>
-<div class="wh__shade wh__shade--center"></div>
-<div class="wh__scan"></div>
-</div>
-<p class="label muted wh__kicker"><span class="dot"></span> Technical skills</p>
-<h1 class="wh__title display" data-split>
-<span class="line-mask"><span>Skills<span class="accent">.</span></span></span>
+<p class="label muted wh__kicker"><span class="dot"></span> Technical expertise</p>
+<h1 class="wh__title wh__title--long display" data-split>
+<span class="line-mask"><span>The Skills Behind</span></span>
+<span class="line-mask"><span>Every <span class="accent">Digital Solution</span>.</span></span>
 </h1>
-<p class="cb__lead" data-reveal style="margin-top:28px">What I work with day to day, grouped by where it sits in the stack. Everything listed here I've used on shipped work or a complete project — not a tutorial list.</p>
-</section>
-<section class="sk wrap">{groups}</section>
-{marquee(["React", "Next.js", "Node.js", "Django", "PostgreSQL", "Postman"], "reverse", "65")}
-<div class="theme-light">
-{capabilities_block()}
+<p class="ph__tag label" data-reveal style="margin-top:22px;display:inline-block">Full Stack Developer · Software Engineer · Freelance Developer</p>
+<p class="cb__lead" data-reveal style="margin-top:24px">My technical toolkit spans modern web
+technologies, frontend engineering, backend development, API integration, and software delivery.
+I focus on building responsive interfaces, reliable application functionality, and maintainable
+digital solutions that address real-world needs.</p>
+<div class="bth__ctas" data-reveal>
+<a href="#stack" class="btn" data-cursor="hover">Explore My Expertise <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="work.html" class="btn" data-cursor="hover">View My Work <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="contact.html#f-name" class="btn" data-cursor="hover">Hire Me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
 </div>
+</section>
+
+<section class="sk wrap" id="stack" aria-labelledby="stack-title">
+<div class="section-head">
+<h2 id="stack-title" class="section-title" data-split>
+<span class="line-mask"><span>My core technology stack<span class="accent">.</span></span></span>
+</h2>
+</div>
+<p class="cb__lead" data-reveal style="margin-bottom:32px">The technologies I reach for first,
+across the stack and the toolchain.</p>
+<ul class="sk__items sk__items--core" data-reveal>{core}</ul>
+</section>
+
+<section class="sk wrap" id="expertise" aria-labelledby="matrix-title">
+<div class="section-head">
+<h2 id="matrix-title" class="section-title" data-split>
+<span class="line-mask"><span>Complete skill set<span class="accent">.</span></span></span>
+</h2>
+<p class="label muted">Solid = working with · Collapsed = familiar / exploring</p>
+</div>
+{groups}
+</section>
+
+<div class="theme-light">
+<section class="caps section wrap" id="approach" aria-labelledby="approach-title">
+<div class="caps__aside"><div class="caps__sticky">
+<h2 id="approach-title" class="section-title" data-split>
+<span class="line-mask"><span>How I approach</span></span>
+<span class="line-mask"><span class="accent">development.</span></span>
+</h2>
+<p class="muted" style="max-width:360px">The same five steps, whether it is a landing page or a
+full application.</p>
+</div></div>
+<ol class="caps__list">{approach}</ol>
+</section>
+</div>
+
+<section class="sk wrap" id="proof" aria-labelledby="proof-title">
+<div class="section-head">
+<h2 id="proof-title" class="section-title" data-split>
+<span class="line-mask"><span>Skills in practice<span class="accent">.</span></span></span>
+</h2>
+<a href="work.html" class="label u-link" data-cursor="hover">All projects {ARROW}</a>
+</div>
+<p class="cb__lead" data-reveal style="margin-bottom:32px">Where these technologies actually meet
+— frontend, backend, APIs and data in one running product.</p>
+</section>
+<section class="grid wrap" aria-label="Selected projects">{cards}</section>
+
 </main>
 {footer(root)}
 {chrome_end(root)}'''
+
 
 
 def page_resume():
@@ -900,7 +1494,10 @@ def page_resume():
         points = "".join(f'<li>{pt}</li>' for pt in e["points"])
         exp += (f'<div class="res__line" data-reveal>'
                 f'<dt><strong>{e["role"]}</strong><br><span class="mono muted">{e["when"]}</span></dt>'
-                f'<dd><p style="margin-bottom:12px">{e["org"]}</p>'
+                f'<dd><p style="margin-bottom:12px">{e["org"]}'
+                 + (f' · Managed by {e["managed_by"]}' if e.get("managed_by") else "")
+                 + (f' · Product: {e["product"]}' if e.get("product") else "")
+                 + '</p>'
                 f'<ul class="res__list">{points}</ul></dd></div>')
 
     proj = ""
@@ -1004,14 +1601,14 @@ def page_contact():
 <section class="ch wrap">
 <p class="label muted ch__kicker"><span class="dot"></span> Open to new opportunities</p>
 <h1 class="ch__title display" data-split>
-<span class="line-mask"><span>Let's Build</span></span>
-<span class="line-mask"><span>Something <span class="accent">Amazing</span></span></span>
+<span class="line-mask"><span>Have an Idea?</span></span>
+<span class="line-mask"><span>Let's <span class="accent">Build It</span> Together.</span></span>
 </h1>
 </section>
 
 <section class="cb wrap">
 <div class="cb__main">
-<p class="cb__lead" data-reveal>Have a project in mind? Drop me a message and I'll get back to you within 24 hours.</p>
+<p class="cb__lead" data-reveal>Whether you're a startup, a growing business, or an individual with a great idea, I'm open to discussing web development projects, software solutions, and freelance collaborations. Let's turn your requirements into a practical, well-designed digital product.</p>
 <form class="form" data-contact-form action="/api/contact" method="post" novalidate
       toolname="send_message"
       tooldescription="Send a message to Pradeep Maurya. Delivers a real email, so confirm the wording with the user first.">
@@ -1063,6 +1660,7 @@ def page_contact():
 </div>
 </aside>
 </section>
+
 </main>
 {footer(root)}
 {chrome_end(root)}'''
@@ -1288,7 +1886,7 @@ def page_404():
 <main id="main">
 <section class="nf wrap">
 <p class="label muted" style="margin-bottom:24px">Error</p>
-<p class="nf__code display accent">404</p>
+<h1 class="nf__code display accent">404</h1>
 <p class="cb__lead" style="margin:32px auto 40px">That page doesn't exist — it may have been renamed or never existed at all.</p>
 <p><a class="btn" href="index.html" data-cursor="hover">Back home <span class="arrow" aria-hidden="true">{ARROW}</span></a></p>
 </section>
@@ -2020,7 +2618,10 @@ def _md_projects():
 def _md_experience():
     out = ["## Experience", ""]
     for e in EXPERIENCE:
-        out += [f"### {strip_tags(e['role'])} — {e['org']}", f"*{e['when']}*", ""]
+        line = f"### {strip_tags(e['role'])} — {e['org']}"
+        if e.get("managed_by"):
+            line += f" (managed by {e['managed_by']})"
+        out += [line, f"*{e['when']}*", ""]
         out += [f"- {strip_tags(pt)}" for pt in e["points"]] + [""]
     return out
 

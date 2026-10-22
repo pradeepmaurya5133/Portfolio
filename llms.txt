@@ -1,6 +1,6 @@
 # Pradeep Maurya
 
-> Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest. Based in Dehradun, India.
+> I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions. Based in Dehradun, India.
 
 Portfolio site. Every page has a markdown twin at the same path with a
 `.md` extension — the links below point straight at those. The site also
@@ -16,11 +16,12 @@ returns markdown to any request sending `Accept: text/markdown`.
 
 ## Projects
 
-- [ConsentX](https://www.pradeepmaury.in/work/consentx.md): A consent management platform where privacy choices have to be captured, stored and proven. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
-- [RegulatoryBridge](https://www.pradeepmaury.in/work/regulatorybridge.md): A regulatory compliance platform — dense information that still has to be quick to read. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
+- [ConsentX](https://www.pradeepmaury.in/work/consentx.md): A consent-focused digital solution designed to support consent management and privacy-related workflows. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
+- [RegulatoryBridge](https://www.pradeepmaury.in/work/regulatorybridge.md): A regulatory-focused digital solution designed to organize compliance-related information and simplify regulatory workflows. Stack: React, Next.js, TypeScript, Tailwind CSS, Node.js, REST APIs. (2026)
 - [Bakery](https://www.pradeepmaury.in/work/bakery.md): A complete bakery shop — storefront, cart and secure accounts, built end to end. Stack: Next.js, Express.js, PostgreSQL, Prisma, Redux Toolkit, JWT. (2025)
 - [Xamlysis](https://www.pradeepmaury.in/work/xamlysis.md): An online examination portal — the kind of app where a bug has a deadline attached. Stack: JavaScript, Node.js, REST APIs, manual & API testing. (2025)
 - [Movie Scraper](https://www.pradeepmaury.in/work/movie-scraper.md): A Django app that pulls movie data from several sources and refuses to trust any of them. Stack: Python, Django, data validation. (2025)
+- [Portfolio](https://www.pradeepmaury.in/work/portfolio.md): A personal portfolio showcasing my technical expertise, selected projects, professional experience, and freelance development services. Stack: Python (static site generator), HTML, CSS, vanilla JavaScript, GSAP, Lenis, Vercel serverless functions. (2026)
 
 ## Optional
 

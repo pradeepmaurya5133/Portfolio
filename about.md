@@ -1,24 +1,26 @@
 # About — Pradeep Maurya
 
-Full Stack Developer crafting responsive interfaces, REST APIs and the tests that keep them honest.
+I build modern, responsive, and scalable web applications that turn ideas into powerful digital experiences. From intuitive user interfaces to robust backend systems, I focus on clean code, practical problem-solving, and reliable software solutions.
 
 Canonical: https://www.pradeepmaury.in/about.html
 
 ---
 
-Computer Science graduate with hands-on experience in web development, software testing and data analysis. Working knowledge of HTML, CSS, JavaScript, React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, Git/GitHub, REST APIs and AI API integration. Focused on building responsive interfaces, improving application usability and debugging web applications.
+I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate about building modern, scalable, and user-friendly web applications. I work across the development lifecycle, from creating responsive frontend interfaces to developing backend services, integrating APIs, and building practical software solutions.
 
 Based in Shree Enclave Panditwari, Dehradun, India.
 
 ## Experience
 
-### Full Stack Developer — iLeads Auxiliary Services Private Limited
+### Web Developer — SS IntelligenceX Private Limited (managed by iLeads Auxiliary Services Pvt. Ltd.)
 *Aug 2026 — Present*
 
-- Contribute to frontend and backend web development tasks, including responsive UI improvements and application functionality.
-- Support development, debugging, testing and refinement of web experiences using modern web technologies.
-- Work on product and project deliverables associated with SS IntelligenceX Private Limited.
-- Project work: ConsentX.io and RegulatoryBridge.com.
+- Develop and maintain responsive web interfaces.
+- Build reusable UI components and implement frontend functionality.
+- Integrate APIs and contribute to full stack application development.
+- Troubleshoot technical issues and improve maintainability.
+- Collaborate on product features using appropriate modern web technologies.
+- Project work: ConsentX and RegulatoryBridge.
 
 ### Software / QA and Data Support — Tecxpert Software Pvt. Ltd.
 *Sep 2025 — July 2026*
