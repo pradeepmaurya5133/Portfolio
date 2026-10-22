@@ -627,6 +627,277 @@
     });
   }
 
+  /* ---------- Circuit-trace backdrop ----------
+     Rounded orthogonal paths over a soft accent glow, with bright glints
+     where paths cross and a scatter of out-of-focus dots. Sits behind the
+     page body on every page; the hero, the footer and the light-theme
+     blocks all paint their own opaque backgrounds over it, which is what
+     keeps it out of those sections.
+
+     The structure — glow, traces, dots — is drawn ONCE into an offscreen
+     canvas. Each frame only blits that and draws the moving parts over it:
+     pulses travelling along the traces, and glints breathing. Redrawing
+     several hundred strokes and gradients every frame, on every page,
+     would not be worth it for a background.
+
+     The pulses are a dashed re-stroke of the same Path2D with an animated
+     lineDashOffset, so they follow the rounded corners exactly without any
+     arc-length maths.
+  */
+  function initTrace() {
+    var canvas = $('[data-trace]');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var ACCENT = '226,35,86';       // brand accent
+    var ROSE = '255,122,150';       // lighter line colour, as in the source
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = 0, h = 0;
+    var still = document.createElement('canvas');
+    var sctx = still.getContext('2d');
+    var live = [];                  // paths that carry a pulse
+    var glints = [];
+    // Pre-rendered glint parts. Building two gradients per glint per frame
+    // was the single most expensive thing this loop did; a scaled drawImage
+    // of a cached sprite is a fraction of the cost and looks the same.
+    var glow = document.createElement('canvas');
+    var streak = document.createElement('canvas');
+    var SPRITE = 128;
+
+    // Deterministic noise, so the pattern is stable for a given page load
+    // instead of reshuffling every time the window is nudged.
+    var seed = 0x2f6e2b1;
+    var rnd = function () {
+      seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
+      return ((seed >>> 0) % 100000) / 100000;
+    };
+    var pick = function (a) { return a[Math.floor(rnd() * a.length)]; };
+
+    /* One orthogonal path: alternating horizontal and vertical runs joined
+       by quarter-circle corners, the way a PCB trace turns. Returns a
+       Path2D so the animated layer can re-stroke it cheaply. */
+    var tracePath = function (x, y, legs, step, radius, horizontal) {
+      var path = new Path2D();
+      path.moveTo(x, y);
+      var length = 0;
+      for (var i = 0; i < legs; i++) {
+        var run = step * (0.6 + rnd() * 1.9);
+        var dir = rnd() < 0.5 ? -1 : 1;
+        var nx = horizontal ? x + run * dir : x;
+        var ny = horizontal ? y : y + run * dir;
+        var turn = step * (0.5 + rnd() * 1.4) * (rnd() < 0.5 ? -1 : 1);
+        var ax = horizontal ? nx : nx + turn;
+        var ay = horizontal ? ny + turn : ny;
+        path.arcTo(nx, ny, ax, ay, radius);
+        length += run;
+        x = nx; y = ny;
+        horizontal = !horizontal;
+      }
+      return { path: path, length: length };
+    };
+
+    var glintAt = function (c, x, y, size, alpha) {
+      var g = c.createRadialGradient(x, y, 0, x, y, size);
+      g.addColorStop(0, 'rgba(255,255,255,' + alpha.toFixed(3) + ')');
+      g.addColorStop(0.3, 'rgba(' + ROSE + ',' + (alpha * 0.5).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + ACCENT + ',0)');
+      c.fillStyle = g;
+      c.fillRect(x - size, y - size, size * 2, size * 2);
+
+      // the horizontal flare streak the source has across its bright crossings
+      var s = c.createLinearGradient(x - size * 3, y, x + size * 3, y);
+      s.addColorStop(0, 'rgba(' + ROSE + ',0)');
+      s.addColorStop(0.5, 'rgba(255,255,255,' + (alpha * 0.65).toFixed(3) + ')');
+      s.addColorStop(1, 'rgba(' + ROSE + ',0)');
+      c.fillStyle = s;
+      c.fillRect(x - size * 3, y - 0.6, size * 6, 1.2);
+    };
+
+    var buildSprites = function () {
+      glow.width = glow.height = SPRITE;
+      var gc = glow.getContext('2d');
+      var r = SPRITE / 2;
+      var g = gc.createRadialGradient(r, r, 0, r, r, r);
+      g.addColorStop(0, 'rgba(255,255,255,1)');
+      g.addColorStop(0.3, 'rgba(' + ROSE + ',0.5)');
+      g.addColorStop(1, 'rgba(' + ACCENT + ',0)');
+      gc.fillStyle = g;
+      gc.fillRect(0, 0, SPRITE, SPRITE);
+
+      streak.width = SPRITE * 3; streak.height = 4;
+      var sc = streak.getContext('2d');
+      var s = sc.createLinearGradient(0, 0, SPRITE * 3, 0);
+      s.addColorStop(0, 'rgba(' + ROSE + ',0)');
+      s.addColorStop(0.5, 'rgba(255,255,255,0.65)');
+      s.addColorStop(1, 'rgba(' + ROSE + ',0)');
+      sc.fillStyle = s;
+      sc.fillRect(0, 1, SPRITE * 3, 2);
+    };
+
+    /* ---- the structure, drawn once ---- */
+    var buildStill = function () {
+      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      sctx.clearRect(0, 0, w, h);
+      seed = 0x2f6e2b1;
+      live = [];
+      glints = [];
+
+      var g = sctx.createRadialGradient(w * 0.52, h * 0.42, 0,
+                                        w * 0.5, h * 0.5, Math.max(w, h) * 0.78);
+      g.addColorStop(0, 'rgba(' + ACCENT + ',0.13)');
+      g.addColorStop(0.45, 'rgba(' + ACCENT + ',0.05)');
+      g.addColorStop(1, 'rgba(' + ACCENT + ',0)');
+      sctx.fillStyle = g;
+      sctx.fillRect(0, 0, w, h);
+
+      var step = Math.max(58, Math.min(w, h) / 11);
+      sctx.lineCap = 'round';
+      sctx.lineJoin = 'round';
+
+      // faint back layer, slightly larger and dimmer
+      var back = Math.round((w * h) / 150000) + 6;
+      for (var i = 0; i < back; i++) {
+        sctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.05 + rnd() * 0.05).toFixed(3) + ')';
+        sctx.lineWidth = 1 + rnd();
+        sctx.stroke(tracePath(rnd() * w, rnd() * h, 4 + Math.floor(rnd() * 4),
+                              step * 1.5, step * 0.5, rnd() < 0.5).path);
+      }
+
+      // foreground traces
+      var front = Math.round((w * h) / 110000) + 8;
+      for (var j = 0; j < front; j++) {
+        var x = rnd() * w, y = rnd() * h;
+        var t = tracePath(x, y, 3 + Math.floor(rnd() * 4), step, step * 0.42, rnd() < 0.5);
+        sctx.strokeStyle = 'rgba(' + ROSE + ',' + (0.1 + rnd() * 0.16).toFixed(3) + ')';
+        sctx.lineWidth = 1.2 + rnd() * 1.1;
+        sctx.shadowColor = 'rgba(' + ACCENT + ',0.5)';
+        sctx.shadowBlur = 8;
+        sctx.stroke(t.path);
+        sctx.shadowBlur = 0;
+
+        // most of the traces carry a travelling pulse. The gap is a little
+        // over half the path length, so a long trace shows two pulses at
+        // once and a short one shows a single pulse with a clear pause.
+        if (rnd() < 0.78) {
+          var dash = 40 + rnd() * 26;
+          live.push({
+            path: t.path,
+            dash: dash,
+            span: t.length * 0.55 + step * 2,
+            speed: 44 + rnd() * 72,             // px per second
+            offset: rnd() * 1000,
+            width: 1.7 + rnd() * 1.3
+          });
+        }
+        if (rnd() < 0.55) {
+          glints.push({ x: x, y: y, size: 10 + rnd() * 20,
+                        alpha: 0.18 + rnd() * 0.3, phase: rnd() * 6.28,
+                        rate: 0.5 + rnd() * 1.1 });
+        }
+      }
+
+      // long straight runs, as in the source
+      for (var k = 0, runs = Math.round(h / 260) + 2; k < runs; k++) {
+        var ry = rnd() * h;
+        sctx.strokeStyle = 'rgba(' + ROSE + ',' + (0.07 + rnd() * 0.1).toFixed(3) + ')';
+        sctx.lineWidth = 1 + rnd() * 0.8;
+        sctx.beginPath();
+        sctx.moveTo(0, ry);
+        sctx.lineTo(w, ry);
+        sctx.stroke();
+      }
+
+      // bokeh dots
+      var dots = Math.round((w * h) / 9000);
+      for (var d = 0; d < dots; d++) {
+        var dx = rnd() * w, dy = rnd() * h;
+        var r = rnd() < 0.9 ? 0.6 + rnd() * 1.4 : 3 + rnd() * 7;
+        var a = r > 3 ? 0.04 + rnd() * 0.06 : 0.1 + rnd() * 0.3;
+        var dg = sctx.createRadialGradient(dx, dy, 0, dx, dy, r);
+        dg.addColorStop(0, 'rgba(' + pick([ROSE, ACCENT, '255,210,220']) + ',' + a.toFixed(3) + ')');
+        dg.addColorStop(1, 'rgba(' + ACCENT + ',0)');
+        sctx.fillStyle = dg;
+        sctx.fillRect(dx - r, dy - r, r * 2, r * 2);
+      }
+
+      // glints belong to the still layer at their base brightness; the
+      // animated pass adds the part that breathes on top
+      for (var n = 0; n < glints.length; n++) {
+        glintAt(sctx, glints[n].x, glints[n].y,
+                glints[n].size, glints[n].alpha * 0.55);
+      }
+    };
+
+    /* ---- one frame: blit, then the moving parts ---- */
+    var paint = function (time) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(still, 0, 0, w, h);
+      if (!time) return;
+
+      // Pulses travelling along the traces. Two passes — wide and faint,
+      // then narrow and bright — stand in for shadowBlur, which is the
+      // other thing that made this loop expensive.
+      ctx.lineCap = 'round';
+      for (var i = 0; i < live.length; i++) {
+        var p = live[i];
+        ctx.setLineDash([p.dash, p.span]);
+        ctx.lineDashOffset = -((p.offset + time * p.speed) % (p.dash + p.span));
+        ctx.strokeStyle = 'rgba(' + ROSE + ',0.22)';
+        ctx.lineWidth = p.width * 4;
+        ctx.stroke(p.path);
+        ctx.strokeStyle = 'rgba(255,224,234,0.88)';
+        ctx.lineWidth = p.width;
+        ctx.stroke(p.path);
+      }
+      ctx.setLineDash([]);
+
+      // glints breathing
+      for (var n = 0; n < glints.length; n++) {
+        var gl = glints[n];
+        var pulse = 0.5 + 0.5 * Math.sin(time * gl.rate + gl.phase);
+        var size = gl.size * (0.82 + pulse * 0.45);
+        ctx.globalAlpha = Math.min(1, gl.alpha * (0.1 + pulse * 1.05));
+        ctx.drawImage(glow, gl.x - size, gl.y - size, size * 2, size * 2);
+        ctx.drawImage(streak, gl.x - size * 3, gl.y - 2, size * 6, 4);
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    var resize = function () {
+      var r = canvas.getBoundingClientRect();
+      w = Math.max(r.width, 1);
+      h = Math.max(r.height, 1);
+      canvas.width = still.width = Math.round(w * dpr);
+      canvas.height = still.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildSprites();
+      buildStill();
+      paint(REDUCED ? 0 : last);
+    };
+
+    var last = 0;
+    resize();
+
+    var t = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(resize, 180);
+    });
+
+    if (REDUCED) return;
+
+    var start = 0;
+    var frame = function (now) {
+      requestAnimationFrame(frame);
+      if (document.hidden) return;
+      if (!start) start = now;
+      last = (now - start) / 1000;
+      paint(last);
+    };
+    requestAnimationFrame(frame);
+  }
+
   /* ---------- Protect media ---------- */
   function initMediaGuards() {
     document.addEventListener('contextmenu', function (e) {
@@ -1330,6 +1601,7 @@
     initAwardRows();
     initFilters();
     initToTop();
+    initTrace();
     initPrint();
     initContactForm();
     initMediaGuards();

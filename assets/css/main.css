@@ -409,6 +409,30 @@ html.js [data-reveal].is-in {
 /* ============================================================
    Footer
    ============================================================ */
+/* ---------- Circuit-trace backdrop ----------
+   A single fixed canvas behind the whole document, painted by initTrace().
+   It is excluded from the hero and the footer not by measuring them, but
+   by giving every band that should not show it an opaque ground of its
+   own — which is also what .theme-light already does. */
+.trace {
+  z-index: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+}
+/* Lift the page content above the canvas. The canvas sits over body's own
+   background, so it cannot simply use a negative z-index. Only <main> needs
+   this — the header, menu, cursor and grain already carry their own
+   stacking order and must not be touched. */
+main { position: relative; z-index: 1 }
+.footer { z-index: 1 }
+/* The bands the backdrop must stay out of. Each already paints imagery on
+   top; this is the opaque floor under it, for the pages where a hero has
+   no photo or canvas of its own. */
+.hero, .wh, .ch, .ph, .footer { background: var(--ink) }
+
 .footer { border-top: 1px solid var(--line); position: relative; overflow: hidden }
 
 /* ---------- Footer background loop ----------

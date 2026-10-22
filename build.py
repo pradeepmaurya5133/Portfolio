@@ -745,11 +745,52 @@ RESUME_FREELANCE_AREAS = [
 RESUME_PDF = "assets/Pradeep_Maurya_Resume.pdf"
 RESUME_DOCX = "assets/Pradeep_Maurya_Resume.docx"
 
+def _months_since_first_role():
+    """Months from the start of the earliest role in EXPERIENCE until now."""
+    months = {m: i + 1 for i, m in enumerate(
+        ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])}
+    starts = []
+    for e in EXPERIENCE:
+        m = re.match(r"([A-Z][a-z]{2})[a-z]* (\d{4})", e["when"])
+        if m:
+            starts.append((int(m.group(2)), months[m.group(1)]))
+    if not starts:
+        return 0
+    year, month = min(starts)
+    now = datetime.date.today()
+    return (now.year - year) * 12 + (now.month - month)
+
+
+# Every figure here is counted from the data above rather than typed in, so
+# none of them can drift from what the rest of the site says. The previous
+# hand-written values had already gone stale: "Projects shipped 05" against
+# six projects, and "Technologies used 27" matched nothing in the file.
+# ============================================================
+#  HOME PAGE — summary sections
+# ============================================================
+# Short standalone intro. Not a copy of ABOUT_STORY: the About page tells
+# it at length, this is the two-line version that earns the click.
+HOME_INTRO = [
+    ("I'm a Full Stack Developer and Software Engineer based in Dehradun, India, working on "
+     "live products at SS IntelligenceX Private Limited and building my own alongside them."),
+    ("My work runs the length of a feature — a responsive interface in React or Next.js, the "
+     "API behind it in Node or Python, and the testing that catches what review misses."),
+]
+
+# Compact career list for the home page. The full detail, with
+# responsibilities and technologies per role, lives on experience.html.
+HOME_FACTS = [
+    ("Role", "Web Developer at SS IntelligenceX Private Limited"),
+    ("Based in", "Dehradun, Uttarakhand, India"),
+    ("Open to", "Freelance projects, collaborations and full-time opportunities"),
+]
+
 STATS = [
-    ("Years in tech", "02"),
-    ("Projects shipped", "05"),
-    ("Technologies used", "27"),
-    ("Certifications", "03"),
+    ("Years in tech", f"{max(1, round(_months_since_first_role() / 12)):02d}"),
+    ("Projects shipped", f"{len(PROJECTS):02d}"),
+    ("Technologies", f"{len(TECH_STRIP):02d}"),
+    ("Certifications", f"{sum(1 for *_, k in CREDENTIALS if k == 'certification'):02d}"),
 ]
 
 # Real screenshots live as .jpg (see assets/img/_frame_screenshot.py); the rest
@@ -903,6 +944,7 @@ def chrome_end(root):
 </svg>
 </span>
 </div>
+<canvas class="trace" data-trace aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 <script src="{root}assets/vendor/gsap.min.js"></script>
 <script src="{root}assets/vendor/ScrollTrigger.min.js"></script>
@@ -986,6 +1028,31 @@ def page_index():
     strip_items = "".join(
         f'<li class="logos__item"><span class="logos__word">{t}</span></li>' for t in TECH_STRIP
     )
+    intro = "".join(f'<p class="cb__lead home__lead" data-reveal>{p}</p>' for p in HOME_INTRO)
+    facts = "".join(
+        f'<div class="tldr__row" data-reveal><dt class="label muted">{k}</dt>'
+        f'<dd>{v}</dd></div>' for k, v in HOME_FACTS
+    )
+    # Role, employer and dates only — experience.html carries the detail.
+    roles = "".join(
+        f'<div class="tldr__row" data-reveal>'
+        f'<dt class="label muted">{e["when"]}</dt>'
+        f'<dd>{strip_tags(e["role"])}<br>'
+        f'<span class="muted home__org">{e["org"]}</span></dd></div>'
+        for e in EXPERIENCE
+    )
+    home_skills = ""
+    for num, name, items in ABOUT_EXPERTISE:
+        lis = "".join(f'<li class="label">{i}</li>' for i in items)
+        home_skills += (f'<div class="sk__group" data-reveal>'
+                        f'<div><span class="sk__num mono">{num}</span>'
+                        f'<h3 class="sk__name">{name}</h3></div>'
+                        f'<ul class="sk__items">{lis}</ul></div>')
+    # Only offered when the file is actually on disk.
+    home_pdf = (f'<a href="{RESUME_PDF}" class="btn" download data-cursor="hover">'
+                f'Download CV <span class="arrow" aria-hidden="true">{ARROW}</span></a>'
+                if (ROOT / RESUME_PDF).exists() else "")
+
     stats = ""
     for i, (label, value) in enumerate(STATS):
         stats += (f'<div class="stat" data-reveal style="--d:{i*0.08:.2f}s">'
@@ -1081,6 +1148,22 @@ def page_index():
 <dl class="stats">{stats}</dl>
 </section>
 
+<section class="tldr section wrap" id="about" aria-labelledby="home-about-title">
+<div class="section-head">
+<h2 id="home-about-title" class="section-title" data-split>
+<span class="line-mask"><span>Who you'd be working with<span class="accent">.</span></span></span>
+</h2>
+<a href="about.html" class="label u-link" data-cursor="hover">Full story {ARROW}</a>
+</div>
+{intro}
+<dl class="tldr__list home__facts">{facts}</dl>
+<div class="bth__ctas home__ctas" data-reveal>
+<a href="about.html" class="btn" data-cursor="hover">More about me <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+<a href="resume.html" class="btn" data-cursor="hover">View Résumé <span class="arrow" aria-hidden="true">{ARROW}</span></a>
+{home_pdf}
+</div>
+</section>
+
 <section class="work section" id="work" aria-labelledby="work-title">
 <div class="wrap section-head">
 <h2 id="work-title" class="section-title" data-split>
@@ -1131,6 +1214,26 @@ As a Web Developer at SS IntelligenceX Private Limited, managed by iLeads Auxili
 <footer class="mono muted">{ME['name']} // Web Developer @ SS IntelligenceX</footer>
 </blockquote>
 </div>
+</section>
+
+<section class="tldr section wrap" id="career" aria-labelledby="home-career-title">
+<div class="section-head">
+<h2 id="home-career-title" class="section-title" data-split>
+<span class="line-mask"><span>Where I've worked<span class="accent">.</span></span></span>
+</h2>
+<a href="experience.html" class="label u-link" data-cursor="hover">Full experience {ARROW}</a>
+</div>
+<dl class="tldr__list">{roles}</dl>
+</section>
+
+<section class="sk wrap" id="skills" aria-labelledby="home-skills-title">
+<div class="section-head">
+<h2 id="home-skills-title" class="section-title" data-split>
+<span class="line-mask"><span>What I work with<span class="accent">.</span></span></span>
+</h2>
+<a href="skills.html" class="label u-link" data-cursor="hover">Full skill set {ARROW}</a>
+</div>
+{home_skills}
 </section>
 
 <div class="theme-light">

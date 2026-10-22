@@ -22,8 +22,8 @@ I am Pradeep Maurya, a Full Stack Developer and Software Engineer passionate abo
 ## At a glance
 
 - Years in tech: 02
-- Projects shipped: 05
-- Technologies used: 27
+- Projects shipped: 06
+- Technologies: 20
 - Certifications: 03
 
 ## Selected work

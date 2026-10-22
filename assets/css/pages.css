@@ -751,6 +751,15 @@ a.rec__row:hover .rec__arrow { transform: rotate(45deg) }
 .tldr__row dt { padding-top: .5em }
 @media (width <= 900px) { .bio, .tldr__row { grid-template-columns: 1fr } }
 
+/* ---------- Home page summary blocks ---------- */
+/* The home page carries short versions of About, Experience and Skills, so
+   that those pages are reachable from the page itself and not only from
+   the nav bar. They reuse .tldr and .sk__group rather than new components. */
+.home__lead + .home__lead { margin-top: 18px }
+.home__facts { margin-top: 44px }
+.home__ctas { margin-top: 44px }
+.home__org { font-size: .82em; display: inline-block; margin-top: 4px }
+
 /* ---------- Experience timeline ---------- */
 .exp__head { grid-template-columns: 1fr 1fr; align-items: end; gap: clamp(32px, 6vw, 120px); margin-bottom: clamp(48px, 6vw, 96px); display: grid }
 .exp__kicker { align-items: center; gap: 12px; margin-bottom: 24px; display: flex }
